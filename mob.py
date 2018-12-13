@@ -64,6 +64,16 @@ class Ball():
             if not self.didBounceY:
                 self.speedy = -self.speedy
                 self.didBounceY = True
+                
+    def bounceBlock(self, other):
+        if self.rect.left < other.rect.right or self.rect.right > other.rect.left:
+            if not self.didBounceX:
+                self.speedx = -self.speedx
+                self.didBounceX = True
+        if self.rect.top < other.rect.bottom or self.rect.bottom > other.rect.top:
+            if not self.didBounceY:
+                self.speedy = -self.speedy
+                self.didBounceY = True
             
     def collide(self, other):
         if self.rect.right > other.rect.left:

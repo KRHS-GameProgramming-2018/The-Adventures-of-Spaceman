@@ -17,7 +17,7 @@ balls = []
 level = loadLevel("Levels/1.lvl")
 
 
-pb = PlayerBall(3, [width/2,height/2])
+pb = PlayerBall(5, [width/2,height/2])
 
 
 
@@ -39,32 +39,30 @@ while True:
                                 if event.key == pygame.K_t:
                                     paused = False
                 if event.key == pygame.K_UP:
-                    pb.face("up")
+                    pb.go("", "up")
                 if event.key == pygame.K_w:
-                    pb.go("up")
+                    pb.go("up", "")
                 if event.key == pygame.K_DOWN:
-                    pb.face("down")
+                    pb.go("", "down")
                 if event.key == pygame.K_s:
-                    pb.go("down")
+                    pb.go("down", "")
                 if event.key == pygame.K_LEFT:
-                    pb.face("left")
+                    pb.go("", "left")
                 if event.key == pygame.K_a:
-                    pb.go("left")
+                    pb.go("left", "")
                 if event.key == pygame.K_RIGHT:
-                    pb.face("right")
+                    pb.go("", "right")
                 if event.key == pygame.K_d:
-                    pb.go("right")
+                    pb.go("right", "")
         if event.type == pygame.KEYUP:
-                if event.key == pygame.K_UP or pygame.K_DOWN or pygame.K_LEFT or pygame.K_Right:
-                    pb.face("check")
                 if event.key == pygame.K_w:
-                    pb.go("sup")
+                    pb.go("sup", "")
                 if event.key == pygame.K_s:
-                    pb.go("sdown")
+                    pb.go("sdown", "")
                 if event.key == pygame.K_a:
-                    pb.go("sleft")
+                    pb.go("sleft", "")
                 if event.key == pygame.K_d:
-                    pb.go("sright")
+                    pb.go("sright", "")
                 
             
     for ball in balls:
@@ -79,7 +77,7 @@ while True:
         for tile in level:
             hitter.collide(tile)
     for tile in level:
-        pb.collide(tile)\
+        pb.collide(tile)
         
         
     screen.fill(bgColor)

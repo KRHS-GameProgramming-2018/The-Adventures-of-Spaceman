@@ -24,7 +24,7 @@ class PlayerBall(Ball):
         self.frame = 0;
         self.maxFrame = len(self.images)-1
         self.aniTimer = 0
-        self.aniTimerMax = 60/20
+        self.aniTimerMax = 60/15
         
         self.maxSpeed = speed
         self.boostSpeed = speed*2
@@ -35,8 +35,10 @@ class PlayerBall(Ball):
         self.didBounceX = False
         self.didBounceY = False
             
-    def go(self, d):
+    def go(self, d, f):
         
+        if d == "":
+            return
         if d == "up":
             self.speedy = -self.maxSpeed
         if d == "down":
@@ -55,7 +57,8 @@ class PlayerBall(Ball):
         if d == "sright":
             self.speedx = 0
         
-    def face(self, f):
+        if f == "":
+            f = d
         
         if f == "up":
             self.images = self.upImages
@@ -65,5 +68,60 @@ class PlayerBall(Ball):
             self.images = self.leftImages
         if f == "right":
             self.images = self.rightImages
-        # ~ if f == "check":
-            # ~ self.face(f)
+        else:
+            f = d
+            print f
+            
+    def collide(self, other):
+        if self.rect.right > other.rect.left:
+            if self.rect.left < other.rect.right:
+                if self.rect.top < other.rect.bottom:
+                    if self.rect.bottom > other.rect.top:
+                        if not self.didBounceX:
+                            if self.speedx > 1: #right
+                                if self.rect.centerx < other.rect.centerx:
+                                    self.speedx = -self.speedx
+                                    self.move()
+                                    self.speedx = 0
+                                    self.didBounceX = True
+                                   
+                            if self.speedx < 1: #left
+                                if self.rect.centerx > other.rect.centerx:
+                                    self.speedx = -self.speedx
+                                    self.move()
+                                    self.speedx = 0
+                                    self.didBounceX = True
+                                    
+                        if not self.didBounceY:
+                            if self.speedy > 1: #down
+                                if self.rect.centery < other.rect.centery:
+                                    self.speedy = -self.speedy
+                                    self.move()
+                                    self.speedy = 0
+                                    self.didBounceY = True
+                                    # ~ if self.rect.bottom > other.rect.top:
+                                        # ~ self.rect.centery = other.rect.centery - ((self.rect.height)/2 + (other.rect.height)/2)
+
+                            if self.speedy < 1: #up
+                                if self.rect.centery > other.rect.centery:
+                                    self.speedy  = -self.speedy
+                                    self.move()
+                                    self.speedy = 0
+                                    self.didBounceY = True
+                                    # ~ if self.rect.top < other.rect.bottom:
+                                        # ~ self.rect.centery = other.rect.centery + (self.rect.height)/2 + (other.rect.height)/2
+
+                        return True
+        return False
+    
+    def bounceBlock(self, other):
+        if self.rect.left < other.rect.right or self.rect.right > other.rect.left:
+            if not self.didBounceX:
+                self.speedx = -self.speedx
+                self.didBounceX = True
+        if self.rect.top < other.rect.bottom or self.rect.bottom > other.rect.top:
+            if not self.didBounceY:
+                self.speedy = -self.speedy
+                self.didBounceY = True
+                
+    
