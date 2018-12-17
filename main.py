@@ -14,19 +14,12 @@ size = width, height
 
 screen = pygame.display.set_mode(size)
 
-mobs = []
+
 levelnum = 1
 level = loadLevel("Levels/1.lvl")
 blocks = level["blocks"]
-
-
-
-
-
-
-pb = Player(5, [200,400]) 
-enemy = SpaceZombie(2, [100,300])
-
+mobs = level["enemies"]
+pb = Player(5, level["player"]) 
 
 
 bgColor = 0,0,0
@@ -77,7 +70,6 @@ while True:
         # ~ print str(mob)
         mob.update(size)
     pb.update(size)
-    enemy.update(size)
     
     
     for hitter in mobs:
@@ -91,17 +83,19 @@ while True:
                 levelnum += 1
                 level = loadLevel("Levels/"+str(levelnum)+".lvl")
                 blocks = level["blocks"]
-                pb = Player(5, level["player"]) 
-        enemy.collide(tile)        
+                mobs = level["enemies"]
+                pb = Player(5, level["player"])
+        # ~ enemy.collide(tile)        
         
         
     screen.fill(bgColor)
     for mob in mobs:
         screen.blit(mob.image, mob.rect)
+        # ~ print mob.rect.center
     for tile in blocks:
         screen.blit(tile.image, tile.rect)
     screen.blit(pb.image, pb.rect)
-    screen.blit(enemy.image, enemy.rect)
+    
     pygame.display.flip()
     clock.tick(60)
     # ~ print clock.get_fps()

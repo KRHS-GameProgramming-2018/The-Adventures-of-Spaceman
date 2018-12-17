@@ -19,7 +19,7 @@ class SpaceZombie(Mob):
         self.frame = 0;
         self.maxFrame = len(self.images)-1
         self.image = self.images[self.frame]
-        self.rect = self.image.get_rect()
+        self.rect = self.image.get_rect(center = startPos)
         
         self.aniTimer = 0
         self.aniTimerMax = 60/15
@@ -32,50 +32,50 @@ class SpaceZombie(Mob):
     def setPos(self, pos):
         self.rect.center = pos
         
-    def go(self, d, y):
+    # ~ def go(self, d, y):
         
-        if d == "":
-            return
-        if d == "up":
-            self.speedy = -self.maxSpeed
-        if d == "down":
-            self.speedy = self.maxSpeed
-        if d == "left":
-            self.speedx = -self.maxSpeed
-        if d == "right":
-            self.speedx = self.maxSpeed
+        # ~ if d == "":
+            # ~ return
+        # ~ if d == "up":
+            # ~ self.speedy = -self.maxSpeed
+        # ~ if d == "down":
+            # ~ self.speedy = self.maxSpeed
+        # ~ if d == "left":
+            # ~ self.speedx = -self.maxSpeed
+        # ~ if d == "right":
+            # ~ self.speedx = self.maxSpeed
             
-        if d == "sup":
-            self.speedy = 0
-        if d == "sdown":
-            self.speedy = 0
-        if d == "sleft":
-            self.speedx = 0
-        if d == "sright":
-            self.speedx = 0
+        # ~ if d == "sup":
+            # ~ self.speedy = 0
+        # ~ if d == "sdown":
+            # ~ self.speedy = 0
+        # ~ if d == "sleft":
+            # ~ self.speedx = 0
+        # ~ if d == "sright":
+            # ~ self.speedx = 0
         
-        if y == "":
-            if self.speedy < 0:
-                self.images = self.upImages
-                if self.speedx < 0:
-                    self.images = self.leftImages
-                if self.speedx > 0:
-                    self.images = self.rightImages
-            if self.speedy >= 0:
-                self.images = self.downImages
-                if self.speedx < 0:
-                    self.images = self.leftImages
-                if self.speedx > 0:
-                    self.images = self.rightImages
+        # ~ if y == "":
+            # ~ if self.speedy < 0:
+                # ~ self.images = self.upImages
+                # ~ if self.speedx < 0:
+                    # ~ self.images = self.leftImages
+                # ~ if self.speedx > 0:
+                    # ~ self.images = self.rightImages
+            # ~ if self.speedy >= 0:
+                # ~ self.images = self.downImages
+                # ~ if self.speedx < 0:
+                    # ~ self.images = self.leftImages
+                # ~ if self.speedx > 0:
+                    # ~ self.images = self.rightImages
             
-        if y == "up":
-            self.images = self.upImages
-        if y == "down":
-            self.images = self.downImages
-        if y == "left":
-            self.images = self.leftImages
-        if y == "right":
-            self.images = self.rightImages
+        # ~ if y == "up":
+            # ~ self.images = self.upImages
+        # ~ if y == "down":
+            # ~ self.images = self.downImages
+        # ~ if y == "left":
+            # ~ self.images = self.leftImages
+        # ~ if y == "right":
+            # ~ self.images = self.rightImages
             
     def collide(self, other):
         if self.rect.right > other.rect.left:

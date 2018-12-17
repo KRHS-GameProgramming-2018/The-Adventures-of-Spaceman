@@ -2,6 +2,7 @@ import pygame, sys, math, random
 from player import *
 from Block import *
 from warp import *
+from enemy import *
 
 def loadLevel(levelFile):
     f = open(levelFile, 'r')
@@ -9,7 +10,8 @@ def loadLevel(levelFile):
     f.close()
     
     level = {"blocks":[],
-             "player":[0,0]
+             "player":[0,0],
+             "enemies":[]
              }
     
     #Block Size is 50x50
@@ -34,6 +36,9 @@ def loadLevel(levelFile):
                 level["blocks"] += [Warp([x*50+25, y*50+25])]
             if character == "%":
                 level["player"] = [x*50+25, y*50+25]
+            if character == 'x':
+                level["enemies"] += [SpaceZombie(2, [x*50+25, y*50+25])]
+            
     return level
     
     
