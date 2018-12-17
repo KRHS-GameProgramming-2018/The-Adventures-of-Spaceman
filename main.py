@@ -67,7 +67,6 @@ while True:
                 
             
     for mob in mobs:
-        # ~ print str(mob)
         mob.update(size)
     pb.update(size)
     
@@ -85,13 +84,11 @@ while True:
                 blocks = level["blocks"]
                 mobs = level["enemies"]
                 pb = Player(5, level["player"])
-        # ~ enemy.collide(tile)        
         
         
     screen.fill(bgColor)
     for mob in mobs:
         screen.blit(mob.image, mob.rect)
-        # ~ print mob.rect.center
     for tile in blocks:
         screen.blit(tile.image, tile.rect)
     screen.blit(pb.image, pb.rect)
