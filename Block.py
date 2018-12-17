@@ -5,4 +5,5 @@ class Block():
         self.image = pygame.image.load("PNG/Blocks/wall.png")
         self.rect = self.image.get_rect(center=pos)
         self.radius = (self.rect.width/2 + self.rect.height/2)/2
+        self.kind = "block"
 

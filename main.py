@@ -15,7 +15,12 @@ size = width, height
 screen = pygame.display.set_mode(size)
 
 mobs = []
+levelnum = 1
 level = loadLevel("Levels/1.lvl")
+blocks = level["blocks"]
+
+
+
 
 
 
@@ -78,16 +83,22 @@ while True:
     for hitter in mobs:
         for hittie in mobs:
             hitter.collide(hittie)
-        for tile in level:
+        for tile in blocks:
             hitter.collide(tile)
-    for tile in level:
-        pb.collide(tile)
-        enemy.collide(tile)
+    for tile in blocks:
+        if pb.collide(tile):
+            if tile.kind == "warp":
+                levelnum += 1
+                level = loadLevel("Levels/"+str(levelnum)+".lvl")
+                blocks = level["blocks"]
+                pb = Player(5, level["player"]) 
+        enemy.collide(tile)        
+        
         
     screen.fill(bgColor)
     for mob in mobs:
         screen.blit(mob.image, mob.rect)
-    for tile in level:
+    for tile in blocks:
         screen.blit(tile.image, tile.rect)
     screen.blit(pb.image, pb.rect)
     screen.blit(enemy.image, enemy.rect)
