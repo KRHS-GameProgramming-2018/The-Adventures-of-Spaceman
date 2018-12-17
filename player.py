@@ -124,13 +124,16 @@ class Player(Mob):
     
     def bounceBlock(self, other):
         if self.rect.left < other.rect.right or self.rect.right > other.rect.left:
-            if not self.didBounceX:
-                self.speedx = -self.speedx
-                self.didBounceX = True
-        if self.rect.top < other.rect.bottom or self.rect.bottom > other.rect.top:
-            if not self.didBounceY:
-                self.speedy = -self.speedy
-                self.didBounceY = True
+            if self.rect.top < other.rect.bottom or self.rect.bottom > other.rect.top:
+                if other.kind == "block":
+                    if not self.didBounceX:
+                        self.speedx = -self.speedx
+                        self.didBounceX = True
+                    if not self.didBounceY:
+                        self.speedy = -self.speedy
+                        self.didBounceY = True
+                return True
+        return False
                 
     # ~ def shoot(self, d):
     
