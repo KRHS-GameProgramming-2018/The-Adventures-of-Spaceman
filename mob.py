@@ -2,7 +2,7 @@
 import pygame, sys, math
 
 
-class Ball():
+class Mob():
     def __init__(self, image, speed=[5,5], startPos=[0,0]):
         self.image = pygame.image.load(image)
         self.rect = self.image.get_rect()

@@ -13,11 +13,12 @@ size = width, height
 
 screen = pygame.display.set_mode(size)
 
-balls = []
+mobs = []
 level = loadLevel("Levels/1.lvl")
 
 
-pb = PlayerBall(5, [width/2,height/2])
+
+pb = Player(5, [200,400]) 
 
 
 
@@ -65,14 +66,14 @@ while True:
                     pb.go("sright", "")
                 
             
-    for ball in balls:
-        # ~ print str(ball)
-        ball.update(size)
+    for mob in mobs:
+        # ~ print str(mob)
+        mob.update(size)
     pb.update(size)
     
     
-    for hitter in balls:
-        for hittie in balls:
+    for hitter in mobs:
+        for hittie in mobs:
             hitter.collide(hittie)
         for tile in level:
             hitter.collide(tile)
@@ -81,8 +82,8 @@ while True:
         
         
     screen.fill(bgColor)
-    for ball in balls:
-        screen.blit(ball.image, ball.rect)
+    for mob in mobs:
+        screen.blit(mob.image, mob.rect)
     for tile in level:
         screen.blit(tile.image, tile.rect)
     screen.blit(pb.image, pb.rect)

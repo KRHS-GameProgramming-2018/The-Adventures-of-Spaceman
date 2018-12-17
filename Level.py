@@ -1,4 +1,5 @@
 import pygame, sys, math, random
+from player import *
 from Block import *
 from warp import *
 
@@ -29,7 +30,6 @@ def loadLevel(levelFile):
                 level += [Block([x*50+25, y*50+25])]
             if character == '@':
                 level += [Warp([x*50+25, y*50+25])]
-             
     return level
     
     

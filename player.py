@@ -1,9 +1,9 @@
 import sys, math, pygame
 from mob import *
 #https://opengameart.org/content/space-man-space-bot-rework
-class PlayerBall(Ball):
+class Player(Mob):
     def __init__(self, speed=10, startPos=[0,0]):
-        Ball.__init__(self, "PNG/Player/spaceman.png", [0,0], startPos)
+        Mob.__init__(self, "PNG/Player/spaceman.png", [0,0], startPos)
         self.upImages = [pygame.image.load("PNG/Player/spaceman-up.png"),
                         pygame.image.load("PNG/Player/spaceman-up.png"),
                         pygame.image.load("PNG/Player/spaceman-up.png"),
@@ -35,7 +35,7 @@ class PlayerBall(Ball):
         self.didBounceX = False
         self.didBounceY = False
             
-    def go(self, d, f):
+    def go(self, d, y):
         
         if d == "":
             return
@@ -57,21 +57,29 @@ class PlayerBall(Ball):
         if d == "sright":
             self.speedx = 0
         
-        if f == "":
-            f = d
-        
-        if f == "up":
-            self.images = self.upImages
-        if f == "down":
-            self.images = self.downImages
-        if f == "left":
-            self.images = self.leftImages
-        if f == "right":
-            self.images = self.rightImages
-        else:
-            f = d
-            print f
+        if y == "":
+            if self.speedy < 0:
+                self.images = self.upImages
+                if self.speedx < 0:
+                    self.images = self.leftImages
+                if self.speedx > 0:
+                    self.images = self.rightImages
+            if self.speedy >= 0:
+                self.images = self.downImages
+                if self.speedx < 0:
+                    self.images = self.leftImages
+                if self.speedx > 0:
+                    self.images = self.rightImages
             
+        if y == "up":
+            self.images = self.upImages
+        if y == "down":
+            self.images = self.downImages
+        if y == "left":
+            self.images = self.leftImages
+        if y == "right":
+            self.images = self.rightImages
+        
     def collide(self, other):
         if self.rect.right > other.rect.left:
             if self.rect.left < other.rect.right:
@@ -124,4 +132,5 @@ class PlayerBall(Ball):
                 self.speedy = -self.speedy
                 self.didBounceY = True
                 
+    # ~ def shoot(self, d):
     
