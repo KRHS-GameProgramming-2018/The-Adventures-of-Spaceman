@@ -2,6 +2,7 @@ import pygame, sys, math, random
 from mob import *
 from player import *
 from Level import *
+from enemy import*
 
 pygame.init()
 
@@ -19,6 +20,7 @@ level = loadLevel("Levels/1.lvl")
 
 
 pb = Player(5, [200,400]) 
+enemy = SpaceZombie(2, [100,300])
 
 
 
@@ -70,6 +72,7 @@ while True:
         # ~ print str(mob)
         mob.update(size)
     pb.update(size)
+    enemy.update(size)
     
     
     for hitter in mobs:
@@ -79,7 +82,7 @@ while True:
             hitter.collide(tile)
     for tile in level:
         pb.collide(tile)
-        
+        enemy.collide(tile)
         
     screen.fill(bgColor)
     for mob in mobs:
@@ -87,6 +90,7 @@ while True:
     for tile in level:
         screen.blit(tile.image, tile.rect)
     screen.blit(pb.image, pb.rect)
+    screen.blit(enemy.image, enemy.rect)
     pygame.display.flip()
     clock.tick(60)
     # ~ print clock.get_fps()
