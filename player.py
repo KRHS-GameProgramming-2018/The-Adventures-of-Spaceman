@@ -35,10 +35,7 @@ class Player(Mob):
         self.didBounceX = False
         self.didBounceY = False
             
-    def go(self, d, y):
-        
-        if d == "":
-            return
+    def go(self, d):
         if d == "up":
             self.speedy = -self.maxSpeed
         if d == "down":
@@ -57,28 +54,28 @@ class Player(Mob):
         if d == "sright":
             self.speedx = 0
         
-        if y == "":
-            if self.speedy < 0:
+    def face(self, y):
+        mode, direction = y.split(" ")
+        if mode == "face":
+            self.keys += [direction]
+        elif mode == "stop":
+            self.keys.remove(direction)
+        
+        
+        if self.keys:
+            if self.keys[-1] == "left":
+                self.images = self.leftImages
+                self.rect = self.image.get_rect(center = self.rect.center)
+            elif self.keys[-1] == "right":
+                self.images = self.rightImages
+                self.rect = self.image.get_rect(center = self.rect.center)
+            elif self.keys[-1] == "up":
                 self.images = self.upImages
-                if self.speedx < 0:
-                    self.images = self.leftImages
-                if self.speedx > 0:
-                    self.images = self.rightImages
-            if self.speedy >= 0:
+                self.rect = self.image.get_rect(center = self.rect.center)
+            elif self.keys[-1] == "down":
                 self.images = self.downImages
-                if self.speedx < 0:
-                    self.images = self.leftImages
-                if self.speedx > 0:
-                    self.images = self.rightImages
-            
-        if y == "up":
-            self.images = self.upImages
-        if y == "down":
-            self.images = self.downImages
-        if y == "left":
-            self.images = self.leftImages
-        if y == "right":
-            self.images = self.rightImages
+                self.rect = self.image.get_rect(center = self.rect.center)
+                
         
     def collide(self, other):
         if self.rect.right > other.rect.left:
@@ -134,6 +131,22 @@ class Player(Mob):
                         self.didBounceY = True
                 return True
         return False
-                
+
+    def update(self, size):
+        self.didBounceX = False
+        self.didBounceY = False
+        self.move()
+        self.bounceWall(size)
+        self.animate()
+        if len(self.keys) == 0:
+            if self.speedx < 0:
+                self.images = self.leftImages
+            if self.speedx > 0:
+                self.images = self.rightImages
+            if self.speedx == 0:
+                if self.speedy < 0:
+                    self.images = self.upImages
+                if self.speedy > 0:
+                    self.images = self.downImages
     # ~ def shoot(self, d):
     
