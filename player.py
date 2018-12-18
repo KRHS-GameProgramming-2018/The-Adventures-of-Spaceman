@@ -146,7 +146,8 @@ class Player(Mob):
             if self.speedx == 0:
                 if self.speedy < 0:
                     self.images = self.upImages
-                if self.speedy > 0:
+                if self.speedy >= 0:
                     self.images = self.downImages
+                    
     # ~ def shoot(self, d):
     
