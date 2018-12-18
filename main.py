@@ -40,30 +40,38 @@ while True:
                                 if event.key == pygame.K_t:
                                     paused = False
                 if event.key == pygame.K_UP:
-                    pb.go("", "up")
+                    pb.face("face up")
                 if event.key == pygame.K_w:
-                    pb.go("up", "")
+                    pb.go("up")
                 if event.key == pygame.K_DOWN:
-                    pb.go("", "down")
+                    pb.face("face down")
                 if event.key == pygame.K_s:
-                    pb.go("down", "")
+                    pb.go("down")
                 if event.key == pygame.K_LEFT:
-                    pb.go("", "left")
+                    pb.face("face left")
                 if event.key == pygame.K_a:
-                    pb.go("left", "")
+                    pb.go("left")
                 if event.key == pygame.K_RIGHT:
-                    pb.go("", "right")
+                    pb.face("face right")
                 if event.key == pygame.K_d:
-                    pb.go("right", "")
+                    pb.go("right")
         if event.type == pygame.KEYUP:
                 if event.key == pygame.K_w:
-                    pb.go("sup", "")
+                    pb.go("sup")
                 if event.key == pygame.K_s:
-                    pb.go("sdown", "")
+                    pb.go("sdown")
                 if event.key == pygame.K_a:
-                    pb.go("sleft", "")
+                    pb.go("sleft")
                 if event.key == pygame.K_d:
-                    pb.go("sright", "")
+                    pb.go("sright")
+                if event.key == pygame.K_UP:
+                    pb.face("stop up")
+                if event.key == pygame.K_DOWN:
+                    pb.face("stop down")
+                if event.key == pygame.K_LEFT:
+                    pb.face("stop left")
+                if event.key == pygame.K_RIGHT:
+                    pb.face("stop right")
                 
             
     for mob in mobs:
