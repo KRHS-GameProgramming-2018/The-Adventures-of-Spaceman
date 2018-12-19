@@ -19,7 +19,8 @@ levelnum = 1
 level = loadLevel("Levels/1.lvl")
 blocks = level["blocks"]
 mobs = level["enemies"]
-pb = Player(5, level["player"]) 
+pb = Player(5, level["player"])
+ 
 
 
 bgColor = 0,0,0
@@ -53,12 +54,12 @@ while True:
                     pb.go("up")
                 if event.key == pygame.K_s:
                     pb.go("down")
-                 if event.key == pygame.K_a:
+                if event.key == pygame.K_a:
                     pb.go("left")
                 if event.key == pygame.K_d:
                     pb.go("right")
                 #for schooting
-                if event,key == pygame.K_SPACE:
+                if event.key == pygame.K_SPACE:
                     shooting == True
         if event.type == pygame.KEYUP:
                 #for not going directions
@@ -80,7 +81,7 @@ while True:
                 if event.key == pygame.K_RIGHT:
                     pb.face("stop right")
                 #for not shooting
-                if event,key == pygame.K_SPACE:
+                if event.key == pygame.K_SPACE:
                     shooting == False
                 
             
