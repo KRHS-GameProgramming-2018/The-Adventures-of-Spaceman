@@ -39,23 +39,29 @@ while True:
                             if event.type == pygame.KEYDOWN:
                                 if event.key == pygame.K_t:
                                     paused = False
+                #for facing directions
                 if event.key == pygame.K_UP:
                     pb.face("face up")
-                if event.key == pygame.K_w:
-                    pb.go("up")
                 if event.key == pygame.K_DOWN:
                     pb.face("face down")
-                if event.key == pygame.K_s:
-                    pb.go("down")
                 if event.key == pygame.K_LEFT:
                     pb.face("face left")
-                if event.key == pygame.K_a:
-                    pb.go("left")
                 if event.key == pygame.K_RIGHT:
                     pb.face("face right")
+                #for moving directions
+                if event.key == pygame.K_w:
+                    pb.go("up")
+                if event.key == pygame.K_s:
+                    pb.go("down")
+                 if event.key == pygame.K_a:
+                    pb.go("left")
                 if event.key == pygame.K_d:
                     pb.go("right")
+                #for schooting
+                if event,key == pygame.K_SPACE:
+                    shooting == True
         if event.type == pygame.KEYUP:
+                #for not going directions
                 if event.key == pygame.K_w:
                     pb.go("sup")
                 if event.key == pygame.K_s:
@@ -64,6 +70,7 @@ while True:
                     pb.go("sleft")
                 if event.key == pygame.K_d:
                     pb.go("sright")
+                #for not facing directions
                 if event.key == pygame.K_UP:
                     pb.face("stop up")
                 if event.key == pygame.K_DOWN:
@@ -72,6 +79,9 @@ while True:
                     pb.face("stop left")
                 if event.key == pygame.K_RIGHT:
                     pb.face("stop right")
+                #for not shooting
+                if event,key == pygame.K_SPACE:
+                    shooting == False
                 
             
     for mob in mobs:
