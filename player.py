@@ -1,5 +1,6 @@
 import sys, math, pygame
 from mob import *
+from bolt import *
 #https://opengameart.org/content/space-man-space-bot-rework
 class Player(Mob):
     def __init__(self, speed=10, startPos=[0,0]):
@@ -34,7 +35,9 @@ class Player(Mob):
         
         self.didBounceX = False
         self.didBounceY = False
-            
+        
+        self.firing = False
+        
     def go(self, d):
         if d == "up":
             self.speedy = -self.maxSpeed
@@ -131,13 +134,21 @@ class Player(Mob):
                         self.didBounceY = True
                 return True
         return False
-
+        
+    def shooting(self, firing):
+        if self.firing:
+            print 'blasting'
+            
+        if not self.firing:
+            return
+            
     def update(self, size):
         self.didBounceX = False
         self.didBounceY = False
         self.move()
         self.bounceWall(size)
         self.animate()
+        self.shooting(self.firing)
         if len(self.keys) == 0:
             if self.speedx < 0:
                 self.images = self.leftImages
@@ -149,5 +160,5 @@ class Player(Mob):
                 if self.speedy >= 0:
                     self.images = self.downImages
                     
-    # ~ def shoot(self, d):
+    
     
