@@ -30,8 +30,19 @@ class SpaceZombie(Mob):
         self.goal = [0,0]
         
     def setPos(self, pos):
-        self.rect.center = pos
+        self.rect.center = pos0
         
+    def directMove(self):
+        compass = random.randint(0, 3)
+        if compass == 0:
+            self.speedy = -self.speedy
+        elif compass == 1:
+            self.speedx = self.speedx
+        elif compass == 2:
+            self.speedy = self.speedy
+        elif compass == 3:
+            self.speedx = -self.speedx
+    
     # ~ def go(self, d, y):
         
         # ~ if d == "":
