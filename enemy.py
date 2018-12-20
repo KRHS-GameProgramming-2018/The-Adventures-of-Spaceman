@@ -38,12 +38,16 @@ class SpaceZombie(Mob):
         compass = random.randint(0, 3)
         if compass == 0:
             self.speedy = -self.maxspeed
+            self.speedx = 0
         elif compass == 1:
             self.speedx = self.maxspeed
+            self.speedy = 0
         elif compass == 2:
             self.speedy = self.maxspeed
+            self.speedx = 0
         elif compass == 3:
             self.speedx = -self.maxspeed
+            self.speedy = 0
 
 
 
