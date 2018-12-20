@@ -59,7 +59,7 @@ while True:
                     pb.go("right")
                 #for schooting
                 if event.key == pygame.K_SPACE:
-                    pb.firing = True
+                    pb.shooting("yes")
         if event.type == pygame.KEYUP:
                 #for not going directions
                 if event.key == pygame.K_w:
@@ -81,7 +81,7 @@ while True:
                     pb.face("stop right")
                 #for not shooting
                 if event.key == pygame.K_SPACE:
-                    pb.firing = False
+                    pb.shooting("no")
                 
             
     for mob in mobs:

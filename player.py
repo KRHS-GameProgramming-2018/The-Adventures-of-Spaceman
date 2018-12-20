@@ -36,7 +36,10 @@ class Player(Mob):
         self.didBounceX = False
         self.didBounceY = False
         
-        self.firing = False
+        
+        self.fireTimer = 0
+        self.fireTimerMax = 60/15
+        # ~ self.facing = "down"
         
     def go(self, d):
         if d == "up":
@@ -136,10 +139,14 @@ class Player(Mob):
         return False
         
     def shooting(self, firing):
-        if self.firing:
+        if firing == "yes":
+            if self.fireTimer < self.fireTimerMax:
+                self.fireTimer += 1
             print 'blasting'
-            
-        if not self.firing:
+        else:
+            self.fireTimer = 0
+            # ~ return bolt(
+        if firing == "no":
             return
             
     def update(self, size):
@@ -148,7 +155,6 @@ class Player(Mob):
         self.move()
         self.bounceWall(size)
         self.animate()
-        self.shooting(self.firing)
         if len(self.keys) == 0:
             if self.speedx < 0:
                 self.images = self.leftImages
