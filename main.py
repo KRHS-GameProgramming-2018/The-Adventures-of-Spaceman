@@ -2,8 +2,8 @@ import pygame, sys, math, random
 from mob import *
 from player import *
 from Level import *
-from enemy import*
-
+from enemy import *
+from bolt import *
 pygame.init()
 
 clock = pygame.time.Clock()
@@ -19,8 +19,7 @@ levelnum = 1
 level = loadLevel("Levels/1.lvl")
 blocks = level["blocks"]
 mobs = level["enemies"]
-pb = Player(5, level["player"])
- 
+pb = Player(5, level["player"]) 
 
 
 bgColor = 0,0,0
@@ -60,7 +59,7 @@ while True:
                     pb.go("right")
                 #for schooting
                 if event.key == pygame.K_SPACE:
-                    shooting == True
+                    pb.firing = True
         if event.type == pygame.KEYUP:
                 #for not going directions
                 if event.key == pygame.K_w:
@@ -82,7 +81,7 @@ while True:
                     pb.face("stop right")
                 #for not shooting
                 if event.key == pygame.K_SPACE:
-                    shooting == False
+                    pb.firing = False
                 
             
     for mob in mobs:
@@ -102,6 +101,7 @@ while True:
                 level = loadLevel("Levels/"+str(levelnum)+".lvl")
                 blocks = level["blocks"]
                 mobs = level["enemies"]
+                #add delay here
                 pb = Player(5, level["player"])
         
         
@@ -114,4 +114,3 @@ while True:
     
     pygame.display.flip()
     clock.tick(60)
-    # ~ print clock.get_fps()
