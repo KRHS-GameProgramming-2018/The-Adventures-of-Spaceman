@@ -1,4 +1,4 @@
-import pygame, sys, math
+import pygame, sys, math, random
 from mob import *
 
 
@@ -15,6 +15,7 @@ class SpaceZombie(Mob):
         self.downImages = [pygame.image.load("PNG/Enemy/Zombie-Down.png"),]
         
         
+        self.maxspeed = speed
         self.images = self.downImages
         self.frame = 0;
         self.maxFrame = len(self.images)-1
@@ -25,69 +26,28 @@ class SpaceZombie(Mob):
         self.aniTimerMax = 60/15
         
         self.maxspeed = speed
-        self.boostSpeed = speed*2
-        self.normalSpeed = speed
         self.goal = [0,0]
+        self.directMove()
         
     def setPos(self, pos):
         self.rect.center = pos0
         
+    #Random Movement
+        
     def directMove(self):
         compass = random.randint(0, 3)
         if compass == 0:
-            self.speedy = -self.speedy
+            self.speedy = -self.maxspeed
         elif compass == 1:
-            self.speedx = self.speedx
+            self.speedx = self.maxspeed
         elif compass == 2:
-            self.speedy = self.speedy
+            self.speedy = self.maxspeed
         elif compass == 3:
-            self.speedx = -self.speedx
-    
-    # ~ def go(self, d, y):
-        
-        # ~ if d == "":
-            # ~ return
-        # ~ if d == "up":
-            # ~ self.speedy = -self.maxSpeed
-        # ~ if d == "down":
-            # ~ self.speedy = self.maxSpeed
-        # ~ if d == "left":
-            # ~ self.speedx = -self.maxSpeed
-        # ~ if d == "right":
-            # ~ self.speedx = self.maxSpeed
-            
-        # ~ if d == "sup":
-            # ~ self.speedy = 0
-        # ~ if d == "sdown":
-            # ~ self.speedy = 0
-        # ~ if d == "sleft":
-            # ~ self.speedx = 0
-        # ~ if d == "sright":
-            # ~ self.speedx = 0
-        
-        # ~ if y == "":
-            # ~ if self.speedy < 0:
-                # ~ self.images = self.upImages
-                # ~ if self.speedx < 0:
-                    # ~ self.images = self.leftImages
-                # ~ if self.speedx > 0:
-                    # ~ self.images = self.rightImages
-            # ~ if self.speedy >= 0:
-                # ~ self.images = self.downImages
-                # ~ if self.speedx < 0:
-                    # ~ self.images = self.leftImages
-                # ~ if self.speedx > 0:
-                    # ~ self.images = self.rightImages
-            
-        # ~ if y == "up":
-            # ~ self.images = self.upImages
-        # ~ if y == "down":
-            # ~ self.images = self.downImages
-        # ~ if y == "left":
-            # ~ self.images = self.leftImages
-        # ~ if y == "right":
-            # ~ self.images = self.rightImages
-            
+            self.speedx = -self.maxspeed
+
+
+
+
     def collide(self, other):
         if self.rect.right > other.rect.left:
             if self.rect.left < other.rect.right:
@@ -98,14 +58,14 @@ class SpaceZombie(Mob):
                                 if self.rect.centerx < other.rect.centerx:
                                     self.speedx = -self.speedx
                                     self.move()
-                                    self.speedx = 0
+                                    self.directMove()
                                     self.didBounceX = True
                                    
                             if self.speedx < 1: #left
                                 if self.rect.centerx > other.rect.centerx:
                                     self.speedx = -self.speedx
                                     self.move()
-                                    self.speedx = 0
+                                    self.directMove()
                                     self.didBounceX = True
                                     
                         if not self.didBounceY:
@@ -113,7 +73,7 @@ class SpaceZombie(Mob):
                                 if self.rect.centery < other.rect.centery:
                                     self.speedy = -self.speedy
                                     self.move()
-                                    self.speedy = 0
+                                    self.directMove()
                                     self.didBounceY = True
                                     # ~ if self.rect.bottom > other.rect.top:
                                         # ~ self.rect.centery = other.rect.centery - ((self.rect.height)/2 + (other.rect.height)/2)
@@ -122,7 +82,7 @@ class SpaceZombie(Mob):
                                 if self.rect.centery > other.rect.centery:
                                     self.speedy  = -self.speedy
                                     self.move()
-                                    self.speedy = 0
+                                    self.directMove()
                                     self.didBounceY = True
                                     # ~ if self.rect.top < other.rect.bottom:
                                         # ~ self.rect.centery = other.rect.centery + (self.rect.height)/2 + (other.rect.height)/2
