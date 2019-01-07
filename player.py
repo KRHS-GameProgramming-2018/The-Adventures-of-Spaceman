@@ -43,6 +43,10 @@ class Player(Mob):
         self.fireTimerMax = 60/15
         # ~ self.facing = "down"
         
+        self.invincTimer = 0
+        self.invincTimerMax = 120
+        
+        
     def go(self, d):
         if d == "up":
             self.speedy = -self.maxSpeed
@@ -92,6 +96,11 @@ class Player(Mob):
                     if self.rect.bottom > other.rect.top:
                         if other.kind == "enemy":
                             self.health += -1
+                            if self.invincTimer < self.invincTimerMax:
+                                  self.invincTimer += 1
+                                  if self.invincTimer == self.invincTimerMax:
+                                      self.invincTimer = 0
+              
                             print self.health
                         elif not self.didBounceX:
                             if self.speedx > 1: #right
