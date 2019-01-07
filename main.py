@@ -86,6 +86,8 @@ while True:
             
     for mob in mobs:
         mob.update(size)
+    for mob in mobs:
+        pb.collide(mob)
     pb.update(size)
     
     

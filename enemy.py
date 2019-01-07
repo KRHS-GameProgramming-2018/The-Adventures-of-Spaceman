@@ -22,7 +22,7 @@ class SpaceZombie(Mob):
                         pygame.image.load("PNG/Enemy/Zombie-Down.png"),
                         ]
         
-        
+        self.kind = "enemy"
         self.maxspeed = speed
         self.images = self.downImages
         self.frame = 0;

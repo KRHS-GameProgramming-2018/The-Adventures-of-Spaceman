@@ -33,6 +33,7 @@ class Player(Mob):
         self.keys = []
         self.goal = [0,0]
         self.kind = "player"
+        self.health = 3
         
         self.didBounceX = False
         self.didBounceY = False
@@ -89,7 +90,10 @@ class Player(Mob):
             if self.rect.left < other.rect.right:
                 if self.rect.top < other.rect.bottom:
                     if self.rect.bottom > other.rect.top:
-                        if not self.didBounceX:
+                        if other.kind == "enemy":
+                            self.health += -1
+                            print self.health
+                        elif not self.didBounceX:
                             if self.speedx > 1: #right
                                 if self.rect.centerx < other.rect.centerx:
                                     self.speedx = -self.speedx
