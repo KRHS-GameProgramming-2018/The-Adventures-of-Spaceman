@@ -32,6 +32,7 @@ class Player(Mob):
         self.normalSpeed = speed
         self.keys = []
         self.goal = [0,0]
+        self.kind = "player"
         
         self.didBounceX = False
         self.didBounceY = False
@@ -145,7 +146,7 @@ class Player(Mob):
             print 'blasting'
         else:
             self.fireTimer = 0
-            # ~ return bolt(
+            return bolt()
         if firing == "no":
             return
             
