@@ -7,12 +7,20 @@ class SpaceZombie(Mob):
         Mob.__init__(self, "PNG/Enemy/Zombie-Down.png", [0,0], startPos)
         self.rightImages = [pygame.image.load("PNG/Enemy/Zombie-Right1.png"),
                         pygame.image.load("PNG/Enemy/Zombie-Right2.png"),
-                        pygame.image.load("PNG/Enemy/Zombie-Right3.png"),]
+                        pygame.image.load("PNG/Enemy/Zombie-Right3.png"),
+                        ]
         self.leftImages = [pygame.image.load("PNG/Enemy/Zombie-Left1.png"),
                         pygame.image.load("PNG/Enemy/Zombie-Left2.png"),
-                        pygame.image.load("PNG/Enemy/Zombie-Left3.png"),]
-        self.upImages = [pygame.image.load("PNG/Enemy/Zombie-Up.png")]
-        self.downImages = [pygame.image.load("PNG/Enemy/Zombie-Down.png"),]
+                        pygame.image.load("PNG/Enemy/Zombie-Left3.png"),
+                        ]
+        self.upImages = [pygame.image.load("PNG/Enemy/Zombie-Up.png"),
+                        pygame.image.load("PNG/Enemy/Zombie-Up.png"),
+                        pygame.image.load("PNG/Enemy/Zombie-Up.png"),
+                        ]
+        self.downImages = [pygame.image.load("PNG/Enemy/Zombie-Down.png"),
+                        pygame.image.load("PNG/Enemy/Zombie-Down.png"),
+                        pygame.image.load("PNG/Enemy/Zombie-Down.png"),
+                        ]
         
         
         self.maxspeed = speed
@@ -37,19 +45,44 @@ class SpaceZombie(Mob):
     def directMove(self):
         compass = random.randint(0, 3)
         if compass == 0:
+            self.moving = "Y"
             self.speedy = -self.maxspeed
             self.speedx = 0
             self.images = self.upImages
         elif compass == 1:
+            self.moving = "X"
             self.speedx = self.maxspeed
             self.speedy = 0
             self.images = self.rightImages
         elif compass == 2:
+            self.moving = "Y"
             self.speedy = self.maxspeed
             self.speedx = 0
+            self.images = self.downImages
         elif compass == 3:
+            self.moving = "X"
             self.speedx = -self.maxspeed
             self.speedy = 0
+            self.images = self.leftImages
+        # ~ self.image = self.images[self.frame]
+        # ~ self.rect = self.image.get_rect()
+            
+    def move(self):
+        self.speed = [self.speedx, self.speedy]
+        print self.rect.centerx%50-25, self.rect.centery%50-25
+        if self.speedx != 0:  #mov'n x
+            if self.rect.centerx%50-25 == 0:
+                print ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+                if random.randint(0,3) == 0:
+                    self.directMove()
+        
+        if self.speedy != 0:
+            if  self.rect.centery%50-25 == 0:
+                print "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+                if random.randint(0,3) == 0:
+                    self.directMove()
+                    
+        self.rect = self.rect.move(self.speed)
 
 
 
