@@ -39,9 +39,11 @@ class SpaceZombie(Mob):
         if compass == 0:
             self.speedy = -self.maxspeed
             self.speedx = 0
+            self.images = self.upImages
         elif compass == 1:
             self.speedx = self.maxspeed
             self.speedy = 0
+            self.images = self.rightImages
         elif compass == 2:
             self.speedy = self.maxspeed
             self.speedx = 0
