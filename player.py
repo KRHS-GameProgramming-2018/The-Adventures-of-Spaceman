@@ -46,7 +46,7 @@ class Player(Mob):
         # ~ self.facing = "down"
         
         self.invincTimer = 0
-        self.invincTimerMax = 120
+        self.invincTimerMax = 1
         
         
     def go(self, d):
