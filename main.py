@@ -26,6 +26,7 @@ bgColor = 0,0,0
 
 
 while True:
+    #raw_input(">>>")
     for event in pygame.event.get():
         #print event.type
         if event.type == pygame.QUIT:
@@ -121,3 +122,4 @@ while True:
     
     pygame.display.flip()
     clock.tick(60)
+    #print clock.get_fps()
