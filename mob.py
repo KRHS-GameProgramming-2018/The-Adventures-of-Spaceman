@@ -4,11 +4,11 @@ import pygame, sys, math
 class Mob():
     def __init__(self, image, speed=[5,5], startPos=[0,0]):
         self.image = pygame.image.load(image)
-        self.rect = self.image.get_rect()
+        self.rect = self.image.get_rect(center = startPos)
         self.speedx = speed[0]
         self.speedy = speed[1]
         self.speed = [self.speedx, self.speedy]
-        self.rect = self.rect.move(startPos)
+        #self.rect = self.rect.move(startPos)
         self.radius = (self.rect.width/2 + self.rect.height/2)/2
         self.didBounceX = False
         self.didBounceY = False
@@ -43,6 +43,7 @@ class Mob():
             self.image = self.images[self.frame]
             
     def update(self, size):
+        # ~ print self.rect.center
         self.didBounceX = False
         self.didBounceY = False
         self.move()

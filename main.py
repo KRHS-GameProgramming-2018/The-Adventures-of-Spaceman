@@ -20,7 +20,7 @@ level = loadLevel("Levels/1.lvl")
 blocks = level["blocks"]
 mobs = level["enemies"]
 pb = Player(5, level["player"]) 
-
+bullets = []
 
 bgColor = 0,0,0
 
@@ -60,7 +60,7 @@ while True:
                     pb.go("right")
                 #for schooting
                 if event.key == pygame.K_SPACE:
-                    pb.shooting("yes")
+                    bullets += [pb.shoot()]
         if event.type == pygame.KEYUP:
                 #for not going directions
                 if event.key == pygame.K_w:
@@ -80,16 +80,14 @@ while True:
                     pb.face("stop left")
                 if event.key == pygame.K_RIGHT:
                     pb.face("stop right")
-                #for not shooting
-                if event.key == pygame.K_SPACE:
-                    pb.shooting("no")
+                
                 
             
     for mob in mobs:
         mob.update(size)
     for mob in mobs:
         pb.collide(mob)
-    for bullet in pb.bullets:
+    for bullet in bullets:
         bullet.update(size)
     pb.update(size)
     
@@ -104,6 +102,7 @@ while True:
         if pb.collide(tile):
             if tile.kind == "warp":
                 levelnum += 1
+                bullets = []
                 level = loadLevel("Levels/"+str(levelnum)+".lvl")
                 blocks = level["blocks"]
                 mobs = level["enemies"]
@@ -116,8 +115,8 @@ while True:
         screen.blit(mob.image, mob.rect)
     for tile in blocks:
         screen.blit(tile.image, tile.rect)
-    for bullet in pb.bullets:
-        screen.blit(bullet.image, tile.rect)
+    for bullet in bullets:
+        screen.blit(bullet.image, bullet.rect)
     screen.blit(pb.image, pb.rect)
     
     pygame.display.flip()

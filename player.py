@@ -43,6 +43,7 @@ class Player(Mob):
         self.fireTimer = 0
         self.fireTimerMax = 60/15
         self.bullets = []
+        self.firing = False
         # ~ self.facing = "down"
         
         self.invincTimer = 0
@@ -155,36 +156,35 @@ class Player(Mob):
         return False
     
     def facingDirection(self):
-        if self. images == self.downImages:
+        if self.images == self.downImages:
             self.y = "down"
-        if self. images == self.upImages:
+        if self.images == self.upImages:
             self.y = "up"
-        if self. images == self.leftImages:
+        if self.images == self.leftImages:
             self.y = "left"
-        if self. images == self.rightImages:
+        if self.images == self.rightImages:
             self.y = "right"
             
-    def shooting(self, firing):
-        if firing == "yes":
-            if self.fireTimer < self.fireTimerMax:
-                self.fireTimer += 1
-            print 'blasting'
+    def shoot(self):
+        if self.firing:
+            pass
         else:
+            self.firing = True
             self.fireTimer = 0
-            print self.rect.centerx, self.rect.centery
-            print len(self.bullets)
+            print self.rect.center, self.y
             if self.y == "down":
-                self.bullets += [Bolt([0,7],[self.rect.centerx, self.rect.centery])]
-                print self.rect.centerx, self.rect.centery 
+                speed = [0,7]
             if self.y == "up":
-                self.bullets += [Bolt([0,-7],[self.rect.centerx, self.rect.centery])] 
+                speed = [0,-7]
             if self.y == "left":
-                self.bullets += [Bolt([-7,0],[self.rect.centerx, self.rect.centery])] 
+                speed = [-7,0]
             if self.y == "right":
-                self.bullets += [Bolt([7,0],[self.rect.centerx, self.rect.centery])] 
+                speed = [7,0]
             
-        if firing == "no":
-            return
+            return Bolt(speed, self.rect.center)
+            
+            
+    
             
     def update(self, size):
         self.didBounceX = False
@@ -192,6 +192,7 @@ class Player(Mob):
         self.move()
         self.bounceWall(size)
         self.animate()
+        self.facingDirection()
         if len(self.keys) == 0:
             if self.speedx < 0:
                 self.images = self.leftImages
@@ -202,6 +203,13 @@ class Player(Mob):
                     self.images = self.upImages
                 if self.speedy >= 0:
                     self.images = self.downImages
+        
+        if self.firing:
+            if self.fireTimer < self.fireTimerMax:
+                self.fireTimer += 1
+            else:
+                self.fireTimer = 0
+                self.firing = False
                     
     
     
