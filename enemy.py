@@ -69,16 +69,16 @@ class SpaceZombie(Mob):
             
     def move(self):
         self.speed = [self.speedx, self.speedy]
-        print self.rect.centerx%50-25, self.rect.centery%50-25
+        # ~ print self.rect.centerx%50-25, self.rect.centery%50-25
         if self.speedx != 0:  #mov'n x
             if self.rect.centerx%50-25 == 0:
-                print ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+                # ~ print ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
                 if random.randint(0,3) == 0:
                     self.directMove()
         
         if self.speedy != 0:
             if  self.rect.centery%50-25 == 0:
-                print "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+                # ~ print "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
                 if random.randint(0,3) == 0:
                     self.directMove()
                     

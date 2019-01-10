@@ -22,6 +22,7 @@ class Player(Mob):
                            pygame.image.load("PNG/Player/spaceman-right-3.png"),
                            ]
         self.images = self.downImages
+        self.y = "down"
         self.frame = 0;
         self.maxFrame = len(self.images)-1
         self.aniTimer = 0
@@ -41,6 +42,7 @@ class Player(Mob):
         
         self.fireTimer = 0
         self.fireTimerMax = 60/15
+        self.bullets = []
         # ~ self.facing = "down"
         
         self.invincTimer = 0
@@ -151,7 +153,17 @@ class Player(Mob):
                         self.didBounceY = True
                 return True
         return False
-        
+    
+    def facingDirection(self):
+        if self. images == self.downImages:
+            self.y = "down"
+        if self. images == self.upImages:
+            self.y = "up"
+        if self. images == self.leftImages:
+            self.y = "left"
+        if self. images == self.rightImages:
+            self.y = "right"
+            
     def shooting(self, firing):
         if firing == "yes":
             if self.fireTimer < self.fireTimerMax:
@@ -159,7 +171,18 @@ class Player(Mob):
             print 'blasting'
         else:
             self.fireTimer = 0
-            return bolt()
+            print self.rect.centerx, self.rect.centery
+            print len(self.bullets)
+            if self.y == "down":
+                self.bullets += [Bolt([0,7],[self.rect.centerx, self.rect.centery])]
+                print self.rect.centerx, self.rect.centery 
+            if self.y == "up":
+                self.bullets += [Bolt([0,-7],[self.rect.centerx, self.rect.centery])] 
+            if self.y == "left":
+                self.bullets += [Bolt([-7,0],[self.rect.centerx, self.rect.centery])] 
+            if self.y == "right":
+                self.bullets += [Bolt([7,0],[self.rect.centerx, self.rect.centery])] 
+            
         if firing == "no":
             return
             

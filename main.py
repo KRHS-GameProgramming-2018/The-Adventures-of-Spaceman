@@ -88,8 +88,11 @@ while True:
         mob.update(size)
     for mob in mobs:
         pb.collide(mob)
+    for bullet in pb.bullets:
+        bullet.update(size)
     pb.update(size)
     
+
     
     for hitter in mobs:
         for hittie in mobs:
@@ -112,6 +115,8 @@ while True:
         screen.blit(mob.image, mob.rect)
     for tile in blocks:
         screen.blit(tile.image, tile.rect)
+    for bullet in pb.bullets:
+        screen.blit(bullet.image, tile.rect)
     screen.blit(pb.image, pb.rect)
     
     pygame.display.flip()
