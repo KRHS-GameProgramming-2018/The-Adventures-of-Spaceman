@@ -4,6 +4,7 @@ import pygame, sys, math
 class Mob():
     def __init__(self, image, speed=[5,5], startPos=[0,0]):
         self.image = pygame.image.load(image)
+        self.alive = True
         self.rect = self.image.get_rect(center = startPos)
         self.speedx = speed[0]
         self.speedy = speed[1]
