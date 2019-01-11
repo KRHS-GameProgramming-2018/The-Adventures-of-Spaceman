@@ -4,9 +4,9 @@ from player import *
 
 class Bolt(Mob):
     def __init__(self, speed=10, startPos=[0,0]):
-        Mob.__init__(self,  "PNG/Player/spaceman.png", speed, startPos)
+        Mob.__init__(self,  "PNG/Bolt/bolt-1.png", speed, startPos)
         # ~ print self.rect.center, speed
-        
+        self.type = "bolt"
         
     def collide(self, other):
         if self.rect.right > other.rect.left:

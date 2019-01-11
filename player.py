@@ -103,43 +103,43 @@ class Player(Mob):
                                   self.invincTimer += 1
                                   if self.invincTimer == self.invincTimerMax:
                                       self.invincTimer = 0
-              
-                            print self.health
-                        elif not self.didBounceX:
-                            if self.speedx > 1: #right
-                                if self.rect.centerx < other.rect.centerx:
-                                    self.speedx = -self.speedx
-                                    self.move()
-                                    self.speedx = 0
-                                    self.didBounceX = True
-                                   
-                            if self.speedx < 1: #left
-                                if self.rect.centerx > other.rect.centerx:
-                                    self.speedx = -self.speedx
-                                    self.move()
-                                    self.speedx = 0
-                                    self.didBounceX = True
-                                    
-                        if not self.didBounceY:
-                            if self.speedy > 1: #down
-                                if self.rect.centery < other.rect.centery:
-                                    self.speedy = -self.speedy
-                                    self.move()
-                                    self.speedy = 0
-                                    self.didBounceY = True
-                                    # ~ if self.rect.bottom > other.rect.top:
-                                        # ~ self.rect.centery = other.rect.centery - ((self.rect.height)/2 + (other.rect.height)/2)
+                        if not other.kind == "enemy":
+                  
+                            if not self.didBounceX:
+                                if self.speedx > 1: #right
+                                    if self.rect.centerx < other.rect.centerx:
+                                        self.speedx = -self.speedx
+                                        self.move()
+                                        self.speedx = 0
+                                        self.didBounceX = True
+                                       
+                                if self.speedx < 1: #left
+                                    if self.rect.centerx > other.rect.centerx:
+                                        self.speedx = -self.speedx
+                                        self.move()
+                                        self.speedx = 0
+                                        self.didBounceX = True
+                                        
+                            if not self.didBounceY:
+                                if self.speedy > 1: #down
+                                    if self.rect.centery < other.rect.centery:
+                                        self.speedy = -self.speedy
+                                        self.move()
+                                        self.speedy = 0
+                                        self.didBounceY = True
+                                        # ~ if self.rect.bottom > other.rect.top:
+                                            # ~ self.rect.centery = other.rect.centery - ((self.rect.height)/2 + (other.rect.height)/2)
 
-                            if self.speedy < 1: #up
-                                if self.rect.centery > other.rect.centery:
-                                    self.speedy  = -self.speedy
-                                    self.move()
-                                    self.speedy = 0
-                                    self.didBounceY = True
-                                    # ~ if self.rect.top < other.rect.bottom:
-                                        # ~ self.rect.centery = other.rect.centery + (self.rect.height)/2 + (other.rect.height)/2
+                                if self.speedy < 1: #up
+                                    if self.rect.centery > other.rect.centery:
+                                        self.speedy  = -self.speedy
+                                        self.move()
+                                        self.speedy = 0
+                                        self.didBounceY = True
+                                        # ~ if self.rect.top < other.rect.bottom:
+                                            # ~ self.rect.centery = other.rect.centery + (self.rect.height)/2 + (other.rect.height)/2
 
-                        return True
+                            return True
         return False
     
     def bounceBlock(self, other):
