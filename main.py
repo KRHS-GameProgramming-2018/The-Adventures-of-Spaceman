@@ -87,7 +87,8 @@ while True:
         mob.update(size)
     for mob in mobs:
         pb.collide(mob)
-        bullets.collide(mob)
+        for bullet in bullets:
+            bullet.collide(mob)
     for bullet in bullets:
         bullet.update(size)
         if not bullet.alive:
