@@ -87,8 +87,11 @@ while True:
         mob.update(size)
     for mob in mobs:
         pb.collide(mob)
+        bullets.collide(mob)
     for bullet in bullets:
         bullet.update(size)
+        if not bullet.alive:
+            bullets.remove(bullet)
     pb.update(size)
     
 
@@ -99,6 +102,8 @@ while True:
         for tile in blocks:
             hitter.collide(tile)
     for tile in blocks:
+        for bullet in bullets:
+            bullet.collide(tile)
         if pb.collide(tile):
             if tile.kind == "warp":
                 levelnum += 1
