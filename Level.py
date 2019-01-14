@@ -3,6 +3,7 @@ from player import *
 from Block import *
 from warp import *
 from enemy import *
+from Imposter import *
 
 def loadLevel(levelFile):
     f = open(levelFile, 'r')
@@ -11,7 +12,7 @@ def loadLevel(levelFile):
     
     level = {"blocks":[],
              "player":[0,0],
-             "enemies":[]
+             "enemies":[],
              }
     
     #Block Size is 50x50
@@ -38,6 +39,8 @@ def loadLevel(levelFile):
                 level["player"] = [x*50+25, y*50+25]
             if character == 'x':
                 level["enemies"] += [SpaceZombie(2, [x*50+25, y*50+25])]
+            if character == 'm':
+                level["enemies"] += [Imposter(1, [x*50+25, y*50+25])]
             
     return level
     
