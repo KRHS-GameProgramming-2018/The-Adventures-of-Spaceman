@@ -3,7 +3,7 @@ from mob import *
 from bolt import *
 #https://opengameart.org/content/space-man-space-bot-rework
 class Player(Mob):
-    def __init__(self, speed=10, startPos=[0,0]):
+    def __init__(self, speed=6, startPos=[0,0]):
         Mob.__init__(self, "PNG/Player/spaceman.png", [0,0], startPos)
         self.upImages = [pygame.image.load("PNG/Player/spaceman-up.png"),
                         pygame.image.load("PNG/Player/spaceman-up.png"),
