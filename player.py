@@ -176,14 +176,18 @@ class Player(Mob):
             print self.rect.center, self.y
             if self.y == "down":
                 speed = [0,7]
+                image = "PNG/Bolt/bolt-2.png"
             if self.y == "up":
                 speed = [0,-7]
+                image = "PNG/Bolt/bolt-2.png"
             if self.y == "left":
                 speed = [-7,0]
+                image = "PNG/Bolt/bolt-1.png"
             if self.y == "right":
                 speed = [7,0]
+                image = "PNG/Bolt/bolt-1.png"
             
-            return Bolt(speed, self.rect.center)
+            return Bolt(image, speed, self.rect.center)
             
             
             
