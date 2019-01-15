@@ -100,9 +100,9 @@ while True:
         levelnum = 0
         level = loadLevel("Levels/"+str(levelnum)+".lvl")
         bullets = []
+        pb = Player(0, level["player"])
         blocks = level["blocks"]
         mobs = level["enemies"]
-        pb = Player(3, level["player"])
     for bullet in bullets:
         bullet.update(size)
         for mob in mobs:
