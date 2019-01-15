@@ -6,9 +6,9 @@ from enemy import *
 from bolt import *
 
 
-print "Welcome to your spaceship, the year is 2100 and you've been overrun."
-print "By what, you don't know but you need need to get out before it too late. \n"
-raw_input("press any key to continue")
+# ~ print "Welcome to your spaceship, the year is 2100 and you've been overrun."
+# ~ print "By what, you don't know but you need need to get out before it too late. \n"
+# ~ raw_input("press any key to continue")
 pygame.init()
 
 clock = pygame.time.Clock()
@@ -90,12 +90,23 @@ while True:
             
     for mob in mobs:
         mob.update(size)
+        if not mob.alive:
+            mobs.remove(mob)
     for mob in mobs:
         pb.collide(mob)
         for bullet in bullets:
             bullet.collide(mob)
+    if not pb.alive:
+        levelnum = 0
+        level = loadLevel("Levels/"+str(levelnum)+".lvl")
+        bullets = []
+        blocks = level["blocks"]
+        mobs = level["enemies"]
+        pb = Player(3, level["player"])
     for bullet in bullets:
         bullet.update(size)
+        for mob in mobs:
+            mob.collide(bullet)
         if not bullet.alive:
             bullets.remove(bullet)
     pb.update(size)
@@ -118,7 +129,7 @@ while True:
                 blocks = level["blocks"]
                 mobs = level["enemies"]
                 #add delay here
-                pb = Player(5, level["player"])
+                pb = Player(3, level["player"])
         
         
     screen.fill(bgColor)

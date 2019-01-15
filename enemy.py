@@ -37,7 +37,8 @@ class SpaceZombie(Mob):
         self.goal = [0,0]
         self.directMove()
         
-        lives = 3
+        self.lives = 3
+        
     def setPos(self, pos):
         self.rect.center = pos0
         
@@ -93,8 +94,8 @@ class SpaceZombie(Mob):
             if self.rect.left < other.rect.right:
                 if self.rect.top < other.rect.bottom:
                     if self.rect.bottom > other.rect.top:
-                        if other.type == "bolt":
-                            lives += -1
+                        if other.kind == "bolt":
+                            self.lives += -1
                         if not self.didBounceX:
                             if self.speedx > 1: #right
                                 if self.rect.centerx < other.rect.centerx:
@@ -141,3 +142,5 @@ class SpaceZombie(Mob):
             if not self.didBounceY:
                 self.speedy = -self.speedy
                 self.didBounceY = True
+                
+    

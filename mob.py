@@ -21,7 +21,9 @@ class Mob():
         self.aniTimer = 0
         self.aniTimerMax = 60/20
         
-    
+    def live(self, lives):
+        if self.lives <= 0:
+            self.alive = False
     
     def getDist(self, pt):
         x1 = self.rect.centerx
@@ -50,6 +52,7 @@ class Mob():
         self.move()
         self.bounceWall(size)
         self.animate()
+        self.live(self.lives)
     
     def move(self):
         self.speed = [self.speedx, self.speedy]

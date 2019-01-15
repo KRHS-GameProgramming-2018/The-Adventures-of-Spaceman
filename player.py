@@ -34,7 +34,7 @@ class Player(Mob):
         self.keys = []
         self.goal = [0,0]
         self.kind = "player"
-        self.health = 3
+        self.lives = 3
         
         self.didBounceX = False
         self.didBounceY = False
@@ -46,6 +46,7 @@ class Player(Mob):
         self.firing = False
         # ~ self.facing = "down"
         
+        self.alive = True
         self.invincTimer = 0
         self.invincTimerMax = 1
         
@@ -98,7 +99,8 @@ class Player(Mob):
                 if self.rect.top < other.rect.bottom:
                     if self.rect.bottom > other.rect.top:
                         if other.kind == "enemy":
-                            self.health += -1
+                            self.lives += -1
+                            print self.lives
                             if self.invincTimer < self.invincTimerMax:
                                   self.invincTimer += 1
                                   if self.invincTimer == self.invincTimerMax:
@@ -184,12 +186,12 @@ class Player(Mob):
             return Bolt(speed, self.rect.center)
             
             
-    
             
     def update(self, size):
         self.didBounceX = False
         self.didBounceY = False
         self.move()
+        self.live(self.lives)
         self.bounceWall(size)
         self.animate()
         self.facingDirection()

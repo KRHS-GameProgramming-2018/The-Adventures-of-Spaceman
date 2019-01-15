@@ -37,7 +37,7 @@ def loadLevel(levelFile):
             if character == "%":
                 level["player"] = [x*50+25, y*50+25]
             if character == 'x':
-                level["enemies"] += [SpaceZombie(2, [x*50+25, y*50+25])]
+                level["enemies"] += [SpaceZombie(3, [x*50+25, y*50+25])]
             
     return level
     
