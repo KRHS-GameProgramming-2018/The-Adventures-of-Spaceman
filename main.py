@@ -3,6 +3,7 @@ from mob import *
 from player import *
 from Level import *
 from enemy import *
+from Imposter import *
 from bolt import *
 
 
