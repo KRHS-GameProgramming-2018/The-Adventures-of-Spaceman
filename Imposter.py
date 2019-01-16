@@ -22,7 +22,7 @@ class Imposter(Mob):
                         pygame.image.load("PNG/Enemy2/Imposter-Down.png"),
                         ]
         self.seen = False
-        self.kind = "imposter"
+        self.kind = "enemy"
         self.images = self.upImages
         self.frame = 0;
         self.maxFrame = len(self.images)-1
