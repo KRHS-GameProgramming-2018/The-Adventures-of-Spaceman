@@ -9,7 +9,7 @@ from bolt import *
 
 # ~ print "Welcome to your spaceship, the year is 2100 and you've been overrun."
 # ~ print "By what, you don't know but you need need to get out before it too late. \n"
-# ~ raw_input("press any key to continue")
+raw_input("press any key to continue")
 pygame.init()
 
 clock = pygame.time.Clock()
