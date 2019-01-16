@@ -52,13 +52,13 @@ class Player(Mob):
         
         
     def go(self, d):
-        if d == "up":
+        if d == "go up":
             self.speedy = -self.maxSpeed
-        if d == "down":
+        if d == "go down":
             self.speedy = self.maxSpeed
-        if d == "left":
+        if d == "go left":
             self.speedx = -self.maxSpeed
-        if d == "right":
+        if d == "go right":
             self.speedx = self.maxSpeed
             
         if d == "sup":
@@ -70,6 +70,29 @@ class Player(Mob):
         if d == "sright":
             self.speedx = 0
         
+        
+    # ~ def go(self, d):
+        # ~ mode, direction = d.split(" ")
+        # ~ if mode == "go":
+            # ~ self.keys += [direction]
+        # ~ elif mode == "s":
+            # ~ self.keys.remove(direction)
+            
+        # ~ if self.keys:
+            # ~ if self.keys[-1] == "left":
+                # ~ self.speedx = -self.maxSpeed
+                
+            # ~ elif self.keys[-1] == "right":
+                # ~ self.speedx = self.maxSpeed
+            
+            # ~ elif self.keys[-1] == "up":
+                # ~ self.speedy = -self.maxSpeed
+            # ~ elif self.keys[-1] == "down":
+                # ~ self.speedy = self.maxSpeed
+        # ~ else:
+            # ~ self.speedx = 0
+            # ~ self.speedy = 0
+            
     def face(self, y):
         mode, direction = y.split(" ")
         if mode == "face":

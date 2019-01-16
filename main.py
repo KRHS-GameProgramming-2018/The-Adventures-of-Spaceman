@@ -57,13 +57,13 @@ while True:
                     pb.face("face right")
                 #for moving directions
                 if event.key == pygame.K_w:
-                    pb.go("up")
+                    pb.go("go up")
                 if event.key == pygame.K_s:
-                    pb.go("down")
+                    pb.go("go down")
                 if event.key == pygame.K_a:
-                    pb.go("left")
+                    pb.go("go left")
                 if event.key == pygame.K_d:
-                    pb.go("right")
+                    pb.go("go right")
                 #for schooting
                 if event.key == pygame.K_SPACE:
                     bullets += [pb.shoot()]
