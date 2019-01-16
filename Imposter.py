@@ -1,6 +1,7 @@
 import pygame, sys, math, random
 from mob import *
 
+
 class Imposter(Mob):
     def __init__(self, speed=5, startPos=[0,0]):
         Mob.__init__(self, "PNG/Enemy2/Imposter-Down.png", [0,0], startPos)
