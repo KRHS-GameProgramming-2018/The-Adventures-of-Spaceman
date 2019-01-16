@@ -92,6 +92,8 @@ class Imposter(Mob):
             if self.rect.left < other.rect.right:
                 if self.rect.top < other.rect.bottom:
                     if self.rect.bottom > other.rect.top:
+                        if other.kind == "bolt":
+                            self.lives += -1
                         if not self.didBounceX:
                             if self.speedx > 1: #right
                                 if self.rect.centerx < other.rect.centerx:
