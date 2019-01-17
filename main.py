@@ -1,4 +1,4 @@
-import pygame, sys, math, random
+import pygame, sys, math, random, time
 from mob import *
 from player import *
 from Level import *
@@ -7,8 +7,6 @@ from Imposter import *
 from bolt import *
 
 
-# ~ print "Welcome to your spaceship, the year is 2100 and you've been overrun."
-# ~ print "By what, you don't know but you need need to get out before it too late. \n"
 raw_input("press any key to continue")
 pygame.init()
 
@@ -112,7 +110,6 @@ while True:
             bullets.remove(bullet)
     pb.update(size)
     
-
     
     for hitter in mobs:
         for hittie in mobs:

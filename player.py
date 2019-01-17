@@ -98,7 +98,10 @@ class Player(Mob):
         if mode == "face":
             self.keys += [direction]
         elif mode == "stop":
-            self.keys.remove(direction)
+            try:
+                self.keys.remove(direction)
+            except:
+                return
         
         
         if self.keys:
@@ -239,6 +242,8 @@ class Player(Mob):
             else:
                 self.fireTimer = 0
                 self.firing = False
+                
+        
                     
     
     
