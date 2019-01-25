@@ -45,8 +45,27 @@ class Imposter(Mob):
     def setPos(self, pos):
         self.rect.center = pos0
         
-    def directMove(self):
-        compass = random.randint(0, 3)
+    def directMove(self, pCenter=None):
+        if pCenter and self.getDist(pCenter) < 250:
+            xDif = abs(self.rect.centerx - pCenter[0])
+            yDif = abs(self.rect.centery - pCenter[1])
+            
+            if xDif > yDif:
+                if self.rect.centerx < pCenter[0]:
+                    compass = 1
+                else:
+                    compass = 3
+            else:
+                if self.rect.centery < pCenter[0]:
+                    compass = 0
+                else:
+                    compass = 2
+                
+        else:
+            compass = random.randint(0, 3)
+        
+        
+        
         if compass == 0:
             self.moving = "Y"
             self.speedy = -self.maxspeed
@@ -70,22 +89,15 @@ class Imposter(Mob):
         # ~ self.image = self.images[self.frame]
         # ~ self.rect = self.image.get_rect()
             
-    def move(self):
-        self.speed = [self.speedx, self.speedy]
-        # ~ print self.rect.centerx%50-25, self.rect.centery%50-25
-        if self.speedx != 0:  #mov'n x
-            if self.rect.centerx%50-25 == 0:
-                # ~ print ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-                if random.randint(0,3) == 0:
-                    self.directMove()
-        
-        if self.speedy != 0:
-            if  self.rect.centery%50-25 == 0:
-                # ~ print "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
-                if random.randint(0,3) == 0:
-                    self.directMove()
-                    
-        self.rect = self.rect.move(self.speed)
+    def update(self, size, pCenter):
+        # ~ print self.rect.center
+        self.didBounceX = False
+        self.didBounceY = False
+        self.directMove(pCenter)
+        self.move()
+        self.bounceWall(size)
+        self.animate()
+        self.live(self.lives)
 
 
     def collide(self, other):
