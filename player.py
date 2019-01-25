@@ -31,6 +31,7 @@ class Player(Mob):
         self.maxSpeed = speed
         self.boostSpeed = speed*2
         self.normalSpeed = speed
+        self.faceKeys = []
         self.keys = []
         self.goal = [0,0]
         self.kind = "player"
@@ -51,59 +52,59 @@ class Player(Mob):
         self.invincTimerMax = 1
         
         
-    def go(self, d):
-        if d == "go up":
-            self.speedy = -self.maxSpeed
-        if d == "go down":
-            self.speedy = self.maxSpeed
-        if d == "go left":
-            self.speedx = -self.maxSpeed
-        if d == "go right":
-            self.speedx = self.maxSpeed
-            
-        if d == "s up":
-            self.speedy = 0
-        if d == "s down":
-            self.speedy = 0
-        if d == "s left":
-            self.speedx = 0
-        if d == "s right":
-            self.speedx = 0
-        
-        
     # ~ def go(self, d):
-        # ~ mode, direction = d.split(" ")
-        # ~ if mode == "go":
-            # ~ self.keys += [direction]
-        # ~ elif mode == "s":
-            # ~ self.keys.remove(direction)
-            # ~ if direction == "left" or "right":
-                # ~ self.speedx = 0
-            # ~ else:
-                # ~ self.speedy = 0
-        # ~ if self.keys:
-            # ~ if self.keys[-1] == "left":
-                # ~ self.speedx = -self.maxSpeed
-                
-            # ~ elif self.keys[-1] == "right":
-                # ~ self.speedx = self.maxSpeed
+        # ~ if d == "go up":
+            # ~ self.speedy = -self.maxSpeed
+        # ~ if d == "go down":
+            # ~ self.speedy = self.maxSpeed
+        # ~ if d == "go left":
+            # ~ self.speedx = -self.maxSpeed
+        # ~ if d == "go right":
+            # ~ self.speedx = self.maxSpeed
             
-            # ~ elif self.keys[-1] == "up":
-                # ~ self.speedy = -self.maxSpeed
-                
-            # ~ elif self.keys[-1] == "down":
-                # ~ self.speedy = self.maxSpeed
-        # ~ else:
-            # ~ self.speedx = 0
+        # ~ if d == "s up":
             # ~ self.speedy = 0
+        # ~ if d == "s down":
+            # ~ self.speedy = 0
+        # ~ if d == "s left":
+            # ~ self.speedx = 0
+        # ~ if d == "s right":
+            # ~ self.speedx = 0
+        
+        
+    def go(self, d):
+        mode, direction = d.split(" ")
+        if mode == "go":
+            self.keys += [direction]
+        elif mode == "s":
+            try:
+                self.keys.remove(direction)
+                if direction == "left" or "right":
+                    self.speedx = 0
+                if direction == "up" or "down":
+                    self.speedy = 0
+            except:
+                return
+        if self.keys:
+            if self.keys[-1] == "left":
+                self.speedx = -self.maxSpeed
+                
+            elif self.keys[-1] == "right":
+                self.speedx = self.maxSpeed
+            
+            elif self.keys[-1] == "up":
+                self.speedy = -self.maxSpeed
+                
+            elif self.keys[-1] == "down":
+                self.speedy = self.maxSpeed
             
     def face(self, y):
         mode, direction = y.split(" ")
         if mode == "face":
-            self.keys += [direction]
+            self.faceKeys += [direction]
         elif mode == "stop":
             try:
-                self.keys.remove(direction)
+                self.faceKeys.remove(direction)
             except:
                 return
         
@@ -227,7 +228,7 @@ class Player(Mob):
         self.bounceWall(size)
         self.animate()
         self.facingDirection()
-        if len(self.keys) == 0:
+        if len(self.faceKeys) == 0:
             if self.speedx < 0:
                 self.images = self.leftImages
             if self.speedx > 0:
