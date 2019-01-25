@@ -68,13 +68,13 @@ while True:
         if event.type == pygame.KEYUP:
                 #for not going directions
                 if event.key == pygame.K_w:
-                    pb.go("sup")
+                    pb.go("s up")
                 if event.key == pygame.K_s:
-                    pb.go("sdown")
+                    pb.go("s down")
                 if event.key == pygame.K_a:
-                    pb.go("sleft")
+                    pb.go("s left")
                 if event.key == pygame.K_d:
-                    pb.go("sright")
+                    pb.go("s right")
                 #for not facing directions
                 if event.key == pygame.K_UP:
                     pb.face("stop up")
@@ -99,7 +99,7 @@ while True:
         levelnum = 0
         level = loadLevel("Levels/"+str(levelnum)+".lvl")
         bullets = []
-        pb = Player(0, level["player"])
+        pb = Player(7, level["player"])
         blocks = level["blocks"]
         mobs = level["enemies"]
     for bullet in bullets:
