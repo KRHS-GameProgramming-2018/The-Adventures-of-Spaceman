@@ -103,7 +103,7 @@ while True:
         blocks = level["blocks"]
         mobs = level["enemies"]
     for bullet in bullets:
-        bullet.update(size)
+        bullet.update(size, pb.rect.center)
         for mob in mobs:
             mob.collide(bullet)
         if not bullet.alive:
