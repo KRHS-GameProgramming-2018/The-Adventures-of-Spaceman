@@ -45,7 +45,7 @@ class Mob():
                 
             self.image = self.images[self.frame]
             
-    def update(self, size):
+    def update(self, size, pCenter):
         # ~ print self.rect.center
         self.didBounceX = False
         self.didBounceY = False

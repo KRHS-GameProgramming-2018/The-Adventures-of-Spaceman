@@ -88,7 +88,7 @@ while True:
                 
             
     for mob in mobs:
-        mob.update(size)
+        mob.update(size, pb.rect.center)
         if not mob.alive:
             mobs.remove(mob)
     for mob in mobs:
