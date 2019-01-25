@@ -61,13 +61,13 @@ class Player(Mob):
         if d == "go right":
             self.speedx = self.maxSpeed
             
-        if d == "sup":
+        if d == "s up":
             self.speedy = 0
-        if d == "sdown":
+        if d == "s down":
             self.speedy = 0
-        if d == "sleft":
+        if d == "s left":
             self.speedx = 0
-        if d == "sright":
+        if d == "s right":
             self.speedx = 0
         
         
@@ -77,7 +77,10 @@ class Player(Mob):
             # ~ self.keys += [direction]
         # ~ elif mode == "s":
             # ~ self.keys.remove(direction)
-            
+            # ~ if direction == "left" or "right":
+                # ~ self.speedx = 0
+            # ~ else:
+                # ~ self.speedy = 0
         # ~ if self.keys:
             # ~ if self.keys[-1] == "left":
                 # ~ self.speedx = -self.maxSpeed
@@ -87,6 +90,7 @@ class Player(Mob):
             
             # ~ elif self.keys[-1] == "up":
                 # ~ self.speedy = -self.maxSpeed
+                
             # ~ elif self.keys[-1] == "down":
                 # ~ self.speedy = self.maxSpeed
         # ~ else:
@@ -155,8 +159,7 @@ class Player(Mob):
                                         self.move()
                                         self.speedy = 0
                                         self.didBounceY = True
-                                        # ~ if self.rect.bottom > other.rect.top:
-                                            # ~ self.rect.centery = other.rect.centery - ((self.rect.height)/2 + (other.rect.height)/2)
+                                       
 
                                 if self.speedy < 1: #up
                                     if self.rect.centery > other.rect.centery:
@@ -164,8 +167,7 @@ class Player(Mob):
                                         self.move()
                                         self.speedy = 0
                                         self.didBounceY = True
-                                        # ~ if self.rect.top < other.rect.bottom:
-                                            # ~ self.rect.centery = other.rect.centery + (self.rect.height)/2 + (other.rect.height)/2
+                                        
 
                             return True
         return False
