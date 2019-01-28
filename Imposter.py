@@ -50,16 +50,22 @@ class Imposter(Mob):
             xDif = abs(self.rect.centerx - pCenter[0])
             yDif = abs(self.rect.centery - pCenter[1])
             
+            # print xDif, yDif, self.rect.center, pCenter
+            
             if xDif > yDif:
                 if self.rect.centerx < pCenter[0]:
                     compass = 1
+                   # print "Player Right"
                 else:
                     compass = 3
+                   # print "Player Left"
             else:
-                if self.rect.centery < pCenter[0]:
+                if self.rect.centery > pCenter[1]:
                     compass = 0
+                   # print "Player Above"
                 else:
                     compass = 2
+                   # print "Player Below"
                 
         else:
             compass = random.randint(0, 3)
@@ -88,6 +94,8 @@ class Imposter(Mob):
             self.images = self.leftImages
         # ~ self.image = self.images[self.frame]
         # ~ self.rect = self.image.get_rect()
+            
+        self.rect = self.rect.move(self.speed)
             
     def update(self, size, pCenter):
         # ~ print self.rect.center
