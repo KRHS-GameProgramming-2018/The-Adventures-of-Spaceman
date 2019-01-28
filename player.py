@@ -109,17 +109,17 @@ class Player(Mob):
                 return
         
         
-        if self.keys:
-            if self.keys[-1] == "left":
+        if self.faceKeys:
+            if self.faceKeys[-1] == "left":
                 self.images = self.leftImages
                 self.rect = self.image.get_rect(center = self.rect.center)
-            elif self.keys[-1] == "right":
+            elif self.faceKeys[-1] == "right":
                 self.images = self.rightImages
                 self.rect = self.image.get_rect(center = self.rect.center)
-            elif self.keys[-1] == "up":
+            elif self.faceKeys[-1] == "up":
                 self.images = self.upImages
                 self.rect = self.image.get_rect(center = self.rect.center)
-            elif self.keys[-1] == "down":
+            elif self.faceKeys[-1] == "down":
                 self.images = self.downImages
                 self.rect = self.image.get_rect(center = self.rect.center)
                 
