@@ -120,17 +120,11 @@ while True:
             pb.collide(mob)
             for bullet in bullets:
                 bullet.collide(mob)
-        # ~ if not pb.alive:
-            # ~ levelnum = 0
-            # ~ level = loadLevel("Levels/"+str(levelnum)+".lvl")
-            # ~ bullets = []
-            # ~ pb = Player(7, level["player"])
-            # ~ blocks = level["blocks"]
-            # ~ mobs = level["enemies"]
         for bullet in bullets:
             bullet.update(size, pb.rect.center)
             for mob in mobs:
                 mob.collide(bullet)
+                # ~ print mob.lives
             if not bullet.alive:
                 bullets.remove(bullet)
         pb.update(size)
@@ -151,7 +145,6 @@ while True:
                     level = loadLevel("Levels/"+str(levelnum)+".lvl")
                     blocks = level["blocks"]
                     mobs = level["enemies"]
-                    #add delay here
                     pb = Player(3, level["player"])
             
             
