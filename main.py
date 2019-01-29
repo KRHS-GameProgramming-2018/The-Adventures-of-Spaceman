@@ -88,44 +88,6 @@ while True:
                     pb.face("stop right")
                 
                 
-<<<<<<< HEAD
-        for mob in mobs:
-            mob.update(size, pb.rect.center)
-            if not mob.alive:
-                mobs.remove(mob)
-        for mob in mobs:
-            pb.collide(mob)
-            for bullet in bullets:
-                bullet.collide(mob)
-        for bullet in bullets:
-            bullet.update(size, pb.rect.center)
-            for mob in mobs:
-                mob.collide(bullet)
-                # ~ print mob.lives
-            if not bullet.alive:
-                bullets.remove(bullet)
-        pb.update(size)
-        
-        
-        for hitter in mobs:
-            for hittie in mobs:
-                hitter.collide(hittie)
-            for tile in blocks:
-                hitter.collide(tile)
-        for tile in blocks:
-            for bullet in bullets:
-                bullet.collide(tile)
-            if pb.collide(tile):
-                if tile.kind == "warp":
-                    levelnum += 1
-                    bullets = []
-                    level = loadLevel("Levels/"+str(levelnum)+".lvl")
-                    blocks = level["blocks"]
-                    mobs = level["enemies"]
-                    pb = Player(3, level["player"])
-            
-=======
->>>>>>> origin/master
             
     for mob in mobs:
         mob.update(size, pb.rect.center)

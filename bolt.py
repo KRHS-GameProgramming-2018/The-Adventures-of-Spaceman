@@ -14,6 +14,6 @@ class Bolt(Mob):
             if self.rect.left < other.rect.right:
                 if self.rect.top < other.rect.bottom:
                     if self.rect.bottom > other.rect.top:
-                        # ~ if self.radius + other.radius > self.getDist(other.rect.center):
-                        self.alive = False
+                        if self.radius + other.radius > self.getDist(other.rect.center):
+                            self.alive = False
         return False

@@ -39,7 +39,7 @@ class Imposter(Mob):
         self.radius = (int(self.rect.height/2.0 + self.rect.width/2.0)/2) - 1
         self.detectionRadius = 96
         
-        self.lives = 6
+        self.lives = 3
         
         
     def setPos(self, pos):
