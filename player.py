@@ -137,8 +137,10 @@ class Player(Mob):
                                   if self.invincTimer == self.invincTimerMax:
                                       self.invincTimer = 0
                         else:
-                            self.speedx = -self.speedx
-                            self.speedy = -self.speedy
+                            if self.rect.top < other.rect.bottom + 10 or self.rect.bottom > other.rect.top - 10:
+                                self.speedx = -self.speedx
+                            if self.rect.right > other.rect.left - 10 or self.rect.left < other.rect.right + 10:
+                                self.speedy = -self.speedy
                             self.move()
                             self.speedx = 0
                             self.didBounceX = True
