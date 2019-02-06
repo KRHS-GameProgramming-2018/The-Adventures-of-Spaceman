@@ -137,10 +137,10 @@ class Player(Mob):
                                   if self.invincTimer == self.invincTimerMax:
                                       self.invincTimer = 0
                         else:
-                            if self.rect.top < other.rect.bottom + 10 or self.rect.bottom > other.rect.top - 10:
-                                self.speedx = -self.speedx
-                            if self.rect.right > other.rect.left - 10 or self.rect.left < other.rect.right + 10:
-                                self.speedy = -self.speedy
+                            
+                            self.speedx = -self.speedx
+                            
+                            self.speedy = -self.speedy
                             self.move()
                             self.speedx = 0
                             self.didBounceX = True
@@ -181,16 +181,16 @@ class Player(Mob):
             self.fireTimer = 0
             print self.rect.center, self.y
             if self.y == "down":
-                speed = [0,7]
+                speed = [0,10]
                 image = "PNG/Bolt/spacemanbolt-down.png"
             if self.y == "up":
-                speed = [0,-7]
+                speed = [0,-10]
                 image = "PNG/Bolt/spacemanbolt-up.png"
             if self.y == "left":
-                speed = [-7,0]
+                speed = [-10,0]
                 image = "PNG/Bolt/spacemanbolt-left.png"
             if self.y == "right":
-                speed = [7,0]
+                speed = [10,0]
                 image = "PNG/Bolt/spacemanbolt-right.png"
             
             return Bolt(image, speed, self.rect.center)
