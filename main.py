@@ -117,7 +117,7 @@ while True:
             if not mob.alive:
                 mobs.remove(mob)
         for mob in mobs:
-            # ~ pb.collide(mob)
+            pb.collide(mob)
             for bullet in bullets:
                 bullet.collide(mob)
         for bullet in bullets:
