@@ -3,8 +3,8 @@ from mob import *
 from player import *
 
 class Tripleshot(Mob):
-    def __init__(self, image="PNG/Power-ups/Tripleshot.png", speed=0, startPos=[0,0]):
-        Mob.__init__(self,  image, speed, startPos)
+    def __init__(self, startPos=[0,0]):
+        Mob.__init__(self,  "PNG/Power-ups/Tripleshot.png", [0,0], startPos)
         # ~ print self.rect.center, speed
         self.kind = "tripleshot"
         self.lives = 1
