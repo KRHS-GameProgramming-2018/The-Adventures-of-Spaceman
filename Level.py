@@ -5,6 +5,7 @@ from warp import *
 from enemy import *
 from Imposter import *
 from tripleShot import *
+from Greenie import *
 
 def loadLevel(levelFile):
     f = open(levelFile, 'r')
@@ -42,6 +43,8 @@ def loadLevel(levelFile):
                 level["enemies"] += [SpaceZombie(4, [x*50+25, y*50+25])]
             if character == 'm':
                 level["enemies"] += [Imposter(1.5, [x*50+25, y*50+25])]
+            if character == 'g':
+                level["enemies"] += [Greenie(3, [x*50+25, y*50+25])]
             if character == '!':
                 level["blocks"] += [Tripleshot([x*50+25, y*50+25])]
     return level
