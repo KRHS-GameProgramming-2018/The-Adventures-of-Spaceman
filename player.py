@@ -129,7 +129,7 @@ class Player(Mob):
             if self.rect.left < other.rect.right:
                 if self.rect.top < other.rect.bottom:
                     if self.rect.bottom > other.rect.top:
-                        if other.kind == "enemy":
+                        if other.kind == "enemy" or other.kind == "greenie" or other.kind == "imposter":
                             self.lives += -1
                             print self.lives
                             if self.invincTimer < self.invincTimerMax:
