@@ -3,7 +3,7 @@ from mob import *
 
 
 class Greenie(Mob):
-    def __init__(self, speed=5, startPos=[0,0]):
+    def __init__(self, speed=5, startPos=[0,0], time = 2):
         Mob.__init__(self, "PNG/Enemy3/Greenie-Down1.png", [0,0], startPos)
         self.rightImages = [pygame.image.load("PNG/Enemy3/Greenie-Right1.png"),
                         pygame.image.load("PNG/Enemy3/Greenie-Right2.png"),
@@ -22,7 +22,7 @@ class Greenie(Mob):
                         pygame.image.load("PNG/Enemy3/Greenie-Down3.png"),
                         ]
         
-        self.kind = "enemy"
+        self.kind = "greenie"
         self.maxspeed = speed
         self.images = self.downImages
         self.frame = 0;
@@ -32,6 +32,11 @@ class Greenie(Mob):
         
         self.aniTimer = 0
         self.aniTimerMax = 60/15
+        
+        self.duplicateTimer = 0 + random.randint(1, 6)*10
+        self.time = time
+        self.duplicateTimerMax = 60*self.time
+        self.canDuplicate = False
         
         self.maxspeed = speed
         self.goal = [0,0]
@@ -86,7 +91,23 @@ class Greenie(Mob):
                     
         self.rect = self.rect.move(self.speed)
 
-
+    
+    def checkDuplicate (self):
+        return self.canDuplicate
+        
+    def duplicate(self):
+        self.canDuplicate = False
+        self.duplicateTimer = 0
+        self.rect = self.rect.move([16,0])
+        return Greenie(self.maxspeed, [self.rect.centerx - 16, self.rect.centery], self.time + 1)
+        
+    def update(self, size, pCenter):
+        Mob.update(self, size, pCenter)
+        if not self.canDuplicate:
+            if self.duplicateTimer < self.duplicateTimerMax:
+                self.duplicateTimer += 1
+            else:
+                self.canDuplicate = True
 
 
     def collide(self, other):

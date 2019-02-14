@@ -125,8 +125,12 @@ while True:
                     print pb.hasPowerUps
         for mob in mobs:
             pb.collide(mob)
+            if mob.kind == "greenie" and len(mobs) < 20:
+                if mob.checkDuplicate():
+                    mobs += [mob.duplicate()]
             for bullet in bullets:
                 bullet.collide(mob)
+        
         for bullet in bullets:
             bullet.update(size, pb.rect.center)
             for mob in mobs:
