@@ -7,7 +7,7 @@ from Imposter import *
 from bolt import *
 
 
-raw_input("press any key to continue")
+# ~ raw_input("press any key to continue")
 pygame.init()
 
 clock = pygame.time.Clock()
