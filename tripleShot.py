@@ -8,6 +8,7 @@ class Tripleshot(Mob):
         # ~ print self.rect.center, speed
         self.kind = "tripleshot"
         self.lives = 1
+        self.alive = True
         
     def collide(self, other):
         if self.rect.right > other.rect.left:
@@ -15,7 +16,8 @@ class Tripleshot(Mob):
                 if self.rect.top < other.rect.bottom:
                     if self.rect.bottom > other.rect.top:
                         if self.radius + other.radius > self.getDist(other.rect.center):
-                            if other.type == "player":
-                                pass
+                            if other.kind == "player":
+                                self.lives = 0
+                                self.alive = False
         return False
 

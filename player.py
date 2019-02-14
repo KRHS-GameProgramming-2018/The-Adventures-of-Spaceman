@@ -33,6 +33,7 @@ class Player(Mob):
         self.normalSpeed = speed
         self.faceKeys = []
         self.keys = []
+        self.hasPowerUps = []
         self.goal = [0,0]
         self.kind = "player"
         self.lives = 3

@@ -14,7 +14,8 @@ def loadLevel(levelFile):
     
     level = {"blocks":[],
              "player":[0,0],
-             "enemies":[]
+             "enemies":[],
+             "power-ups":[]
              }
     
     #Block Size is 50x50
@@ -46,7 +47,11 @@ def loadLevel(levelFile):
             if character == 'g':
                 level["enemies"] += [Greenie(3, [x*50+25, y*50+25])]
             if character == '!':
-                level["blocks"] += [Tripleshot([x*50+25, y*50+25])]
+                level["power-ups"] += [Tripleshot([x*50+25, y*50+25])]
+            if character == '[':
+                level["power-ups"] += [speedBoost([x*50+25, y*50+25])]
+            if character == '<':
+                level["power-ups"] += [healthUp([x*50+25, y*50+25])]
     return level
     
     
