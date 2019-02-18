@@ -176,11 +176,13 @@ class Player(Mob):
             
     def shoot(self):
         if self.firing:
-            pass
+            if self.fireTimer < self.fireTimerMax:
+                self.fireTimer += 1
+            else:
+                self.fireTimer = 0
+                self.firing = False
         else:
             self.firing = True
-            self.fireTimer = 0
-            print self.rect.center, self.y
             if self.y == "down":
                 speed = [0,10]
                 image = "PNG/Bolt/spacemanbolt-down.png"
