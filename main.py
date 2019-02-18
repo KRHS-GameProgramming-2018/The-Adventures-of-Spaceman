@@ -4,7 +4,6 @@ from player import *
 from Level import *
 from enemy import *
 from Imposter import *
-from healthUp import *
 from bolt import *
 
 
@@ -24,7 +23,6 @@ levelnum = 1
 level = loadLevel("Levels/1.lvl")
 blocks = level["blocks"]
 mobs = level["enemies"]
-mobs += level["power-ups"]
 pb = Player(3, level["player"]) 
 bullets = []
 
@@ -44,7 +42,6 @@ while True:
                         level = loadLevel("Levels/"+str(levelnum)+".lvl")
                         blocks = level["blocks"]
                         mobs = level["enemies"]
-                        mobs += level["power-ups"]
                         pb = Player(3, level["player"])
                     if event.key == pygame.K_ESCAPE:
                         sys.exit()
@@ -119,11 +116,6 @@ while True:
             mob.update(size, pb.rect.center)
             if not mob.alive:
                 mobs.remove(mob)
-            if pb.collide(mob):
-                if mob.kind == "tripleshot" or  mob.kind == "healthUp" or mob.kind == "speedBoost":
-                    pb.hasPowerUps += mob.kind
-                    print pb.hasPowerUps
-        for mob in mobs:
             pb.collide(mob)
             if mob.kind == "greenie" and len(mobs) < 20:
                 if mob.checkDuplicate():
@@ -155,7 +147,6 @@ while True:
                     level = loadLevel("Levels/"+str(levelnum)+".lvl")
                     blocks = level["blocks"]
                     mobs = level["enemies"]
-                    mobs += level["power-ups"]
                     #add delay here
                     pb = Player(3, level["player"])
         
