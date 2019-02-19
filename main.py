@@ -20,7 +20,7 @@ screen = pygame.display.set_mode(size)
 
 
 levelnum = 1
-level = loadLevel("Levels/1.lvl")
+level = loadLevel("Levels/4.lvl")
 blocks = level["blocks"]
 mobs = level["enemies"]
 pb = Player(3, level["player"]) 

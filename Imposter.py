@@ -55,17 +55,17 @@ class Imposter(Mob):
             if xDif > yDif:
                 if self.rect.centerx < pCenter[0]:
                     compass = 1
-                   # print "Player Right"
+                    print "Player Right"
                 else:
                     compass = 3
-                   # print "Player Left"
+                    print "Player Left"
             else:
                 if self.rect.centery > pCenter[1]:
                     compass = 0
-                   # print "Player Above"
+                    print "Player Above"
                 else:
                     compass = 2
-                   # print "Player Below"
+                    print "Player Below"
                 
         else:
             compass = random.randint(0, 3)
@@ -77,7 +77,7 @@ class Imposter(Mob):
             self.speedy = -self.maxspeed
             self.speedx = 0
             self.images = self.upImages
-        elif compass == 0:
+        elif compass == 1:
             self.moving = "X"
             self.speedx = self.maxspeed
             self.speedy = 0
