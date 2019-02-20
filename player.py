@@ -187,7 +187,6 @@ class Player(Mob):
             if self.y == "down":
                 speed = [0,10]
                 image = "PNG/Bolt/spacemanbolt-down.png"
-                
             if self.y == "up":
                 speed = [0,-10]
                 image = "PNG/Bolt/spacemanbolt-up.png"
