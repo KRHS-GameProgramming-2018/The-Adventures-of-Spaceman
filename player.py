@@ -3,8 +3,8 @@ from mob import *
 from bolt import *
 #https://opengameart.org/content/space-man-space-bot-rework
 class Player(Mob):
-    def __init__(self, speed=6, startPos=[0,0]):
-        Mob.__init__(self, "PNG/Player/spaceman.png", [0,0], startPos)
+    def __init__(self, speed=6, startPos=[0,0], powers=[]):
+        Mob.__init__(self, "PNG/Player/spaceman.png", [0,0], startPos, powers)
         self.upImages = [pygame.image.load("PNG/Player/spaceman-up.png"),
                         pygame.image.load("PNG/Player/spaceman-up.png"),
                         pygame.image.load("PNG/Player/spaceman-up.png"),
@@ -33,7 +33,6 @@ class Player(Mob):
         self.normalSpeed = speed
         self.faceKeys = []
         self.keys = []
-        self.hasPowerUps = []
         self.goal = [0,0]
         self.kind = "player"
         self.lives = 3
@@ -52,6 +51,8 @@ class Player(Mob):
         self.invincTimer = 0
         self.invincTimerMax = 1
         
+        if "tripleshot" in powers:
+            print powers
         
     # ~ def go(self, d):
         # ~ if d == "go up":
@@ -186,6 +187,7 @@ class Player(Mob):
             if self.y == "down":
                 speed = [0,10]
                 image = "PNG/Bolt/spacemanbolt-down.png"
+                
             if self.y == "up":
                 speed = [0,-10]
                 image = "PNG/Bolt/spacemanbolt-up.png"

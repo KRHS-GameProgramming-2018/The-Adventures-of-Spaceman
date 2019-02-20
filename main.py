@@ -18,12 +18,13 @@ size = width, height
 
 screen = pygame.display.set_mode(size)
 
-
+hasPowers = []
 levelnum = 1
 level = loadLevel("Levels/1.lvl")
 blocks = level["blocks"]
 mobs = level["enemies"]
-pb = Player(3, level["player"]) 
+powerUps = level["power-ups"]
+pb = Player(3, level["player"], hasPowers) 
 bullets = []
 
 bgColor = 0,0,0
@@ -42,7 +43,8 @@ while True:
                         level = loadLevel("Levels/"+str(levelnum)+".lvl")
                         blocks = level["blocks"]
                         mobs = level["enemies"]
-                        pb = Player(3, level["player"])
+                        powerUps = level["power-ups"]
+                        pb = Player(3, level["player"], hasPowers)
                     if event.key == pygame.K_ESCAPE:
                         sys.exit()
                     if event.key == pygame.K_t:
@@ -89,7 +91,9 @@ while True:
                         pb.go("go right")
                     #for schooting
                     if event.key == pygame.K_SPACE:
-                        bullets += [pb.shoot()]
+                        bullet = pb.shoot()
+                        if bullet:
+                            bullets += [bullet]
             if event.type == pygame.KEYUP:
                     #for not going directions
                     if event.key == pygame.K_w:
@@ -116,7 +120,7 @@ while True:
             mob.update(size, pb.rect.center)
             if not mob.alive:
                 mobs.remove(mob)
-            pb.collide(mob)
+            # ~ pb.collide(mob)
             if mob.kind == "greenie" and len(mobs) < 20:
                 if mob.checkDuplicate():
                     mobs += [mob.duplicate()]
@@ -127,10 +131,17 @@ while True:
             bullet.update(size, pb.rect.center)
             for mob in mobs:
                 mob.collide(bullet)
+                print mob.lives
             if not bullet.alive:
                 bullets.remove(bullet)
         pb.update(size)
         
+        for power in powerUps:
+            if pb.collide(power):
+                hasPowers += [power.kind]
+                powerUps.remove(power)
+                print hasPowers
+                
         
         for hitter in mobs:
             for hittie in mobs:
@@ -147,13 +158,16 @@ while True:
                     level = loadLevel("Levels/"+str(levelnum)+".lvl")
                     blocks = level["blocks"]
                     mobs = level["enemies"]
+                    powerUps = level["power-ups"]
                     #add delay here
-                    pb = Player(3, level["player"])
+                    pb = Player(3, level["player"], hasPowers)
         
             
         screen.fill(bgColor)
         for mob in mobs:
             screen.blit(mob.image, mob.rect)
+        for power in powerUps:
+            screen.blit(power.image, power.rect)
         for tile in blocks:
             screen.blit(tile.image, tile.rect)
         for bullet in bullets:

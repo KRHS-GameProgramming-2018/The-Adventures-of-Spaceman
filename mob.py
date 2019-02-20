@@ -2,7 +2,7 @@ import pygame, sys, math
 
 
 class Mob():
-    def __init__(self, image, speed=[5,5], startPos=[0,0]):
+    def __init__(self, image, speed=[5,5], startPos=[0,0], power=[]):
         print image
         self.image = pygame.image.load(image)
         self.alive = True
@@ -99,23 +99,16 @@ class Mob():
             if self.rect.left < other.rect.right:
                 if self.rect.top < other.rect.bottom:
                     if self.rect.bottom > other.rect.top:
-                        if other.kind == "enemy":
-                            self.lives += -1
-                            print self.lives
-                            if self.invincTimer < self.invincTimerMax:
-                                  self.invincTimer += 1
-                                  if self.invincTimer == self.invincTimerMax:
-                                      self.invincTimer = 0
-                        else:
-                            
-                            self.speedx = -self.speedx
-                            
-                            self.speedy = -self.speedy
-                            self.move()
-                            self.speedx = 0
-                            self.didBounceX = True
-                            self.speedy = 0
-                            self.didBounceY = True
-                            
-                            return True
+                        
+                        
+                        self.speedx = -self.speedx
+                        
+                        self.speedy = -self.speedy
+                        self.move()
+                        self.speedx = 0
+                        self.didBounceX = True
+                        self.speedy = 0
+                        self.didBounceY = True
+                        
+                        return True
         return False
