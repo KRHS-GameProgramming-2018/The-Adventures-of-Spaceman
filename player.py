@@ -2,7 +2,7 @@ import sys, math, pygame
 from mob import *
 from bolt import *
 
-from tripleshot import *
+from tripleShot import *
 from healthUp import *
 from speedBoost import *
 #https://opengameart.org/content/space-man-space-bot-rework
@@ -40,6 +40,7 @@ class Player(Mob):
         self.goal = [0,0]
         self.kind = "player"
         self.lives = 3
+        self.extraLives = 6
         
         self.didBounceX = False
         self.didBounceY = False

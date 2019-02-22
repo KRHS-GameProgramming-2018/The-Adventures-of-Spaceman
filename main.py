@@ -143,7 +143,12 @@ while True:
             if pb.collide(power):
                 hasPowers += [power.kind]
                 powerUps.remove(power)
-                print hasPowers
+            if power == "speedboost":
+                pb.maxSpeed = pb.boostSpeed
+                print str(pb.maxSpeed)
+            if power == "healthUp":
+                pb.lives = pb.extraLives
+
                 
         
         for hitter in mobs:
