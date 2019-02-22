@@ -6,6 +6,9 @@ from enemy import *
 from Imposter import *
 from bolt import *
 
+from tripleShot import *
+from healthUp import *
+from speedBoost import *
 
 # ~ raw_input("press any key to continue")
 pygame.init()
@@ -120,7 +123,7 @@ while True:
             mob.update(size, pb.rect.center)
             if not mob.alive:
                 mobs.remove(mob)
-            pb.collide(mob)
+            # ~ pb.collide(mob)
             if mob.kind == "greenie" and len(mobs) < 20:
                 if mob.checkDuplicate():
                     mobs += [mob.duplicate()]

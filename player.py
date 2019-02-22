@@ -1,6 +1,10 @@
 import sys, math, pygame
 from mob import *
 from bolt import *
+
+from tripleshot import *
+from healthUp import *
+from speedBoost import *
 #https://opengameart.org/content/space-man-space-bot-rework
 class Player(Mob):
     def __init__(self, speed=6, startPos=[0,0], powers=[]):
