@@ -33,8 +33,7 @@ class Player(Mob):
         self.aniTimerMax = 60/15
         
         self.maxSpeed = speed
-        self.boostSpeed = speed*2
-        self.normalSpeed = speed
+        self.boostSpeed = 200
         self.faceKeys = []
         self.keys = []
         self.goal = [0,0]

@@ -143,11 +143,16 @@ while True:
             if pb.collide(power):
                 hasPowers += [power.kind]
                 powerUps.remove(power)
-            if power == "speedboost":
-                pb.maxSpeed = pb.boostSpeed
-                print str(pb.maxSpeed)
-            if power == "healthUp":
-                pb.lives = pb.extraLives
+                if power.kind == "speedboost":
+                    pb.maxSpeed = 200
+                    print str(pb.maxSpeed)
+                if power.kind == "healthUp":
+                    pb.lives = pb.extraLives
+                if "speedboost" in hasPowers:
+                    pb.maxSpeed = 200
+                    print "yes"
+                
+                
 
                 
         
