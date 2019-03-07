@@ -34,10 +34,14 @@ class Imposter(Mob):
         
         self.maxspeed = speed
         self.goal = [0,0]
+        self.tracking = True
+        self.compass = 0
         self.directMove()
         
         self.radius = (int(self.rect.height/2.0 + self.rect.width/2.0)/2) - 1
         self.detectionRadius = 96
+        
+    
         
         self.lives = 6
         
@@ -47,6 +51,7 @@ class Imposter(Mob):
         
     def directMove(self, pCenter=None):
         if pCenter and self.getDist(pCenter) < 250:
+            self.tracking = True
             xDif = abs(self.rect.centerx - pCenter[0])
             yDif = abs(self.rect.centery - pCenter[1])
             
@@ -54,40 +59,46 @@ class Imposter(Mob):
             
             if xDif > yDif:
                 if self.rect.centerx < pCenter[0]:
-                    compass = 1
+                    self.compass = 1
                     print "Player Right"
                 else:
-                    compass = 3
+                    self.compass = 3
                     print "Player Left"
             else:
                 if self.rect.centery > pCenter[1]:
-                    compass = 0
+                    self.compass = 0
                     print "Player Above"
                 else:
-                    compass = 2
+                    self.compass = 2
                     print "Player Below"
                 
         else:
-            compass = random.randint(0, 3)
+            if self.tracking: 
+                self.tracking = False
+                self.compass = random.randint(0, 3)
+            elif random.randint (0, 60) == 0:
+                self.compass = random.randint(0, 3)
+            
+
         
         
         
-        if compass == 0:
+        if self.compass == 0:
             self.moving = "Y"
             self.speedy = -self.maxspeed
             self.speedx = 0
             self.images = self.upImages
-        elif compass == 1:
+        elif self.compass == 1:
             self.moving = "X"
             self.speedx = self.maxspeed
             self.speedy = 0
             self.images = self.rightImages
-        elif compass == 2:
+        elif self.compass == 2:
             self.moving = "Y"
             self.speedy = self.maxspeed
             self.speedx = 0
             self.images = self.downImages
-        elif compass == 3:
+        elif self.compass == 3:
             self.moving = "X"
             self.speedx = -self.maxspeed
             self.speedy = 0
