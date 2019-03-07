@@ -22,6 +22,7 @@ size = width, height
 screen = pygame.display.set_mode(size)
 
 hasPowers = []
+tripleShot = False
 levelnum = 1
 level = loadLevel("Levels/1.lvl")
 blocks = level["blocks"]
@@ -97,6 +98,13 @@ while True:
                         bullet = pb.shoot()
                         if bullet:
                             bullets += [bullet]
+                            if tripleShot:
+                                print 'yes'
+                                time.sleep(1)
+                                bullets += [bullet]
+                                time.sleep(1)
+                                bullets += [bullet]
+                                
             if event.type == pygame.KEYUP:
                     #for not going directions
                     if event.key == pygame.K_w:
@@ -143,19 +151,19 @@ while True:
             if pb.collide(power):
                 hasPowers += [power.kind]
                 powerUps.remove(power)
-                if power.kind == "speedboost":
-                    pb.maxSpeed = 200
-                    print str(pb.maxSpeed)
-                if power.kind == "healthUp":
-                    pb.lives = pb.extraLives
-                if "speedboost" in hasPowers:
-                    pb.maxSpeed = 200
-                    print "yes"
+                print hasPowers
+               
                 
+        tripleShot = False
+        if "speedBoost" in hasPowers:
+            pb.maxSpeed = 7
+        if "healthUp" in hasPowers:
+            pb.lives = pb.extraLives
+            print pb.lives
+        if "tripleShot" in hasPowers:
+            tripleShot = True
+            
                 
-
-                
-        
         for hitter in mobs:
             for hittie in mobs:
                 hitter.collide(hittie)
