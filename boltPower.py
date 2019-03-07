@@ -2,11 +2,11 @@ import sys, math, pygame
 from mob import *
 from player import *
 
-class Tripleshot(Mob):
+class boltPower(Mob):
     def __init__(self, startPos=[0,0]):
         Mob.__init__(self,  "PNG/Power-ups/Tripleshot.png", [0,0], startPos)
         # ~ print self.rect.center, speed
-        self.kind = "tripleShot"
+        self.kind = "boltPower"
         self.lives = 1
         self.alive = True
         

@@ -2,7 +2,7 @@ import sys, math, pygame
 from mob import *
 from bolt import *
 
-from tripleShot import *
+from boltPower import *
 from healthUp import *
 from speedBoost import *
 #https://opengameart.org/content/space-man-space-bot-rework

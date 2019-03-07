@@ -6,7 +6,7 @@ from enemy import *
 from Imposter import *
 from bolt import *
 
-from tripleShot import *
+from boltPower import *
 from healthUp import *
 from speedBoost import *
 
@@ -22,7 +22,7 @@ size = width, height
 screen = pygame.display.set_mode(size)
 
 hasPowers = []
-tripleShot = False
+boltPower = False
 levelnum = 1
 level = loadLevel("Levels/1.lvl")
 blocks = level["blocks"]
@@ -36,6 +36,7 @@ bgColor = 0,0,0
 
 while True:
     while not pb.alive:
+        hasPowers = []
         for event in pygame.event.get():
             #print event.type
             if event.type == pygame.QUIT:
@@ -98,11 +99,10 @@ while True:
                         bullet = pb.shoot()
                         if bullet:
                             bullets += [bullet]
-                            if tripleShot:
+                            print bullet
+                            if boltPower == True:
                                 print 'yes'
-                                time.sleep(1)
                                 bullets += [bullet]
-                                time.sleep(1)
                                 bullets += [bullet]
                                 
             if event.type == pygame.KEYUP:
@@ -131,7 +131,7 @@ while True:
             mob.update(size, pb.rect.center)
             if not mob.alive:
                 mobs.remove(mob)
-            # ~ pb.collide(mob)
+            pb.collide(mob)
             if mob.kind == "greenie" and len(mobs) < 20:
                 if mob.checkDuplicate():
                     mobs += [mob.duplicate()]
@@ -142,7 +142,7 @@ while True:
             bullet.update(size, pb.rect.center)
             for mob in mobs:
                 mob.collide(bullet)
-                print mob.lives
+                
             if not bullet.alive:
                 bullets.remove(bullet)
         pb.update(size)
@@ -154,14 +154,16 @@ while True:
                 print hasPowers
                
                 
-        tripleShot = False
+        boltPower = False
         if "speedBoost" in hasPowers:
             pb.maxSpeed = 7
         if "healthUp" in hasPowers:
             pb.lives = pb.extraLives
+            hasPowers.remove("healthUp")
             print pb.lives
-        if "tripleShot" in hasPowers:
-            tripleShot = True
+        if "boltPower" in hasPowers:
+            boltPower = True
+            
             
                 
         for hitter in mobs:
