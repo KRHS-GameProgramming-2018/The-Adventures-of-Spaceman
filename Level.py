@@ -47,7 +47,7 @@ def loadLevel(levelFile):
             if character == 'g':
                 level["enemies"] += [Greenie(3, [x*50+25, y*50+25])]
             if character == '!':
-                level["power-ups"] += [Tripleshot([x*50+25, y*50+25])]
+                level["power-ups"] += [boltPower([x*50+25, y*50+25])]
             if character == '[':
                 level["power-ups"] += [speedBoost([x*50+25, y*50+25])]
             if character == '<':
