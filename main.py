@@ -36,10 +36,10 @@ bgColor = 0,0,0
 mode = "inGame"
 
 while True:
-     menuimage = pygame.image.load ("Screens/MainMenu.png")
-    menurect = menuimage.get_rect()
-    startimage = pygame.image.load ("Screens/backroundStartScreen.png")
-    startrect = startimage.get_rect()
+    #menuimage = pygame.image.load ("backgrounds/Titlescreen.png")
+    #menurect = menuimage.get_rect()
+    #startimage = pygame.image.load ("backgrounds/backroundStartScreen.png")
+    #startrect = startimage.get_rect()
     
     
     while mode == "inGame":
