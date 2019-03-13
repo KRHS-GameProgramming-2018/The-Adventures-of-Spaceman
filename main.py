@@ -36,6 +36,7 @@ bgColor = 0,0,0
 mode = "menu"
 
 while True:
+<<<<<<< HEAD
     while mode == "menu":
         menuimage = pygame.image.load ("PNG/backgrounds/menuImage.png")
         menurect = menuimage.get_rect()
@@ -54,6 +55,14 @@ while True:
         screen.fill(bgColor)
         screen.blit(menuimage, menurect)
         pygame.display.flip()
+=======
+    #menuimage = pygame.image.load ("backgrounds/Titlescreen.png")
+    #menurect = menuimage.get_rect()
+    #startimage = pygame.image.load ("backgrounds/backroundStartScreen.png")
+    #startrect = startimage.get_rect()
+    
+    
+>>>>>>> origin/master
     while mode == "inGame":
         while pb.alive:
                 
