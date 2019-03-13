@@ -33,55 +33,30 @@ pb = Player(3, level["player"], hasPowers)
 bullets = []
 
 bgColor = 0,0,0
-mode = "inGame"
+mode = "menu"
 
 while True:
-     menuimage = pygame.image.load ("Screens/MainMenu.png")
-    menurect = menuimage.get_rect()
-    startimage = pygame.image.load ("Screens/backroundStartScreen.png")
-    startrect = startimage.get_rect()
-    
-    
+    while mode == "menu":
+        menuimage = pygame.image.load ("PNG/backgrounds/menuImage.png")
+        menurect = menuimage.get_rect()
+        # ~ startimage = pygame.image.load ("Screens/backroundStartScreen.png")
+        # ~ startrect = startimage.get_rect()
+        # ~ print 'f'
+        for event in pygame.event.get():
+                    #print event.type
+                    if event.type == pygame.QUIT:
+                        sys.exit()
+                    if event.type == pygame.KEYDOWN:
+                            if event.key == pygame.K_RETURN:
+                                mode = "inGame"
+                            if event.key == pygame.K_ESCAPE:
+                                sys.exit()
+        screen.fill(bgColor)
+        screen.blit(menuimage, menurect)
+        pygame.display.flip()
     while mode == "inGame":
-        while not pb.alive:
-            hasPowers = []
-            for event in pygame.event.get():
-                #print event.type
-                if event.type == pygame.QUIT:
-                    sys.exit()
-                if event.type == pygame.KEYDOWN:
-                        if event.key == pygame.K_RETURN:
-                            levelnum = 1
-                            bullets = []
-                            level = loadLevel("Levels/"+str(levelnum)+".lvl")
-                            blocks = level["blocks"]
-                            mobs = level["enemies"]
-                            powerUps = level["power-ups"]
-                            pb = Player(3, level["player"], hasPowers)
-                        if event.key == pygame.K_ESCAPE:
-                            sys.exit()
-                        if event.key == pygame.K_t:
-                            paused = True
-                            while paused:
-                                for event in pygame.event.get():
-                                    if event.type == pygame.QUIT: sys.exit()
-                                    if event.type == pygame.KEYDOWN:
-                                        if event.key == pygame.K_t:
-                                            paused = False
-            screen.fill(bgColor)
-            for mob in mobs:
-                screen.blit(mob.image, mob.rect)
-            for power in powerUps:
-                screen.blit(power.image, power.rect)
-            for tile in blocks:
-                screen.blit(tile.image, tile.rect)
-            for bullet in bullets:
-                screen.blit(bullet.image, bullet.rect)
-            screen.blit(pb.image, pb.rect)
-            
-            pygame.display.flip()
-            clock.tick(60)
         while pb.alive:
+                
             for event in pygame.event.get():
                 #print event.type
                 if event.type == pygame.QUIT:
@@ -217,7 +192,45 @@ while True:
             for bullet in bullets:
                 screen.blit(bullet.image, bullet.rect)
             screen.blit(pb.image, pb.rect)
+            pygame.display.flip()
+            clock.tick(60)
+        while not pb.alive:
+            hasPowers = []
+            for event in pygame.event.get():
+                #print event.type
+                if event.type == pygame.QUIT:
+                    sys.exit()
+                if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_RETURN:
+                            levelnum = 1
+                            bullets = []
+                            level = loadLevel("Levels/"+str(levelnum)+".lvl")
+                            blocks = level["blocks"]
+                            mobs = level["enemies"]
+                            powerUps = level["power-ups"]
+                            pb = Player(3, level["player"], hasPowers)
+                        if event.key == pygame.K_ESCAPE:
+                            sys.exit()
+                        if event.key == pygame.K_t:
+                            paused = True
+                            while paused:
+                                for event in pygame.event.get():
+                                    if event.type == pygame.QUIT: sys.exit()
+                                    if event.type == pygame.KEYDOWN:
+                                        if event.key == pygame.K_t:
+                                            paused = False
+            screen.fill(bgColor)
+            for mob in mobs:
+                screen.blit(mob.image, mob.rect)
+            for power in powerUps:
+                screen.blit(power.image, power.rect)
+            for tile in blocks:
+                screen.blit(tile.image, tile.rect)
+            for bullet in bullets:
+                screen.blit(bullet.image, bullet.rect)
+            screen.blit(pb.image, pb.rect)
             
             pygame.display.flip()
             clock.tick(60)
-            #print clock.get_fps()
+    
+    #print clock.get_fps()
