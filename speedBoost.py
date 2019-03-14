@@ -4,7 +4,7 @@ from player import *
 
 class speedBoost(Mob):
     def __init__(self, startPos=[0,0]):
-        Mob.__init__(self,  "PNG/Power-ups/speedboost.png", [0,0], startPos)
+        Mob.__init__(self,  "PNG/Power-ups/speedup.png", [0,0], startPos)
         # ~ print self.rect.center, speed
         self.kind = "speedBoost"
         self.lives = 1

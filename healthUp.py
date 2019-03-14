@@ -4,7 +4,7 @@ from player import *
 
 class healthUp(Mob):
     def __init__(self, startPos=[0,0]):
-        Mob.__init__(self,  "PNG/Power-ups/healthUp.png", [0,0], startPos)
+        Mob.__init__(self,  "PNG/Power-ups/healthpowerup.png", [0,0], startPos)
         # ~ print self.rect.center, speed
         self.kind = "healthUp"
         self.lives = 1
