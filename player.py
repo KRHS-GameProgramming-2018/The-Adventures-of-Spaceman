@@ -37,8 +37,8 @@ class Player(Mob):
         self.keys = []
         self.goal = [0,0]
         self.kind = "player"
-        self.lives = 3
-        self.extraLives = 6
+        self.lives = 6
+        self.extraLives = 12
         
         self.didBounceX = False
         self.didBounceY = False
@@ -51,8 +51,9 @@ class Player(Mob):
         # ~ self.facing = "down"
         
         self.alive = True
+        self.invincible = False
         self.invincTimer = 0
-        self.invincTimerMax = 1
+        self.invincTimerMax = 10
         
         if "tripleshot" in powers:
             print powers
@@ -134,13 +135,10 @@ class Player(Mob):
             if self.rect.left < other.rect.right:
                 if self.rect.top < other.rect.bottom:
                     if self.rect.bottom > other.rect.top:
-                        if other.kind == "enemy" or other.kind == "greenie" or other.kind == "imposter":
+                        if not self.invincible and (other.kind == "enemy" or other.kind == "greenie" or other.kind == "imposter"):
                             self.lives += -1
                             print self.lives
-                            if self.invincTimer < self.invincTimerMax:
-                                  self.invincTimer += 1
-                                  if self.invincTimer == self.invincTimerMax:
-                                      self.invincTimer = 0
+                            self.invincible = True
                         else:
                             
                             self.speedx = -self.speedx
@@ -230,6 +228,12 @@ class Player(Mob):
                 self.fireTimer = 0
                 self.firing = False
                 
+        if self.invincible:
+            if self.invincTimer < self.invincTimerMax:
+                self.invincTimer += 1
+            else:
+                self.invincTimer = 0
+                self.invincible = False
         
                     
     
