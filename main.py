@@ -203,8 +203,8 @@ while True:
             clock.tick(60)
         while not pb.alive:
             hasPowers = []
-            menuimage = pygame.image.load ("PNG/backgrounds/endscreen.png")
-            menurect = menuimage.get_rect()
+            endimage = pygame.image.load ("PNG/backgrounds/endscreen.png")
+            endrect = menuimage.get_rect()
         # ~ startimage = pygame.image.load ("Screens/backroundStartScreen.png")
         # ~ startrect = startimage.get_rect()
         # ~ print 'f"
@@ -215,7 +215,14 @@ while True:
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_RETURN:
-                            mode = "menu"
+                            levelnum = 1
+                            bullets = []
+                            level = loadLevel("Levels/"+str(levelnum)+".lvl")
+                            blocks = level["blocks"]
+                            mobs = level["enemies"]
+                            powerUps = level["power-ups"]
+                            #add delay here
+                            pb = Player(3, level["player"], hasPowers)
                         if event.key == pygame.K_ESCAPE:
                             sys.exit()
                         if event.key == pygame.K_t:
@@ -227,7 +234,7 @@ while True:
                                         if event.key == pygame.K_t:
                                             paused = False
             screen.fill(bgColor)
-            screen.blit(menuimage, menurect)
+            screen.blit(endimage, endrect)
             pygame.display.flip()
             clock.tick(60)
     
