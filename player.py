@@ -45,7 +45,7 @@ class Player(Mob):
         
         
         self.fireTimer = 0
-        self.fireTimerMax = 60/15
+        self.fireTimerMax = 60/3
         self.bullets = []
         self.firing = False
         # ~ self.facing = "down"
@@ -53,7 +53,7 @@ class Player(Mob):
         self.alive = True
         self.invincible = False
         self.invincTimer = 0
-        self.invincTimerMax = 10
+        self.invincTimerMax = 60
         
         if "tripleshot" in powers:
             print powers

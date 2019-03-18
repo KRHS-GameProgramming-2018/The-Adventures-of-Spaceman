@@ -34,10 +34,11 @@ bullets = []
 
 bgColor = 0,0,0
 mode = "menu"
+shooting = False
 
 while True:
     while mode == "menu":
-        menuimage = pygame.image.load ("PNG/backgrounds/menuImage.png")
+        menuimage = pygame.image.load ("PNG/backgrounds/Title.png")
         menurect = menuimage.get_rect()
         # ~ startimage = pygame.image.load ("Screens/backroundStartScreen.png")
         # ~ startrect = startimage.get_rect()
@@ -99,14 +100,8 @@ while True:
                             pb.go("go right")
                         #for schooting
                         if event.key == pygame.K_SPACE:
-                            bullet = pb.shoot()
-                            if bullet:
-                                bullets += [bullet]
-                                print bullet
-                                if boltPower == True:
-                                    print 'yes'
-                                    bullets += [bullet]
-                                    bullets += [bullet]
+                            shooting = True
+                            
                                     
                 if event.type == pygame.KEYUP:
                         #for not going directions
@@ -127,8 +122,18 @@ while True:
                             pb.face("stop left")
                         if event.key == pygame.K_RIGHT:
                             pb.face("stop right")
+                        if event.key == pygame.K_SPACE:
+                            shooting = False
                         
-                        
+            if shooting:
+                bullet = pb.shoot()
+                if bullet:
+                    bullets += [bullet]
+                    print bullet
+                    if boltPower == True:
+                        print 'yes'
+                        bullets += [bullet]
+                        bullets += [bullet]            
                     
             for mob in mobs:
                 mob.update(size, pb.rect.center)
@@ -179,14 +184,17 @@ while True:
                     bullet.collide(tile)
                 if pb.collide(tile):
                     if tile.kind == "warp":
-                        levelnum += 1
-                        bullets = []
-                        level = loadLevel("Levels/"+str(levelnum)+".lvl")
-                        blocks = level["blocks"]
-                        mobs = level["enemies"]
-                        powerUps = level["power-ups"]
-                        #add delay here
-                        pb = Player(3, level["player"], hasPowers)
+                        if levelnum == 10:
+                            mode = "victory"
+                        else:
+                            levelnum += 1
+                            bullets = []
+                            level = loadLevel("Levels/"+str(levelnum)+".lvl")
+                            blocks = level["blocks"]
+                            mobs = level["enemies"]
+                            powerUps = level["power-ups"]
+                            #add delay here
+                            pb = Player(3, level["player"], hasPowers)
             
                 
             screen.fill(bgColor)
@@ -201,6 +209,7 @@ while True:
             screen.blit(pb.image, pb.rect)
             pygame.display.flip()
             clock.tick(60)
+            
         while not pb.alive:
             hasPowers = []
             endimage = pygame.image.load ("PNG/backgrounds/endscreen.png")
@@ -237,5 +246,18 @@ while True:
             screen.blit(endimage, endrect)
             pygame.display.flip()
             clock.tick(60)
-    
-    #print clock.get_fps()
+    while mode == "Victory":
+        menuimage = pygame.image.load ("PNG/backgrounds/Title.png")
+        menurect = menuimage.get_rect()
+        for event in pygame.event.get():
+                    #print event.type
+                    if event.type == pygame.QUIT:
+                        sys.exit()
+                    if event.type == pygame.KEYDOWN:
+                            if event.key == pygame.K_RETURN:
+                                mode = "inGame"
+                            if event.key == pygame.K_ESCAPE:
+                                sys.exit()
+        screen.fill(bgColor)
+        screen.blit(menuimage, menurect)
+        pygame.display.flip()
