@@ -139,7 +139,7 @@ while True:
                 mob.update(size, pb.rect.center)
                 if not mob.alive:
                     mobs.remove(mob)
-                pb.collide(mob)
+                # ~ pb.collide(mob)
                 if mob.kind == "greenie" and len(mobs) < 20:
                     if mob.checkDuplicate():
                         mobs += [mob.duplicate()]
@@ -186,6 +186,7 @@ while True:
                     if tile.kind == "warp":
                         if levelnum == 10:
                             mode = "victory"
+                            pb.alive = False
                         else:
                             levelnum += 1
                             bullets = []
@@ -195,6 +196,7 @@ while True:
                             powerUps = level["power-ups"]
                             #add delay here
                             pb = Player(3, level["player"], hasPowers)
+                            print levelnum
             
                 
             screen.fill(bgColor)
@@ -247,7 +249,7 @@ while True:
             pygame.display.flip()
             clock.tick(60)
     while mode == "Victory":
-        menuimage = pygame.image.load ("PNG/backgrounds/Title.png")
+        menuimage = pygame.image.load ("PNG/backgrounds/winendgame.png")
         menurect = menuimage.get_rect()
         for event in pygame.event.get():
                     #print event.type
