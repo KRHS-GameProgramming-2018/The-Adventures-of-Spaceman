@@ -139,7 +139,7 @@ while True:
                 mob.update(size, pb.rect.center)
                 if not mob.alive:
                     mobs.remove(mob)
-                pb.collide(mob)
+                # ~ pb.collide(mob)
                 if mob.kind == "greenie" and len(mobs) < 20:
                     if mob.checkDuplicate():
                         mobs += [mob.duplicate()]
@@ -186,7 +186,6 @@ while True:
                     if tile.kind == "warp":
                         if levelnum == 10:
                             mode = "victory"
-                            pb.alive = False
                         else:
                             levelnum += 1
                             bullets = []
@@ -257,7 +256,7 @@ while True:
                         sys.exit()
                     if event.type == pygame.KEYDOWN:
                             if event.key == pygame.K_RETURN:
-                                mode = "inGame"
+                                mode = "menu"
                             if event.key == pygame.K_ESCAPE:
                                 sys.exit()
         screen.fill(bgColor)
