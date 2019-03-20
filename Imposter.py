@@ -60,17 +60,17 @@ class Imposter(Mob):
             if xDif > yDif:
                 if self.rect.centerx < pCenter[0]:
                     self.compass = 1
-                    print "Player Right"
+                    # print "Player Right"
                 else:
                     self.compass = 3
-                    print "Player Left"
+                    # print "Player Left"
             else:
                 if self.rect.centery > pCenter[1]:
                     self.compass = 0
-                    print "Player Above"
+                    # print "Player Above"
                 else:
                     self.compass = 2
-                    print "Player Below"
+                    # print "Player Below"
                 
         else:
             if self.tracking: 
