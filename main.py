@@ -64,7 +64,6 @@ while True:
 
     while mode == "inGame":
         while pb.alive:
-                
             for event in pygame.event.get():
                 #print event.type
                 if event.type == pygame.QUIT:
@@ -247,7 +246,8 @@ while True:
             screen.blit(endimage, endrect)
             pygame.display.flip()
             clock.tick(60)
-    while mode == "Victory":
+    while mode == "victory":
+        print "pog"
         menuimage = pygame.image.load ("PNG/backgrounds/winendgame.png")
         menurect = menuimage.get_rect()
         for event in pygame.event.get():
