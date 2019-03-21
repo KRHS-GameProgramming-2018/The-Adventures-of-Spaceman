@@ -22,6 +22,23 @@ size = width, height
 
 screen = pygame.display.set_mode(size)
 
+enemies = pygame.sprite.Group()
+
+bolts = pygame.sprite.Group()
+
+powers = pygame.sprite.Group()
+
+all = pygame.sprite.RenderUpdates()
+
+SpaceZombie.containers = (enemies, all)
+Imposter.containers = (enemies, all)
+Greenie.containers = (enemies, all)
+Bolt.containers = (bolts, all)
+speedBoost.containers = (powers, all)
+boltPower.containers = (powers, all)
+healthUp.containers = (powers, all)
+Player.containers = (all)
+
 hasPowers = []
 boltPower = False
 levelnum = 1

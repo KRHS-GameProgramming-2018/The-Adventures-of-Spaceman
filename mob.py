@@ -1,9 +1,10 @@
 import pygame, sys, math
 
 
-class Mob():
+class Mob(pygame.sprite.Sprite):
     def __init__(self, image, speed=[5,5], startPos=[0,0], power=[]):
-        print image
+        pygame.sprite.Sprite.__init__(self, self.containers)
+        #print image
         self.image = pygame.image.load(image)
         self.alive = True
         self.rect = self.image.get_rect(center = startPos)
