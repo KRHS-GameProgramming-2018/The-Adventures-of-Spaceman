@@ -1,6 +1,6 @@
 import pygame, sys, math
 
-class Block():
+class Block(pygame.sprite.Sprite):
     def __init__(self,  pos=[0,0]):
         self.image = pygame.image.load("PNG/Blocks/br3.png")
         self.rect = self.image.get_rect(center=pos)

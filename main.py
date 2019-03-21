@@ -155,7 +155,7 @@ while True:
                 mob.update(size, pb.rect.center)
                 if not mob.alive:
                     mobs.remove(mob)
-                # ~ pb.collide(mob)
+                pb.collide(mob)
                 if mob.kind == "greenie" and len(mobs) < 20:
                     if mob.checkDuplicate():
                         mobs += [mob.duplicate()]
