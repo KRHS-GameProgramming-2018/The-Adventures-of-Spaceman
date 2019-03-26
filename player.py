@@ -13,7 +13,7 @@ class Player(Mob):
                         pygame.image.load("PNG/Player/spaceman-up.png"),
                         pygame.image.load("PNG/Player/spaceman-up.png"),
                         ]
-        self.downImages = [pygame.image.load("PNG/Player/spaceman1.png"),
+        self.downImages = [pygame.image.load("PNG/Player/spaceman.png"),
                           pygame.image.load("PNG/Player/spaceman2.png"),
                           pygame.image.load("PNG/Player/spaceman3.png"),
                           ]

@@ -155,8 +155,9 @@ while True:
                         bullets += [bullet]
                         bullets += [bullet]            
                     
-            for mob in mobs:
-                mob.update(size, pb.rect.center)
+            # ~ for mob in mobs:
+                # ~ mob.update(size, pb.rect.center)
+                all.update(size, pb.rect.center)
                 if not mob.alive:
                     mobs.remove(mob)
                 pb.collide(mob)
@@ -166,14 +167,14 @@ while True:
                 for bullet in bullets:
                     bullet.collide(mob)
             
-            for bullet in bullets:
-                bullet.update(size, pb.rect.center)
+            # ~ for bullet in bullets:
+                # ~ bullet.update(size, pb.rect.center)
                 for mob in mobs:
                     mob.collide(bullet)
                     
                 if not bullet.alive:
                     bullets.remove(bullet)
-            pb.update(size)
+            # ~ pb.update(size)
             
             for power in powerUps:
                 if pb.collide(power):
