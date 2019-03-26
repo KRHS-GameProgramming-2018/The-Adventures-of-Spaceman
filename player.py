@@ -180,7 +180,7 @@ class Player(Mob):
             
             
             
-    def update(self, size):
+    def update(self, size, pos):
         self.didBounceX = False
         self.didBounceY = False
         self.move()

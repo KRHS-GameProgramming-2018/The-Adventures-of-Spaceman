@@ -52,6 +52,7 @@ mobs = level["enemies"]
 powerUps = level["power-ups"]
 pb = Player(3, level["player"], hasPowers) 
 bullets = []
+bulletMag = 12
 
 bgColor = 0,0,0
 mode = "menu"
@@ -121,6 +122,8 @@ while True:
                         #for schooting
                         if event.key == pygame.K_SPACE:
                             shooting = True
+                        if event.key == pygame.K_r:
+                            bulletMag = 12
                             
                                     
                 if event.type == pygame.KEYUP:
@@ -148,16 +151,18 @@ while True:
             if shooting:
                 bullet = pb.shoot()
                 if bullet:
-                    bullets += [bullet]
-                    print bullet
-                    if boltPower == True:
-                        print 'yes'
+                    if bulletMag > 0:
                         bullets += [bullet]
-                        bullets += [bullet]            
+                        bulletMag += -1
+                        print bulletMag
+                        if boltPower == True:
+                            print 'yes'
+                            bullets += [bullet]
+                            bullets += [bullet]            
                     
-            # ~ for mob in mobs:
+            for mob in mobs:
                 # ~ mob.update(size, pb.rect.center)
-                all.update(size, pb.rect.center)
+            
                 if not mob.alive:
                     mobs.remove(mob)
                 pb.collide(mob)
@@ -167,7 +172,7 @@ while True:
                 for bullet in bullets:
                     bullet.collide(mob)
             
-            # ~ for bullet in bullets:
+            for bullet in bullets:
                 # ~ bullet.update(size, pb.rect.center)
                 for mob in mobs:
                     mob.collide(bullet)
@@ -175,6 +180,7 @@ while True:
                 if not bullet.alive:
                     bullets.remove(bullet)
             # ~ pb.update(size)
+            all.update(size, pb.rect.center)
             
             for power in powerUps:
                 if pb.collide(power):
