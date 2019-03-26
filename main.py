@@ -26,6 +26,8 @@ enemies = pygame.sprite.Group()
 
 bolts = pygame.sprite.Group()
 
+blocks = pygame.sprite.Group
+
 powers = pygame.sprite.Group()
 
 all = pygame.sprite.RenderUpdates()
@@ -34,6 +36,8 @@ SpaceZombie.containers = (enemies, all)
 Imposter.containers = (enemies, all)
 Greenie.containers = (enemies, all)
 Bolt.containers = (bolts, all)
+Block.containers = (blocks, all)
+Warp.containers = (blocks, all)
 speedBoost.containers = (powers, all)
 boltPower.containers = (powers, all)
 healthUp.containers = (powers, all)
@@ -151,8 +155,9 @@ while True:
                         bullets += [bullet]
                         bullets += [bullet]            
                     
-            for mob in mobs:
-                mob.update(size, pb.rect.center)
+            # ~ for mob in mobs:
+                # ~ mob.update(size, pb.rect.center)
+                all.update(size, pb.rect.center)
                 if not mob.alive:
                     mobs.remove(mob)
                 pb.collide(mob)
@@ -162,14 +167,14 @@ while True:
                 for bullet in bullets:
                     bullet.collide(mob)
             
-            for bullet in bullets:
-                bullet.update(size, pb.rect.center)
+            # ~ for bullet in bullets:
+                # ~ bullet.update(size, pb.rect.center)
                 for mob in mobs:
                     mob.collide(bullet)
                     
                 if not bullet.alive:
                     bullets.remove(bullet)
-            pb.update(size)
+            # ~ pb.update(size)
             
             for power in powerUps:
                 if pb.collide(power):
