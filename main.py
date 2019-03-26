@@ -11,7 +11,6 @@ from boltPower import *
 from healthUp import *
 from speedBoost import *
 
-# ~ raw_input("press any key to continue")
 pygame.init()
 
 clock = pygame.time.Clock()
@@ -19,17 +18,12 @@ clock = pygame.time.Clock()
 width = 1000
 height = 800
 size = width, height
-
 screen = pygame.display.set_mode(size)
 
 enemies = pygame.sprite.Group()
-
 bolts = pygame.sprite.Group()
-
 blocks = pygame.sprite.Group
-
 powers = pygame.sprite.Group()
-
 all = pygame.sprite.RenderUpdates()
 
 SpaceZombie.containers = (enemies, all)
@@ -62,11 +56,8 @@ while True:
     while mode == "menu":
         menuimage = pygame.image.load ("PNG/backgrounds/Title.png")
         menurect = menuimage.get_rect()
-        # ~ startimage = pygame.image.load ("Screens/backroundStartScreen.png")
-        # ~ startrect = startimage.get_rect()
-        # ~ print 'f'
+        
         for event in pygame.event.get():
-                    #print event.type
                     if event.type == pygame.QUIT:
                         sys.exit()
                     if event.type == pygame.KEYDOWN:
@@ -77,17 +68,10 @@ while True:
         screen.fill(bgColor)
         screen.blit(menuimage, menurect)
         pygame.display.flip()
-
-    #menuimage = pygame.image.load ("backgrounds/Titlescreen.png")
-    #menurect = menuimage.get_rect()
-    #startimage = pygame.image.load ("backgrounds/backroundStartScreen.png")
-    #startrect = startimage.get_rect()
-    
-
+        
     while mode == "inGame":
         while pb.alive:
             for event in pygame.event.get():
-                #print event.type
                 if event.type == pygame.QUIT:
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
@@ -161,8 +145,6 @@ while True:
                             bullets += [bullet]            
                     
             for mob in mobs:
-                # ~ mob.update(size, pb.rect.center)
-            
                 if not mob.alive:
                     mobs.remove(mob)
                 pb.collide(mob)
@@ -173,33 +155,10 @@ while True:
                     bullet.collide(mob)
             
             for bullet in bullets:
-                # ~ bullet.update(size, pb.rect.center)
                 for mob in mobs:
                     mob.collide(bullet)
-                    
                 if not bullet.alive:
                     bullets.remove(bullet)
-            # ~ pb.update(size)
-            all.update(size, pb.rect.center)
-            
-            for power in powerUps:
-                if pb.collide(power):
-                    hasPowers += [power.kind]
-                    powerUps.remove(power)
-                    print hasPowers
-                   
-                    
-            boltPower = False
-            if "speedBoost" in hasPowers:
-                pb.maxSpeed = 7
-            if "healthUp" in hasPowers:
-                pb.lives = pb.extraLives
-                hasPowers.remove("healthUp")
-                print pb.lives
-            if "boltPower" in hasPowers:
-                boltPower = True
-                
-                
                     
             for hitter in mobs:
                 for hittie in mobs:
@@ -224,6 +183,23 @@ while True:
                             pb = Player(3, level["player"], hasPowers)
                             print levelnum
             
+            all.update(size, pb.rect.center)
+            
+            for power in powerUps:
+                if pb.collide(power):
+                    hasPowers += [power.kind]
+                    powerUps.remove(power)
+                    print hasPowers
+                   
+            boltPower = False
+            if "speedBoost" in hasPowers:
+                pb.maxSpeed = 7
+            if "healthUp" in hasPowers:
+                pb.lives = pb.extraLives
+                hasPowers.remove("healthUp")
+                print pb.lives
+            if "boltPower" in hasPowers:
+                boltPower = True
                 
             screen.fill(bgColor)
             for mob in mobs:
@@ -242,12 +218,8 @@ while True:
             hasPowers = []
             endimage = pygame.image.load ("PNG/backgrounds/endscreen.png")
             endrect = menuimage.get_rect()
-        # ~ startimage = pygame.image.load ("Screens/backroundStartScreen.png")
-        # ~ startrect = startimage.get_rect()
-        # ~ print 'f"
         
             for event in pygame.event.get():
-                #print event.type
                 if event.type == pygame.QUIT:
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
@@ -258,7 +230,6 @@ while True:
                             blocks = level["blocks"]
                             mobs = level["enemies"]
                             powerUps = level["power-ups"]
-                            #add delay here
                             pb = Player(3, level["player"], hasPowers)
                         if event.key == pygame.K_ESCAPE:
                             sys.exit()
@@ -275,7 +246,6 @@ while True:
             pygame.display.flip()
             clock.tick(60)
     while mode == "victory":
-        print "pog"
         menuimage = pygame.image.load ("PNG/backgrounds/winendgame.png")
         menurect = menuimage.get_rect()
         for event in pygame.event.get():
