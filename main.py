@@ -26,6 +26,8 @@ enemies = pygame.sprite.Group()
 
 bolts = pygame.sprite.Group()
 
+blocks = pygame.sprite.Group
+
 powers = pygame.sprite.Group()
 
 all = pygame.sprite.RenderUpdates()
@@ -34,6 +36,8 @@ SpaceZombie.containers = (enemies, all)
 Imposter.containers = (enemies, all)
 Greenie.containers = (enemies, all)
 Bolt.containers = (bolts, all)
+Block.containers = (blocks, all)
+Warp.containers = (blocks, all)
 speedBoost.containers = (powers, all)
 boltPower.containers = (powers, all)
 healthUp.containers = (powers, all)
