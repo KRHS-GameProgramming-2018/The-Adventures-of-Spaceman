@@ -144,7 +144,13 @@ while True:
                             bullets += [bullet]
                             bullets += [bullet]            
                     
+
+            # ~ for mob in mobs:
+                # ~ mob.update(size, pb.rect.center)
+                
+
             for mob in mobs:
+
                 if not mob.alive:
                     mobs.remove(mob)
                 pb.collide(mob)
@@ -159,6 +165,25 @@ while True:
                     mob.collide(bullet)
                 if not bullet.alive:
                     bullets.remove(bullet)
+            # ~ pb.update(size)
+            all.update(size, pb.rect.center)
+            for power in powerUps:
+                if pb.collide(power):
+                    hasPowers += [power.kind]
+                    powerUps.remove(power)
+                    print hasPowers
+                   
+                    
+            boltPower = False
+            if "speedBoost" in hasPowers:
+                pb.maxSpeed = 7
+            if "healthUp" in hasPowers:
+                pb.lives = pb.extraLives
+                hasPowers.remove("healthUp")
+                print pb.lives
+            if "boltPower" in hasPowers:
+                boltPower = True
+                
                     
             for hitter in mobs:
                 for hittie in mobs:
