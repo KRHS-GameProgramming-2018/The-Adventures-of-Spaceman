@@ -144,13 +144,13 @@ while True:
                             bullets += [bullet]
                             bullets += [bullet]            
                     
-<<<<<<< HEAD
+
             # ~ for mob in mobs:
                 # ~ mob.update(size, pb.rect.center)
                 
-=======
+
             for mob in mobs:
->>>>>>> origin/master
+
                 if not mob.alive:
                     mobs.remove(mob)
                 pb.collide(mob)
@@ -165,7 +165,6 @@ while True:
                     mob.collide(bullet)
                 if not bullet.alive:
                     bullets.remove(bullet)
-<<<<<<< HEAD
             # ~ pb.update(size)
             all.update(size, pb.rect.center)
             for power in powerUps:
@@ -185,9 +184,6 @@ while True:
             if "boltPower" in hasPowers:
                 boltPower = True
                 
-                
-=======
->>>>>>> origin/master
                     
             for hitter in mobs:
                 for hittie in mobs:
