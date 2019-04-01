@@ -113,7 +113,7 @@ class Player(Mob):
                 self.faceKeys.remove(direction)
             except:
                 return
-        
+      
         
         if self.faceKeys:
             if self.faceKeys[-1] == "left":
