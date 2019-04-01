@@ -14,8 +14,8 @@ class Player(Mob):
                         pygame.image.load("PNG/Player/spaceman-up.png"),
                         ]
         self.downImages = [pygame.image.load("PNG/Player/spaceman.png"),
-                          pygame.image.load("PNG/Player/spaceman.png"),
-                          pygame.image.load("PNG/Player/spaceman.png"),
+                          pygame.image.load("PNG/Player/spaceman2.png"),
+                          pygame.image.load("PNG/Player/spaceman3.png"),
                           ]
         self.leftImages = [pygame.image.load("PNG/Player/spaceman-left-1.png"),
                           pygame.image.load("PNG/Player/spaceman-left-2.png"),
@@ -37,8 +37,8 @@ class Player(Mob):
         self.keys = []
         self.goal = [0,0]
         self.kind = "player"
-        self.lives = 6
-        self.extraLives = 12
+        self.lives = 4
+        self.extraLives = 8
         
         self.didBounceX = False
         self.didBounceY = False
@@ -54,28 +54,6 @@ class Player(Mob):
         self.invincible = False
         self.invincTimer = 0
         self.invincTimerMax = 60
-        
-        if "tripleshot" in powers:
-            print powers
-        
-    # ~ def go(self, d):
-        # ~ if d == "go up":
-            # ~ self.speedy = -self.maxSpeed
-        # ~ if d == "go down":
-            # ~ self.speedy = self.maxSpeed
-        # ~ if d == "go left":
-            # ~ self.speedx = -self.maxSpeed
-        # ~ if d == "go right":
-            # ~ self.speedx = self.maxSpeed
-            
-        # ~ if d == "s up":
-            # ~ self.speedy = 0
-        # ~ if d == "s down":
-            # ~ self.speedy = 0
-        # ~ if d == "s left":
-            # ~ self.speedx = 0
-        # ~ if d == "s right":
-            # ~ self.speedx = 0
         
         
     def go(self, d):
@@ -202,7 +180,7 @@ class Player(Mob):
             
             
             
-    def update(self, size):
+    def update(self, size, pos):
         self.didBounceX = False
         self.didBounceY = False
         self.move()
