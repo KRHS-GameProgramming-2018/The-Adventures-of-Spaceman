@@ -110,7 +110,7 @@ while True:
                         if event.key == pygame.K_SPACE:
                             shooting = True
                         if event.key == pygame.K_r:
-                            bulletMag = 12
+                            bulletMag = 25
                             
                                     
                 if event.type == pygame.KEYUP:
