@@ -13,6 +13,12 @@ from healthUp import *
 from speedBoost import *
 
 pygame.init()
+pygame.joystick.init()
+if pygame.joystick.get_count() > 0:
+    controller =  pygame.joystick.Joystick(0)
+    controller.init()
+else:
+    controller = None
 
 clock = pygame.time.Clock()
 
@@ -59,15 +65,20 @@ while True:
     while mode == "menu":
         menuimage = pygame.image.load ("PNG/backgrounds/Title.png")
         menurect = menuimage.get_rect()
-        
+
         for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        mode = "inGame"
+                    if event.key == pygame.K_ESCAPE:
+
                     if event.type == pygame.QUIT:
                         sys.exit()
-                    if event.type == pygame.KEYDOWN:
-                            if event.key == pygame.K_RETURN:
-                                mode = "inGame"
-                            if event.key == pygame.K_ESCAPE:
-                                sys.exit()
+            if event.type == pygame.JOYBUTTONDOWN:
+                if event.button == 0:
+                    mode = "inGame"
         screen.fill(bgColor)
         screen.blit(menuimage, menurect)
         pygame.display.flip()
@@ -134,7 +145,96 @@ while True:
                             pb.face("stop right")
                         if event.key == pygame.K_SPACE:
                             shooting = False
+                
+                if event.type == pygame.JOYAXISMOTION:
+                    if event.axis == 3:
+                        if event.value > .85:
+                            pb.face("face down")
+                            pb.y = "down"
+                        if event.value < -.85:
+                            pb.face("face up")
+                            pb.y = "up"
+                            
+                    if event.axis == 4:
+                        if event.value > .85:
+                            pb.face("face right")
+                            pb.y = "right"
+                        if event.value < -.85:
+                            pb.face("face left")
+                            pb.y = "left"
+                            
+                    
+
+                    if event.axis == 0:
+                        if event.value > .7:
+                            pb.go("go right")
+                            
+                        elif event.value > 0: 
+                            pb.go("s right")
+                            pb.go("s left")
+                            pb.speed = 0
+                        elif event.value > -.7:
+                            pb.go("s left")
+                            pb.go("s right")
+                            pb.speed = 0
+                        else:
+                            pb.go("go left")
+                           
+                            
+                            
+                    if event.axis == 1:
+                        if event.value > .7:
+                            pb.go("go down")
+                            
+                        elif event.value > 0: 
+                            pb.go("s down")
+                            pb.go("s up")
+                            pb.speed = 0
+                        elif event.value > -.7:
+                            pb.go("s up")
+                            pb.go("s down")
+                            pb.speed = 0
+                        else:
+                            pb.go("go up")
+                                
+                    
+                    if not event.axis == 3:
+                        if event.value <.7:
+                            if event.value >0:
+                                if event.axis == 1:
+                                    if event.value > .7:
+                                        pb.face("face down")
+                        if event.value > -.7:
+                            if event.value <0:
+                                if event.axis == 1:                
+                                    if event.value < -.7:
+                                        pb.face("face up")
+                                        
+                    if not event.axis == 4:
+                        if event.value <.7:
+                            if event.value >0:
+                                if event.axis == 0:
+                                    if event.value > .7:
+                                        pb.face("face right")
+                        if event.value > -.7:
+                            if event.value <0:
+                                if event.axis == 1:                                
+                                    if event.value < -.7:
+                                        pb.face("face left")
+                                 
+                            
+                    
                         
+                    if event.axis == 2:
+                        if event.value < -.3:
+                            shooting = True
+                        else:
+                            shooting = False
+                            
+                if event.type == pygame.JOYBUTTONDOWN:
+                    print event.button
+            
+            
             if shooting:
                 bullet = pb.shoot()
                 if bullet:
@@ -147,7 +247,13 @@ while True:
                             bullets += [bullet]
                             bullets += [bullet]            
                     
+
+            # ~ for mob in mobs:
+                # ~ mob.update(size, pb.rect.center)
+                
+
             for mob in mobs:
+
                 if not mob.alive:
                     mobs.remove(mob)
                 pb.collide(mob)
@@ -162,6 +268,25 @@ while True:
                     mob.collide(bullet)
                 if not bullet.alive:
                     bullets.remove(bullet)
+            # ~ pb.update(size)
+            all.update(size, pb.rect.center)
+            for power in powerUps:
+                if pb.collide(power):
+                    hasPowers += [power.kind]
+                    powerUps.remove(power)
+                    print hasPowers
+                   
+                    
+            boltPower = False
+            if "speedBoost" in hasPowers:
+                pb.maxSpeed = 7
+            if "healthUp" in hasPowers:
+                pb.lives = pb.extraLives
+                hasPowers.remove("healthUp")
+                print pb.lives
+            if "boltPower" in hasPowers:
+                boltPower = True
+                
                     
             for hitter in mobs:
                 for hittie in mobs:
@@ -225,6 +350,9 @@ while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
+                if event.type == pygame.JOYBUTTONDOWN:
+                    if event.button == 0:
+                        mode = "menu"
                 if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_RETURN:
                             levelnum = 1
@@ -243,8 +371,11 @@ while True:
                                 for event in pygame.event.get():
                                     if event.type == pygame.QUIT: sys.exit()
                                     if event.type == pygame.KEYDOWN:
+                
                                         if event.key == pygame.K_t:
                                             paused = False
+               
+                    
             screen.fill(bgColor)
             screen.blit(endimage, endrect)
             pygame.display.flip()
