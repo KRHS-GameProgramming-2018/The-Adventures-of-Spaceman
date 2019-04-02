@@ -59,7 +59,6 @@ class Player(Mob):
         self.invincTimer = 0
         self.invincTimerMax = 60
         
-        
     def go(self, d):
         mode, direction = d.split(" ")
         if mode == "go":
@@ -95,8 +94,6 @@ class Player(Mob):
                 self.faceKeys.remove(direction)
             except:
                 return
-      
-        
         if self.faceKeys:
             if self.faceKeys[-1] == "left":
                 self.images = self.leftImages
@@ -110,6 +107,7 @@ class Player(Mob):
             elif self.faceKeys[-1] == "down":
                 self.images = self.downImages
                 self.rect = self.image.get_rect(center = self.rect.center)
+                
                 
         
     def collide(self, other):
@@ -149,7 +147,7 @@ class Player(Mob):
         return False
     
     def facingDirection(self):
-        if self.images == self.downImages:
+        if self.images == self.downImages or self.images == self.notMoving:
             self.y = "down"
         if self.images == self.upImages:
             self.y = "up"

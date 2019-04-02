@@ -7,6 +7,4 @@ class GameDisplay(pygame.sprite.Sprite):
             self.rect = self.image.get_rect()
             
         def update(self, size, bullets, lives):
-            for bullet in bullets:
-                GameDisplayObject(image = "spacemansheat.png", pos = [0,0])
-    
+           pass

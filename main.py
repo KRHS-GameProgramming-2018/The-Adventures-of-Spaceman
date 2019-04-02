@@ -70,12 +70,12 @@ while True:
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_RETURN:
-                        mode = "inGame"
-                    if event.key == pygame.K_ESCAPE:
-
-                    if event.type == pygame.QUIT:
-                        sys.exit()
+                if event.key == pygame.K_RETURN:
+                    mode = "inGame"
+                if event.key == pygame.K_ESCAPE:
+                    sys.exit()
+            if event.type == pygame.QUIT:
+                sys.exit()
             if event.type == pygame.JOYBUTTONDOWN:
                 if event.button == 0:
                     mode = "inGame"
@@ -248,8 +248,7 @@ while True:
                             bullets += [bullet]            
                     
 
-            # ~ for mob in mobs:
-                # ~ mob.update(size, pb.rect.center)
+            
                 
 
             for mob in mobs:
@@ -269,6 +268,8 @@ while True:
                 if not bullet.alive:
                     bullets.remove(bullet)
             # ~ pb.update(size)
+            # ~ for mob in mobs:
+                # ~ mob.update(size, pb.rect.center)
             all.update(size, pb.rect.center)
             for power in powerUps:
                 if pb.collide(power):
@@ -310,8 +311,6 @@ while True:
                             #add delay here
                             pb = Player(3, level["player"], hasPowers)
                             print levelnum
-            
-            all.update(size, pb.rect.center)
             
             for power in powerUps:
                 if pb.collide(power):
