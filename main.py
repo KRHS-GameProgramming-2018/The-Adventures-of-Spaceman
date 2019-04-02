@@ -6,6 +6,7 @@ from enemy import *
 from Imposter import *
 from bolt import *
 from Button import *
+from HUD import *
 
 from boltPower import *
 from healthUp import *
@@ -24,6 +25,7 @@ enemies = pygame.sprite.Group()
 bolts = pygame.sprite.Group()
 blocks = pygame.sprite.Group
 powers = pygame.sprite.Group()
+HUD = pygame.sprite.Group()
 all = pygame.sprite.RenderUpdates()
 
 SpaceZombie.containers = (enemies, all)
@@ -35,6 +37,7 @@ Warp.containers = (blocks, all)
 speedBoost.containers = (powers, all)
 boltPower.containers = (powers, all)
 healthUp.containers = (powers, all)
+HUD.containers = (HUD, all)
 Player.containers = (all)
 
 hasPowers = []
@@ -231,6 +234,7 @@ while True:
                             mobs = level["enemies"]
                             powerUps = level["power-ups"]
                             pb = Player(3, level["player"], hasPowers)
+                            bulletMag = 12
                         if event.key == pygame.K_ESCAPE:
                             sys.exit()
                         if event.key == pygame.K_t:
