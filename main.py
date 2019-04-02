@@ -6,7 +6,7 @@ from enemy import *
 from Imposter import *
 from bolt import *
 from Button import *
-
+from warp import *
 from boltPower import *
 from healthUp import *
 from speedBoost import *
@@ -52,11 +52,13 @@ mobs = level["enemies"]
 powerUps = level["power-ups"]
 pb = Player(3, level["player"], hasPowers) 
 bullets = []
-bulletMag = 12
+bulletMag = 100
 
 bgColor = 0,0,0
 mode = "menu"
 shooting = False
+
+startTime = time.clock()
 
 while True:
     while mode == "menu":
@@ -70,7 +72,7 @@ while True:
                     if event.key == pygame.K_RETURN:
                         mode = "inGame"
                     if event.key == pygame.K_ESCAPE:
-
+                        mode = "menu"
                     if event.type == pygame.QUIT:
                         sys.exit()
             if event.type == pygame.JOYBUTTONDOWN:
@@ -82,6 +84,7 @@ while True:
         
     while mode == "inGame":
         while pb.alive:
+            print int((time.clock() - startTime)*1000)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
@@ -177,12 +180,9 @@ while True:
                         else:
                             pb.go("go left")
                            
-                            
-                            
                     if event.axis == 1:
                         if event.value > .7:
-                            pb.go("go down")
-                            
+                            pb.go("go down") 
                         elif event.value > 0: 
                             pb.go("s down")
                             pb.go("s up")
@@ -228,8 +228,12 @@ while True:
                         else:
                             shooting = False
                             
+                            
+                    
                 if event.type == pygame.JOYBUTTONDOWN:
-                    print event.button
+                    if event.button == 2:
+                        bulletMag = 12
+                    
             
             
             if shooting:
