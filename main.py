@@ -70,7 +70,7 @@ while True:
                     if event.key == pygame.K_RETURN:
                         mode = "inGame"
                     if event.key == pygame.K_ESCAPE:
-
+                        mode = "menu"
                     if event.type == pygame.QUIT:
                         sys.exit()
             if event.type == pygame.JOYBUTTONDOWN:
