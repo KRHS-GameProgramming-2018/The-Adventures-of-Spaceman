@@ -73,33 +73,25 @@ class Mob(pygame.sprite.Sprite):
                 self.didBounceY = True
             
     def bounceBlock(self, other):
-        if self.rect.left < other.rect.right or self.rect.right > other.rect.left:
-            if self.rect.top < other.rect.bottom or self.rect.bottom > other.rect.top:
-                if other.kind == "block":
-                    if not self.didBounceX:
-                        self.speedx = -self.speedx
-                        self.didBounceX = True
-                    if not self.didBounceY:
-                        self.speedy = -self.speedy
-                        self.didBounceY = True
-                return True
+        if other.kind == "block":
+            if not self.didBounceX:
+                self.speedx = -self.speedx
+                self.didBounceX = True
+            if not self.didBounceY:
+                self.speedy = -self.speedy
+                self.didBounceY = True
+            return True
         return False
             
     def collide(self, other):
-        if self.rect.right > other.rect.left:
-            if self.rect.left < other.rect.right:
-                if self.rect.top < other.rect.bottom:
-                    if self.rect.bottom > other.rect.top:
-                        
-                        
-                        self.speedx = -self.speedx
-                        
-                        self.speedy = -self.speedy
-                        self.move()
-                        self.speedx = 0
-                        self.didBounceX = True
-                        self.speedy = 0
-                        self.didBounceY = True
-                        
-                        return True
-        return False
+        self.speedx = -self.speedx
+        
+        self.speedy = -self.speedy
+        self.move()
+        self.speedx = 0
+        self.didBounceX = True
+        self.speedy = 0
+        self.didBounceY = True
+        
+        return True
+

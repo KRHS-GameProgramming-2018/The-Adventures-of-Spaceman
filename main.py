@@ -29,22 +29,22 @@ height = 800
 size = width, height
 screen = pygame.display.set_mode(size)
 
-enemies = pygame.sprite.Group()
-bolts = pygame.sprite.Group()
-blocks = pygame.sprite.Group
-powers = pygame.sprite.Group()
+mobs = pygame.sprite.Group()
+bullets = pygame.sprite.Group()
+blocks = pygame.sprite.Group()
+powerUps = pygame.sprite.Group()
 HUD = pygame.sprite.Group()
-all = pygame.sprite.RenderUpdates()
+all = pygame.sprite.OrderedUpdates()
 
-SpaceZombie.containers = (enemies, all)
-Imposter.containers = (enemies, all)
-Greenie.containers = (enemies, all)
-Bolt.containers = (bolts, all)
+SpaceZombie.containers = (mobs, all)
+Imposter.containers = (mobs, all)
+Greenie.containers = (mobs, all)
+Bolt.containers = (bullets, all)
 Block.containers = (blocks, all)
 Warp.containers = (blocks, all)
-speedBoost.containers = (powers, all)
-boltPower.containers = (powers, all)
-healthUp.containers = (powers, all)
+speedBoost.containers = (powerUps, all)
+boltPower.containers = (powerUps, all)
+healthUp.containers = (powerUps, all)
 HUD.containers = (HUD, all)
 Player.containers = (all)
 
@@ -52,11 +52,11 @@ hasPowers = []
 boltPower = False
 levelnum = 1
 level = loadLevel("Levels/1.lvl")
-blocks = level["blocks"]
-mobs = level["enemies"]
-powerUps = level["power-ups"]
+#blocks = level["blocks"]
+#mobs = level["enemies"]
+#powerUps = level["power-ups"]
 pb = Player(3, level["player"], hasPowers) 
-bullets = []
+#bullets = []
 bulletMag = 100
 
 bgColor = 0,0,0
@@ -239,92 +239,65 @@ while True:
                     if event.button == 2:
                         bulletMag = 12
                     
-            
-            
             if shooting:
                 bullet = pb.shoot()
                 if bullet:
                     if bulletMag > 0:
-                        bullets += [bullet]
-                        bulletMag += -1
+                        bulletMag -= 1
                         print bulletMag
                         if boltPower == True:
                             print 'yes'
-                            bullets += [bullet]
-                            bullets += [bullet]            
-                    
-
-            # ~ for mob in mobs:
-                # ~ mob.update(size, pb.rect.center)
-                
-
-            for mob in mobs:
-
-                if not mob.alive:
-                    mobs.remove(mob)
-                pb.collide(mob)
-                if mob.kind == "greenie" and len(mobs) < 20:
-                    if mob.checkDuplicate():
-                        mobs += [mob.duplicate()]
-                for bullet in bullets:
-                    bullet.collide(mob)
+                            pb.shoot(False)         
             
-            for bullet in bullets:
-                for mob in mobs:
+            
+            playerHitMobs = pygame.sprite.spritecollide(pb, mobs, False, pygame.sprite.collide_mask)   
+            for mob in playerHitMobs:
+                player.collide(mob)
+                     
+            
+            bulletsHitMobs = pygame.sprite.groupcollide(bullets, mobs, True, False, pygame.sprite.collide_mask)
+            for bullet in bulletsHitMobs:
+                for mob in bulletsHitMobs[bullet]:
                     mob.collide(bullet)
-                if not bullet.alive:
-                    bullets.remove(bullet)
-            # ~ pb.update(size)
-            all.update(size, pb.rect.center)
-            for power in powerUps:
+            
+            playerHitPowerUps = pygame.sprite.spritecollide(pb, powerUps, True, pygame.sprite.collide_mask)   
+            for power in playerHitPowerUps:
                 if pb.collide(power):
                     hasPowers += [power.kind]
-                    powerUps.remove(power)
                     print hasPowers
-                   
-                    
-            boltPower = False
-            if "speedBoost" in hasPowers:
-                pb.maxSpeed = 7
-            if "healthUp" in hasPowers:
-                pb.lives = pb.extraLives
-                hasPowers.remove("healthUp")
-                print pb.lives
-            if "boltPower" in hasPowers:
-                boltPower = True
                 
+            mobsHitMobs = pygame.sprite.groupcollide(mobs, mobs, False, False, pygame.sprite.collide_mask)
+            for hitter in mobsHitMobs:
+                for hittee in mobsHitMobs[hitter]:
+                    hitter.collide(hittee)
+            
+            mobsHitBlocks = pygame.sprite.groupcollide(mobs, blocks, False, False, pygame.sprite.collide_mask)
+            for mob in mobsHitBlocks:
+                for block in mobsHitBlocks[mob]:
+                    mob.collide(block)
                     
-            for hitter in mobs:
-                for hittie in mobs:
-                    hitter.collide(hittie)
-                for tile in blocks:
-                    hitter.collide(tile)
-            for tile in blocks:
-                for bullet in bullets:
-                    bullet.collide(tile)
-                if pb.collide(tile):
+            bulletsHitBlocks = pygame.sprite.groupcollide(bullets, blocks, True, False, pygame.sprite.collide_mask)
+            
+            playerHitBlocks = pygame.sprite.spritecollide(pb, blocks, False, pygame.sprite.collide_mask)   
+            for block in playerHitBlocks:
+                if pb.collide(block):
                     if tile.kind == "warp":
                         if levelnum == 10:
                             mode = "victory"
                         else:
                             levelnum += 1
-                            bullets = []
+                            #bullets = []
                             level = loadLevel("Levels/"+str(levelnum)+".lvl")
-                            blocks = level["blocks"]
-                            mobs = level["enemies"]
-                            powerUps = level["power-ups"]
+                            #blocks = level["blocks"]
+                            #mobs = level["enemies"]
+                            #powerUps = level["power-ups"]
                             #add delay here
                             pb = Player(3, level["player"], hasPowers)
                             print levelnum
             
             all.update(size, pb.rect.center)
-            
-            for power in powerUps:
-                if pb.collide(power):
-                    hasPowers += [power.kind]
-                    powerUps.remove(power)
-                    print hasPowers
                    
+                    
             boltPower = False
             if "speedBoost" in hasPowers:
                 pb.maxSpeed = 7
@@ -335,15 +308,16 @@ while True:
             if "boltPower" in hasPowers:
                 boltPower = True
                 
-            screen.fill(bgColor)
-            for mob in mobs:
-                screen.blit(mob.image, mob.rect)
-            for power in powerUps:
-                screen.blit(power.image, power.rect)
-            for tile in blocks:
-                screen.blit(tile.image, tile.rect)
-            for bullet in bullets:
-                screen.blit(bullet.image, bullet.rect)
+                    
+            for mob in mobs.sprites():
+                if mob.kind == "greenie" and len(mobs.sprites()) < 20:
+                    if mob.checkDuplicate():
+                        mob.duplicate()
+            
+            
+                
+            dirty = all.draw(screen)
+            pygame.display.update(dirty)
             screen.blit(pb.image, pb.rect)
             pygame.display.flip()
             clock.tick(60)
@@ -362,11 +336,11 @@ while True:
                 if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_RETURN:
                             levelnum = 1
-                            bullets = []
+                            #bullets = []
                             level = loadLevel("Levels/"+str(levelnum)+".lvl")
-                            blocks = level["blocks"]
-                            mobs = level["enemies"]
-                            powerUps = level["power-ups"]
+                            #blocks = level["blocks"]
+                            #mobs = level["enemies"]
+                            #powerUps = level["power-ups"]
                             pb = Player(3, level["player"], hasPowers)
                             bulletMag = 12
                         if event.key == pygame.K_ESCAPE:
