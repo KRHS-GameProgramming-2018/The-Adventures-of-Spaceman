@@ -6,6 +6,8 @@ from enemy import *
 from Imposter import *
 from bolt import *
 from Button import *
+
+from warp import *
 from HUD import *
 
 from boltPower import *
@@ -61,6 +63,8 @@ bgColor = 0,0,0
 mode = "menu"
 shooting = False
 
+startTime = time.clock()
+
 while True:
     while mode == "menu":
         menuimage = pygame.image.load ("PNG/backgrounds/Title.png")
@@ -70,12 +74,12 @@ while True:
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN:
-                    mode = "inGame"
-                if event.key == pygame.K_ESCAPE:
-                    sys.exit()
-            if event.type == pygame.QUIT:
-                sys.exit()
+                    if event.key == pygame.K_RETURN:
+                        mode = "inGame"
+                    if event.key == pygame.K_ESCAPE:
+                        mode = "menu"
+                    if event.type == pygame.QUIT:
+                        sys.exit()
             if event.type == pygame.JOYBUTTONDOWN:
                 if event.button == 0:
                     mode = "inGame"
@@ -232,7 +236,9 @@ while True:
                             shooting = False
                             
                 if event.type == pygame.JOYBUTTONDOWN:
-                    print event.button
+                    if event.button == 2:
+                        bulletMag = 12
+                    
             
             
             if shooting:
