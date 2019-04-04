@@ -46,7 +46,7 @@ mobs = level["enemies"]
 powerUps = level["power-ups"]
 pb = Player(3, level["player"], hasPowers) 
 bullets = []
-bulletMag = 12
+bulletMag = 1200
 
 bgColor = 0,0,0
 mode = "menu"
