@@ -25,6 +25,7 @@ class Warp(pygame.sprite.Sprite):
     
     
     def update(self,image):
+        #self.animate()
         if self.aniTimer < self.aniTimerMax:
             self.aniTimer += 1
         else:
@@ -33,6 +34,6 @@ class Warp(pygame.sprite.Sprite):
                 currentImage += 1
             else:
                 currentImage = 0
-            self.image = self.images [currentImage]
+            self.image = self.images[currentImage]
         
         
