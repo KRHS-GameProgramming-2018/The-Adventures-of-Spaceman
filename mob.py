@@ -25,7 +25,7 @@ class Mob(pygame.sprite.Sprite):
         
     def live(self, lives):
         if self.lives <= 0:
-            self.alive = False
+            self.kill()
     
     def getDist(self, pt):
         x1 = self.rect.centerx

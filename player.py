@@ -117,6 +117,8 @@ class Player(Mob):
             self.lives += -1
             print self.lives
             self.invincible = True
+            if self.lives == 0:
+                self.alive = False
         else:
             
             self.speedx = -self.speedx
