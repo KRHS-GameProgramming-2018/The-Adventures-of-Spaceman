@@ -9,9 +9,13 @@ from speedBoost import *
 class Player(Mob):
     def __init__(self, speed=6, startPos=[0,0], powers=[]):
         Mob.__init__(self, "PNG/Player/spaceman.png", [0,0], startPos, powers)
-        self.upImages = [pygame.image.load("PNG/Player/spaceman-up.png"),
-                        pygame.image.load("PNG/Player/spaceman-up.png"),
-                        pygame.image.load("PNG/Player/spaceman-up.png"),
+        self.notMoving = [pygame.image.load("PNG/Player/spaceman.png"),
+                        pygame.image.load("PNG/Player/spaceman.png"),
+                        pygame.image.load("PNG/Player/spaceman.png"),
+                        ]
+        self.upImages = [pygame.image.load("PNG/Player/spacemanFoward1.png"),
+                        pygame.image.load("PNG/Player/spacemanFoward2.png"),
+                        pygame.image.load("PNG/Player/spacemanFoward3.png"),
                         ]
         self.downImages = [pygame.image.load("PNG/Player/spaceman.png"),
                           pygame.image.load("PNG/Player/spaceman2.png"),
@@ -55,7 +59,6 @@ class Player(Mob):
         self.invincTimer = 0
         self.invincTimerMax = 60
         
-        
     def go(self, d):
         mode, direction = d.split(" ")
         if mode == "go":
@@ -91,8 +94,6 @@ class Player(Mob):
                 self.faceKeys.remove(direction)
             except:
                 return
-        
-        
         if self.faceKeys:
             if self.faceKeys[-1] == "left":
                 self.images = self.leftImages
@@ -107,28 +108,27 @@ class Player(Mob):
                 self.images = self.downImages
                 self.rect = self.image.get_rect(center = self.rect.center)
                 
+                
         
     def collide(self, other):
-        if self.rect.right > other.rect.left:
-            if self.rect.left < other.rect.right:
-                if self.rect.top < other.rect.bottom:
-                    if self.rect.bottom > other.rect.top:
-                        if not self.invincible and (other.kind == "enemy" or other.kind == "greenie" or other.kind == "imposter"):
-                            self.lives += -1
-                            print self.lives
-                            self.invincible = True
-                        else:
-                            
-                            self.speedx = -self.speedx
-                            
-                            self.speedy = -self.speedy
-                            self.move()
-                            self.speedx = 0
-                            self.didBounceX = True
-                            self.speedy = 0
-                            self.didBounceY = True
-                            
-                            return True
+        if not self.invincible and (other.kind == "enemy" or other.kind == "greenie" or other.kind == "imposter"):
+            self.lives += -1
+            print self.lives
+            self.invincible = True
+            if self.lives == 0:
+                self.alive = False
+        else:
+            
+            self.speedx = -self.speedx
+            
+            self.speedy = -self.speedy
+            self.move()
+            self.speedx = 0
+            self.didBounceX = True
+            self.speedy = 0
+            self.didBounceY = True
+            
+            return True
         return False
     
     def bounceBlock(self, other):
@@ -145,7 +145,7 @@ class Player(Mob):
         return False
     
     def facingDirection(self):
-        if self.images == self.downImages:
+        if self.images == self.downImages or self.images == self.notMoving:
             self.y = "down"
         if self.images == self.upImages:
             self.y = "up"
@@ -154,8 +154,8 @@ class Player(Mob):
         if self.images == self.rightImages:
             self.y = "right"
             
-    def shoot(self):
-        if self.firing:
+    def shoot(self, testingFire=True):
+        if testingFire and self.firing:
             if self.fireTimer < self.fireTimerMax:
                 self.fireTimer += 1
             else:
@@ -180,7 +180,7 @@ class Player(Mob):
             
             
             
-    def update(self, size):
+    def update(self, size, pos):
         self.didBounceX = False
         self.didBounceY = False
         self.move()
@@ -213,6 +213,7 @@ class Player(Mob):
                 self.invincTimer = 0
                 self.invincible = False
         
-                    
+                   
+    
     
     
