@@ -9,9 +9,13 @@ from speedBoost import *
 class Player(Mob):
     def __init__(self, speed=6, startPos=[0,0], powers=[]):
         Mob.__init__(self, "PNG/Player/spaceman.png", [0,0], startPos, powers)
-        self.upImages = [pygame.image.load("PNG/Player/spaceman-up.png"),
-                        pygame.image.load("PNG/Player/spaceman-up.png"),
-                        pygame.image.load("PNG/Player/spaceman-up.png"),
+        self.notMoving = [pygame.image.load("PNG/Player/spaceman.png"),
+                        pygame.image.load("PNG/Player/spaceman.png"),
+                        pygame.image.load("PNG/Player/spaceman.png"),
+                        ]
+        self.upImages = [pygame.image.load("PNG/Player/spacemanFoward1.png"),
+                        pygame.image.load("PNG/Player/spacemanFoward2.png"),
+                        pygame.image.load("PNG/Player/spacemanFoward3.png"),
                         ]
         self.downImages = [pygame.image.load("PNG/Player/spaceman.png"),
                           pygame.image.load("PNG/Player/spaceman2.png"),
@@ -91,7 +95,7 @@ class Player(Mob):
                 self.faceKeys.remove(direction)
             except:
                 return
-        
+      
         
         if self.faceKeys:
             if self.faceKeys[-1] == "left":
@@ -213,6 +217,7 @@ class Player(Mob):
                 self.invincTimer = 0
                 self.invincible = False
         
-                    
+                   
+    
     
     

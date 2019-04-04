@@ -33,7 +33,7 @@ class SpaceZombie(Mob):
         self.aniTimer = 0
         self.aniTimerMax = 60/15
         
-        self.maxspeed = speed
+        #self.maxspeed = speed
         self.goal = [0,0]
         self.directMove()
         
