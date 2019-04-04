@@ -6,6 +6,7 @@ from enemy import *
 from Imposter import *
 from bolt import *
 from Button import *
+from Background import *
 
 from warp import *
 from HUD import *
@@ -29,34 +30,36 @@ height = 800
 size = width, height
 screen = pygame.display.set_mode(size)
 
-enemies = pygame.sprite.Group()
-bolts = pygame.sprite.Group()
-blocks = pygame.sprite.Group
-powers = pygame.sprite.Group()
+mobs = pygame.sprite.Group()
+bullets = pygame.sprite.Group()
+blocks = pygame.sprite.Group()
+powerUps = pygame.sprite.Group()
 HUD = pygame.sprite.Group()
-all = pygame.sprite.RenderUpdates()
+all = pygame.sprite.OrderedUpdates()
 
-SpaceZombie.containers = (enemies, all)
-Imposter.containers = (enemies, all)
-Greenie.containers = (enemies, all)
-Bolt.containers = (bolts, all)
+SpaceZombie.containers = (mobs, all)
+Imposter.containers = (mobs, all)
+Greenie.containers = (mobs, all)
+Bolt.containers = (bullets, all)
 Block.containers = (blocks, all)
 Warp.containers = (blocks, all)
-speedBoost.containers = (powers, all)
-boltPower.containers = (powers, all)
-healthUp.containers = (powers, all)
+speedBoost.containers = (powerUps, all)
+boltPower.containers = (powerUps, all)
+healthUp.containers = (powerUps, all)
 HUD.containers = (HUD, all)
 Player.containers = (all)
+Background.containers = (all)
+
+
 
 hasPowers = []
 boltPower = False
 levelnum = 1
-level = loadLevel("Levels/1.lvl")
-blocks = level["blocks"]
-mobs = level["enemies"]
-powerUps = level["power-ups"]
-pb = Player(3, level["player"], hasPowers) 
-bullets = []
+
+#blocks = level["blocks"]
+#mobs = level["enemies"]
+#powerUps = level["power-ups"]
+#bullets = []
 bulletMag = 100
 
 bgColor = 0,0,0
@@ -66,9 +69,9 @@ shooting = False
 startTime = time.clock()
 
 while True:
+    bg = Background ("PNG/backgrounds/Title.png")
     while mode == "menu":
-        menuimage = pygame.image.load ("PNG/backgrounds/Title.png")
-        menurect = menuimage.get_rect()
+        
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -83,13 +86,19 @@ while True:
             if event.type == pygame.JOYBUTTONDOWN:
                 if event.button == 0:
                     mode = "inGame"
-        screen.fill(bgColor)
-        screen.blit(menuimage, menurect)
-        pygame.display.flip()
         
+        dirty = all.draw(screen)
+        pygame.display.update(dirty)
+        pygame.display.flip()
+    
+    
     while mode == "inGame":
+        bg.kill()
+        bg = Background("PNG/backgrounds/Black.png")
+        level = loadLevel("Levels/1.lvl")
+        pb = Player(3, level["player"], hasPowers) 
+
         while pb.alive:
-            print int((time.clock() - startTime)*1000)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
@@ -239,92 +248,65 @@ while True:
                     if event.button == 2:
                         bulletMag = 12
                     
-            
-            
             if shooting:
                 bullet = pb.shoot()
                 if bullet:
                     if bulletMag > 0:
-                        bullets += [bullet]
-                        bulletMag += -1
+                        bulletMag -= 1
                         print bulletMag
                         if boltPower == True:
                             print 'yes'
-                            bullets += [bullet]
-                            bullets += [bullet]            
-                    
-
-            # ~ for mob in mobs:
-                # ~ mob.update(size, pb.rect.center)
-                
-
-            for mob in mobs:
-
-                if not mob.alive:
-                    mobs.remove(mob)
-                pb.collide(mob)
-                if mob.kind == "greenie" and len(mobs) < 20:
-                    if mob.checkDuplicate():
-                        mobs += [mob.duplicate()]
-                for bullet in bullets:
-                    bullet.collide(mob)
+                            pb.shoot(False)         
             
-            for bullet in bullets:
-                for mob in mobs:
+            
+            playerHitMobs = pygame.sprite.spritecollide(pb, mobs, False, pygame.sprite.collide_mask)   
+            for mob in playerHitMobs:
+                pb.collide(mob)
+                     
+            
+            bulletsHitMobs = pygame.sprite.groupcollide(bullets, mobs, True, False, pygame.sprite.collide_mask)
+            for bullet in bulletsHitMobs:
+                for mob in bulletsHitMobs[bullet]:
                     mob.collide(bullet)
-                if not bullet.alive:
-                    bullets.remove(bullet)
-            # ~ pb.update(size)
-            all.update(size, pb.rect.center)
-            for power in powerUps:
+            
+            playerHitPowerUps = pygame.sprite.spritecollide(pb, powerUps, True, pygame.sprite.collide_mask)   
+            for power in playerHitPowerUps:
                 if pb.collide(power):
                     hasPowers += [power.kind]
-                    powerUps.remove(power)
                     print hasPowers
-                   
-                    
-            boltPower = False
-            if "speedBoost" in hasPowers:
-                pb.maxSpeed = 7
-            if "healthUp" in hasPowers:
-                pb.lives = pb.extraLives
-                hasPowers.remove("healthUp")
-                print pb.lives
-            if "boltPower" in hasPowers:
-                boltPower = True
                 
+            mobsHitMobs = pygame.sprite.groupcollide(mobs, mobs, False, False, pygame.sprite.collide_mask)
+            for hitter in mobsHitMobs:
+                for hittee in mobsHitMobs[hitter]:
+                    hitter.collide(hittee)
+            
+            mobsHitBlocks = pygame.sprite.groupcollide(mobs, blocks, False, False)
+            for mob in mobsHitBlocks:
+                for block in mobsHitBlocks[mob]:
+                    mob.collide(block)
                     
-            for hitter in mobs:
-                for hittie in mobs:
-                    hitter.collide(hittie)
-                for tile in blocks:
-                    hitter.collide(tile)
-            for tile in blocks:
-                for bullet in bullets:
-                    bullet.collide(tile)
-                if pb.collide(tile):
-                    if tile.kind == "warp":
+            bulletsHitBlocks = pygame.sprite.groupcollide(bullets, blocks, True, False)
+            
+            playerHitBlocks = pygame.sprite.spritecollide(pb, blocks, False)   
+            for block in playerHitBlocks:
+                if pb.collide(block):
+                    if block.kind == "warp":
                         if levelnum == 10:
                             mode = "victory"
                         else:
                             levelnum += 1
-                            bullets = []
+                            #bullets = []
                             level = loadLevel("Levels/"+str(levelnum)+".lvl")
-                            blocks = level["blocks"]
-                            mobs = level["enemies"]
-                            powerUps = level["power-ups"]
+                            #blocks = level["blocks"]
+                            #mobs = level["enemies"]
+                            #powerUps = level["power-ups"]
                             #add delay here
                             pb = Player(3, level["player"], hasPowers)
                             print levelnum
             
             all.update(size, pb.rect.center)
-            
-            for power in powerUps:
-                if pb.collide(power):
-                    hasPowers += [power.kind]
-                    powerUps.remove(power)
-                    print hasPowers
                    
+                    
             boltPower = False
             if "speedBoost" in hasPowers:
                 pb.maxSpeed = 7
@@ -335,24 +317,23 @@ while True:
             if "boltPower" in hasPowers:
                 boltPower = True
                 
-            screen.fill(bgColor)
-            for mob in mobs:
-                screen.blit(mob.image, mob.rect)
-            for power in powerUps:
-                screen.blit(power.image, power.rect)
-            for tile in blocks:
-                screen.blit(tile.image, tile.rect)
-            for bullet in bullets:
-                screen.blit(bullet.image, bullet.rect)
-            screen.blit(pb.image, pb.rect)
+                    
+            for mob in mobs.sprites():
+                if mob.kind == "greenie" and len(mobs.sprites()) < 20:
+                    if mob.checkDuplicate():
+                        mob.duplicate()
+            
+            
+                
+            dirty = all.draw(screen)
+            pygame.display.update(dirty)
             pygame.display.flip()
             clock.tick(60)
             
+        bg.kill()    
+        bg = Background("PNG/backgrounds/endscreen.png")
         while not pb.alive:
             hasPowers = []
-            endimage = pygame.image.load ("PNG/backgrounds/endscreen.png")
-            endrect = menuimage.get_rect()
-        
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
@@ -362,11 +343,11 @@ while True:
                 if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_RETURN:
                             levelnum = 1
-                            bullets = []
+                            #bullets = []
                             level = loadLevel("Levels/"+str(levelnum)+".lvl")
-                            blocks = level["blocks"]
-                            mobs = level["enemies"]
-                            powerUps = level["power-ups"]
+                            #blocks = level["blocks"]
+                            #mobs = level["enemies"]
+                            #powerUps = level["power-ups"]
                             pb = Player(3, level["player"], hasPowers)
                             bulletMag = 12
                         if event.key == pygame.K_ESCAPE:
@@ -382,13 +363,14 @@ while True:
                                             paused = False
                
                     
-            screen.fill(bgColor)
-            screen.blit(endimage, endrect)
+            dirty = all.draw(screen)
+            pygame.display.update(dirty)
             pygame.display.flip()
             clock.tick(60)
+            
+    bg.kill()
+    bg = Background("PNG/backgrounds/winendgame.png")
     while mode == "victory":
-        menuimage = pygame.image.load ("PNG/backgrounds/winendgame.png")
-        menurect = menuimage.get_rect()
         for event in pygame.event.get():
                     #print event.type
                     if event.type == pygame.QUIT:
@@ -398,6 +380,7 @@ while True:
                                 mode = "menu"
                             if event.key == pygame.K_ESCAPE:
                                 sys.exit()
-        screen.fill(bgColor)
-        screen.blit(menuimage, menurect)
+        dirty = all.draw(screen)
+        pygame.display.update(dirty)
         pygame.display.flip()
+        clock.tick(60)

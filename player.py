@@ -113,26 +113,24 @@ class Player(Mob):
                 
         
     def collide(self, other):
-        if self.rect.right > other.rect.left:
-            if self.rect.left < other.rect.right:
-                if self.rect.top < other.rect.bottom:
-                    if self.rect.bottom > other.rect.top:
-                        if not self.invincible and (other.kind == "enemy" or other.kind == "greenie" or other.kind == "imposter"):
-                            self.lives += -1
-                            print self.lives
-                            self.invincible = True
-                        else:
-                            
-                            self.speedx = -self.speedx
-                            
-                            self.speedy = -self.speedy
-                            self.move()
-                            self.speedx = 0
-                            self.didBounceX = True
-                            self.speedy = 0
-                            self.didBounceY = True
-                            
-                            return True
+        if not self.invincible and (other.kind == "enemy" or other.kind == "greenie" or other.kind == "imposter"):
+            self.lives += -1
+            print self.lives
+            self.invincible = True
+            if self.lives == 0:
+                self.alive = False
+        else:
+            
+            self.speedx = -self.speedx
+            
+            self.speedy = -self.speedy
+            self.move()
+            self.speedx = 0
+            self.didBounceX = True
+            self.speedy = 0
+            self.didBounceY = True
+            
+            return True
         return False
     
     def bounceBlock(self, other):
@@ -158,8 +156,8 @@ class Player(Mob):
         if self.images == self.rightImages:
             self.y = "right"
             
-    def shoot(self):
-        if self.firing:
+    def shoot(self, testingFire=True):
+        if testingFire and self.firing:
             if self.fireTimer < self.fireTimerMax:
                 self.fireTimer += 1
             else:
