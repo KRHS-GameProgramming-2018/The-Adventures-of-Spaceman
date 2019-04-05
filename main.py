@@ -4,6 +4,7 @@ from player import *
 from Level import *
 from enemy import *
 from Imposter import *
+from merchant import *
 from bolt import *
 from Button import *
 from Background import *
@@ -40,6 +41,7 @@ all = pygame.sprite.OrderedUpdates()
 SpaceZombie.containers = (mobs, all)
 Imposter.containers = (mobs, all)
 Greenie.containers = (mobs, all)
+Merchant.containers = (mobs, all)
 Bolt.containers = (bullets, all)
 Block.containers = (blocks, all)
 Warp.containers = (blocks, all)

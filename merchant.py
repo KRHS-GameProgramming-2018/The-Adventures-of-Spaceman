@@ -13,22 +13,25 @@ class Merchant(Mob):
         self.downImages = [pygame.image.load("PNG/Merchant/merchant-down.png"),
                         ]
     
-    self.kind = "merchant"
-    self.images = self.upImages
-    self.image = self.images[self.frame]
-    self.rect = self.image.get_rect(center = startPos)
+        self.seen = False
+        self.kind = "merchant"
+        self.images = self.upImages
+        self.image = self.images[self.frame]
+        self.rect = self.image.get_rect(center = startPos)
+        
+        self.aniTimer = 0
+        self.aniTimerMax = 60/15
+        
+        self.goal = [0,0]
+        self.tracking = True
+        self.compass = 0
+        self.directMove()
     
-    self.goal = [0,0]
-    self.tracking = True
-    self.compass = 0
-    self.directMove()
+        self.radius = (int(self.rect.height/2.0 + self.rect.width/2.0)/2) - 1
+        self.detectionRadius = 96
     
-    
-    
-    
-    
-    
-    
+    def setPos(self, pos):
+        self.rect.center = pos0
     
     def directMove(self, pCenter=None):
         if pCenter and self.getDist(pCenter) < 250:
@@ -52,3 +55,18 @@ class Merchant(Mob):
                 else:
                     self.compass = 2
                     # print "Player Below"
+                    
+                    
+            if self.compass == 0:
+                self.images = self.upImages
+            elif self.compass == 1:
+                self.images = self.rightImages
+            elif self.compass == 2:
+                self.images = self.downImages
+            elif self.compass == 3:
+                self.images = self.leftImages
+                
+    def update(self, size, pCenter):
+        # ~ print self.rect.center
+        self.directMove(pCenter)
+        self.animate()

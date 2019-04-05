@@ -4,6 +4,7 @@ from Block import *
 from warp import *
 from enemy import *
 from Imposter import *
+from merchant import *
 from tripleShot import *
 from Greenie import *
 
@@ -15,6 +16,7 @@ def loadLevel(levelFile):
     level = {"blocks":[],
              "player":[0,0],
              "enemies":[],
+             "merchant":[],
              "power-ups":[]
              }
     
@@ -46,6 +48,8 @@ def loadLevel(levelFile):
                 level["enemies"] += [Imposter(1.5, [x*50+25, y*50+25])]
             if character == 'g':
                 level["enemies"] += [Greenie(3, [x*50+25, y*50+25])]
+            if character == '$':
+                level["merchant"] += [Merchant(0, [x*50+25, y*50+25])]
             if character == '!':
                 level["power-ups"] += [boltPower([x*50+25, y*50+25])]
             if character == '[':
