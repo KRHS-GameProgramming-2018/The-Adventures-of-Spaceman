@@ -4,6 +4,7 @@ from player import *
 from Level import *
 from enemy import *
 from Imposter import *
+from merchant import *
 from bolt import *
 from Button import *
 from Background import *
@@ -40,6 +41,7 @@ all = pygame.sprite.OrderedUpdates()
 SpaceZombie.containers = (mobs, all)
 Imposter.containers = (mobs, all)
 Greenie.containers = (mobs, all)
+Merchant.containers = (mobs, all)
 Bolt.containers = (bullets, all)
 Block.containers = (blocks, all)
 Warp.containers = (blocks, all)
@@ -295,15 +297,18 @@ while True:
                         if levelnum == 10:
                             mode = "victory"
                         else:
+                            for s in all.sprites():
+                                s.kill()
                             levelnum += 1
-                            #bullets = []
+                            bg = Background("PNG/backgrounds/Black.png")
                             level = loadLevel("Levels/"+str(levelnum)+".lvl")
-                            #blocks = level["blocks"]
-                            #mobs = level["enemies"]
-                            #powerUps = level["power-ups"]
-                            #add delay here
                             pb = Player(3, level["player"], hasPowers)
                             print levelnum
+                            #blocks = level["blocks"]
+                            #mobs = level["enemies"]
+                            #powerUps = level["power-ups"]\
+                            #bullets = []
+                            #add delay here
             
             all.update(size, pb.rect.center)
                    
@@ -331,10 +336,12 @@ while True:
             pygame.display.flip()
             clock.tick(60)
             
-        bg.kill()    
-        bg = Background("PNG/backgrounds/endscreen.png")
         while not pb.alive:
+            bg = Background("PNG/backgrounds/endscreen.png")
+            for s in all.sprites():
+                s.kill()
             hasPowers = []
+            bg = Background("PNG/backgrounds/endscreen.png")
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
@@ -368,10 +375,11 @@ while True:
             pygame.display.update(dirty)
             pygame.display.flip()
             clock.tick(60)
-            
-    bg.kill()
-    bg = Background("PNG/backgrounds/winendgame.png")
+            bg = Background("PNG/backgrounds/endscreen.png")
+            bg.kill()    
     while mode == "victory":
+        bg.kill()
+        bg = Background("PNG/backgrounds/winendgame.png")
         for event in pygame.event.get():
                     #print event.type
                     if event.type == pygame.QUIT:
