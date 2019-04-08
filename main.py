@@ -340,6 +340,7 @@ while True:
             for s in all.sprites():
                 s.kill()
             hasPowers = []
+            bg = Background("PNG/backgrounds/endscreen.png")
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
@@ -373,7 +374,6 @@ while True:
             pygame.display.update(dirty)
             pygame.display.flip()
             clock.tick(60)
-            bg.kill()    
             bg = Background("PNG/backgrounds/endscreen.png")
     while mode == "victory":
         bg.kill()
