@@ -295,15 +295,18 @@ while True:
                         if levelnum == 10:
                             mode = "victory"
                         else:
+                            for s in all.sprites():
+                                s.kill()
                             levelnum += 1
-                            #bullets = []
+                            bg = Background("PNG/backgrounds/Black.png")
                             level = loadLevel("Levels/"+str(levelnum)+".lvl")
-                            #blocks = level["blocks"]
-                            #mobs = level["enemies"]
-                            #powerUps = level["power-ups"]
-                            #add delay here
                             pb = Player(3, level["player"], hasPowers)
                             print levelnum
+                            #blocks = level["blocks"]
+                            #mobs = level["enemies"]
+                            #powerUps = level["power-ups"]\
+                            #bullets = []
+                            #add delay here
             
             all.update(size, pb.rect.center)
                    
@@ -331,9 +334,9 @@ while True:
             pygame.display.flip()
             clock.tick(60)
             
-        bg.kill()    
-        bg = Background("PNG/backgrounds/endscreen.png")
         while not pb.alive:
+            for s in all.sprites():
+                s.kill()
             hasPowers = []
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -368,10 +371,11 @@ while True:
             pygame.display.update(dirty)
             pygame.display.flip()
             clock.tick(60)
-            
-    bg.kill()
-    bg = Background("PNG/backgrounds/winendgame.png")
+            bg.kill()    
+            bg = Background("PNG/backgrounds/endscreen.png")
     while mode == "victory":
+        bg.kill()
+        bg = Background("PNG/backgrounds/winendgame.png")
         for event in pygame.event.get():
                     #print event.type
                     if event.type == pygame.QUIT:

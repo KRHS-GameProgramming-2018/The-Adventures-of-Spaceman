@@ -3,6 +3,7 @@ import pygame, sys, math
 
 class Warp(pygame.sprite.Sprite):
     def __init__(self,  pos=[0,0]):
+        pygame.sprite.Sprite.__init__(self, self.containers)
         self.images = [ pygame.image.load("PNG/Blocks/warp.png"),
                         pygame.image.load("PNG/Blocks/warp2.png"),
                         pygame.image.load("PNG/Blocks/warp3.png"),
@@ -24,7 +25,7 @@ class Warp(pygame.sprite.Sprite):
     
     
     
-    def update(self,image):
+    def update(self, size, pCenter):
         #self.animate()
         if self.aniTimer < self.aniTimerMax:
             self.aniTimer += 1
