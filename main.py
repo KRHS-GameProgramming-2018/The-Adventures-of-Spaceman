@@ -341,6 +341,7 @@ while True:
             for s in all.sprites():
                 s.kill()
             hasPowers = []
+            bg = Background("PNG/backgrounds/endscreen.png")
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
