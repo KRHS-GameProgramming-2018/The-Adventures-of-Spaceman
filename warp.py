@@ -19,9 +19,9 @@ class Warp(pygame.sprite.Sprite):
         self.aniTimer = 0
         self.aniTimerMax = 60/15
         
-        currentImage = 0
-        lastImage = len(self.images)-1
-        self.image = self.images [currentImage]
+        self.currentImage = 0
+        self.lastImage = len(self.images)-1
+        self.image = self.images [self.currentImage]
     
     
     
@@ -31,10 +31,10 @@ class Warp(pygame.sprite.Sprite):
             self.aniTimer += 1
         else:
             self.aniTimer = 0
-            if currentImage < lastImage:
-                currentImage += 1
+            if self.currentImage < self.lastImage:
+                self.currentImage += 1
             else:
-                currentImage = 0
-            self.image = self.images[currentImage]
+                self.currentImage = 0
+            self.image = self.images[self.currentImage]
         
         
