@@ -259,7 +259,9 @@ while True:
                         print bulletMag
                         if boltPower == True:
                             print 'yes'
-                            pb.shoot(False)         
+                            pb.shoot(False)  
+                if bulletMag == 0:
+                    shooting = False
             
             
             playerHitMobs = pygame.sprite.spritecollide(pb, mobs, False, pygame.sprite.collide_mask)   
@@ -374,7 +376,6 @@ while True:
             pygame.display.update(dirty)
             pygame.display.flip()
             clock.tick(60)
-            bg = Background("PNG/backgrounds/endscreen.png")
     while mode == "victory":
         bg.kill()
         bg = Background("PNG/backgrounds/winendgame.png")
