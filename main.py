@@ -95,6 +95,9 @@ while True:
     
     
     while mode == "inGame":
+        for s in all.sprites():
+            s.kill()
+        print len(mobs)
         bg.kill()
         bg = Background("PNG/backgrounds/Black.png")
         level = loadLevel("Levels/1.lvl")
@@ -256,7 +259,6 @@ while True:
                 if bullet:
                     if bulletMag > 0:
                         bulletMag -= 1
-                        print bulletMag
                         if boltPower == True:
                             print 'yes'
                             pb.shoot(False)  
@@ -339,7 +341,6 @@ while True:
             clock.tick(60)
             
         while not pb.alive:
-            bg = Background("PNG/backgrounds/endscreen.png")
             for s in all.sprites():
                 s.kill()
             hasPowers = []
@@ -371,16 +372,11 @@ while True:
                 
                                         if event.key == pygame.K_t:
                                             paused = False
-               
                     
             dirty = all.draw(screen)
             pygame.display.update(dirty)
             pygame.display.flip()
             clock.tick(60)
-
-
-            bg = Background("PNG/backgrounds/endscreen.png")
-            bg.kill()    
 
     while mode == "victory":
         bg.kill()
