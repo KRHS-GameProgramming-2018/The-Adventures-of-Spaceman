@@ -339,6 +339,7 @@ while True:
             clock.tick(60)
             
         while not pb.alive:
+            bg = Background("PNG/backgrounds/endscreen.png")
             for s in all.sprites():
                 s.kill()
             hasPowers = []
@@ -376,6 +377,11 @@ while True:
             pygame.display.update(dirty)
             pygame.display.flip()
             clock.tick(60)
+
+
+            bg = Background("PNG/backgrounds/endscreen.png")
+            bg.kill()    
+
     while mode == "victory":
         bg.kill()
         bg = Background("PNG/backgrounds/winendgame.png")
