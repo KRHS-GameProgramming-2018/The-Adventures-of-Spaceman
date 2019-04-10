@@ -17,7 +17,7 @@ class Warp(pygame.sprite.Sprite):
         self.radius = (self.rect.width/2 + self.rect.height/2)/2
         self.kind = "warp"
         self.aniTimer = 0
-        self.aniTimerMax = 60/15
+        self.aniTimerMax = 60/8
         
         self.currentImage = 0
         self.lastImage = len(self.images)-1
