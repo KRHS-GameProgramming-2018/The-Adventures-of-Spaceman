@@ -118,9 +118,7 @@ class Player(Mob):
             if self.lives == 0:
                 self.alive = False
         else:
-            
             self.speedx = -self.speedx
-            
             self.speedy = -self.speedy
             self.move()
             self.speedx = 0
