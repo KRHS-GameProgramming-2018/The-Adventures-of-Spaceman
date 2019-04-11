@@ -118,6 +118,15 @@ while True:
                                     if event.type == pygame.KEYDOWN:
                                         if event.key == pygame.K_t:
                                             paused = False
+                        if event.key == pygame.K_e:
+                            #if in merchant radius 
+                            paused = True
+                            while paused:
+                                for event in pygame.event.get():
+                                    if event.type == pygame.QUIT: sys.exit()
+                                    if event.type == pygame.KEYDOWN:
+                                        if event.key == pygame.K_t:
+                                            paused = False
                         #for facing directions
                         if event.key == pygame.K_UP:
                             pb.face("face up")
