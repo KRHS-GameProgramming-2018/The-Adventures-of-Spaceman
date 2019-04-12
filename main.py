@@ -52,8 +52,6 @@ HUD.containers = (HUD, all)
 Player.containers = (all)
 Background.containers = (all)
 
-
-
 hasPowers = []
 boltPower = False
 levelnum = 1
@@ -163,6 +161,7 @@ while True:
                             shooting = False
                 
                 if event.type == pygame.JOYAXISMOTION:
+                    
                     if event.axis == 3:
                         if event.value > .85:
                             pb.face("face down")
@@ -201,7 +200,7 @@ while True:
                     if event.axis == 1:
                         if event.value > .7:
                             pb.go("go down")
-                            
+                                
                         elif event.value > 0: 
                             pb.go("s down")
                             pb.go("s up")
@@ -290,7 +289,8 @@ while True:
                     
             bulletsHitBlocks = pygame.sprite.groupcollide(bullets, blocks, True, False)
             
-            playerHitBlocks = pygame.sprite.spritecollide(pb, blocks, False)   
+            playerHitBlocks = pygame.sprite.spritecollide(pb, blocks, False)
+            if len(playerHitBlocks) > 0: print len(playerHitBlocks)
             for block in playerHitBlocks:
                 if pb.collide(block):
                     if block.kind == "warp":
