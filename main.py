@@ -93,6 +93,9 @@ while True:
     
     
     while mode == "inGame":
+        for s in all.sprites():
+            s.kill()
+        print len(mobs)
         bg.kill()
         bg = Background("PNG/backgrounds/Black.png")
         level = loadLevel("Levels/1.lvl")
@@ -113,6 +116,15 @@ while True:
                                     if event.type == pygame.KEYDOWN:
                                         if event.key == pygame.K_t:
                                             paused = False
+                        #if event.key == pygame.K_e:
+                            #if in merchant.radius:
+                                #paused = True
+                                #while paused:
+                                    #for event in pygame.event.get():
+                                        #if event.type == pygame.QUIT: sys.exit()
+                                        #if event.type == pygame.KEYDOWN:
+                                            #if event.key == pygame.K_t:
+                                                #paused = False
                         #for facing directions
                         if event.key == pygame.K_UP:
                             pb.face("face up")
@@ -255,10 +267,11 @@ while True:
                 if bullet:
                     if bulletMag > 0:
                         bulletMag -= 1
-                        print bulletMag
                         if boltPower == True:
                             print 'yes'
-                            pb.shoot(False)         
+                            pb.shoot(False)  
+                if bulletMag == 0:
+                    shooting = False
             
             
             playerHitMobs = pygame.sprite.spritecollide(pb, mobs, False, pygame.sprite.collide_mask)   
@@ -337,7 +350,6 @@ while True:
             clock.tick(60)
             
         while not pb.alive:
-            bg = Background("PNG/backgrounds/endscreen.png")
             for s in all.sprites():
                 s.kill()
             hasPowers = []
@@ -369,14 +381,12 @@ while True:
                 
                                         if event.key == pygame.K_t:
                                             paused = False
-               
                     
             dirty = all.draw(screen)
             pygame.display.update(dirty)
             pygame.display.flip()
             clock.tick(60)
-            bg = Background("PNG/backgrounds/endscreen.png")
-            bg.kill()    
+
     while mode == "victory":
         bg.kill()
         bg = Background("PNG/backgrounds/winendgame.png")
