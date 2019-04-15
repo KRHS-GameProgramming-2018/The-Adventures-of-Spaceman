@@ -193,14 +193,13 @@ while True:
                     
 
                     if event.axis == 0:
-                        if event.value > .7:
+                        if event.value > .9:
                             pb.go("go right")
-                            
                         elif event.value > 0: 
                             pb.go("s right")
                             pb.go("s left")
                             pb.speed = 0
-                        elif event.value > -.7:
+                        elif event.value > -.9:
                             pb.go("s left")
                             pb.go("s right")
                             pb.speed = 0
@@ -210,14 +209,13 @@ while True:
                             
                             
                     if event.axis == 1:
-                        if event.value > .7:
+                        if event.value > .9:
                             pb.go("go down")
-                                
                         elif event.value > 0: 
                             pb.go("s down")
                             pb.go("s up")
                             pb.speed = 0
-                        elif event.value > -.7:
+                        elif event.value > -.9:
                             pb.go("s up")
                             pb.go("s down")
                             pb.speed = 0
