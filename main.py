@@ -339,7 +339,8 @@ while True:
                 
                     
             for mob in mobs.sprites():
-                if mob.kind == "greenie" and len(mobs.sprites()) < 20:
+                #~ MOB LIMIT
+                if mob.kind == "greenie" and len(mobs.sprites()) < 15:
                     if mob.checkDuplicate():
                         mob.duplicate()
             
