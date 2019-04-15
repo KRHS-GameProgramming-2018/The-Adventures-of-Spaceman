@@ -37,7 +37,7 @@ class SpaceZombie(Mob):
         self.goal = [0,0]
         self.directMove()
         
-        self.lives = 6
+        self.lives = 3
         
     def setPos(self, pos):
         self.rect.center = pos0
