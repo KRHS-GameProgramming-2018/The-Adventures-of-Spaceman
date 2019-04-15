@@ -103,6 +103,7 @@ while True:
 
         while pb.alive:
             for event in pygame.event.get():
+                #print event
                 if event.type == pygame.QUIT:
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
@@ -193,13 +194,9 @@ while True:
                     
 
                     if event.axis == 0:
-                        if event.value > .9:
+                        if event.value > .7:
                             pb.go("go right")
-                        elif event.value > 0: 
-                            pb.go("s right")
-                            pb.go("s left")
-                            pb.speed = 0
-                        elif event.value > -.9:
+                        elif event.value > -.7:
                             pb.go("s left")
                             pb.go("s right")
                             pb.speed = 0
@@ -209,13 +206,9 @@ while True:
                             
                             
                     if event.axis == 1:
-                        if event.value > .9:
+                        if event.value > .7:
                             pb.go("go down")
-                        elif event.value > 0: 
-                            pb.go("s down")
-                            pb.go("s up")
-                            pb.speed = 0
-                        elif event.value > -.9:
+                        elif event.value > -.7:
                             pb.go("s up")
                             pb.go("s down")
                             pb.speed = 0
@@ -301,7 +294,7 @@ while True:
             bulletsHitBlocks = pygame.sprite.groupcollide(bullets, blocks, True, False)
             
             playerHitBlocks = pygame.sprite.spritecollide(pb, blocks, False)
-            if len(playerHitBlocks) > 0: print len(playerHitBlocks)
+            #if len(playerHitBlocks) > 0: print len(playerHitBlocks)
             for block in playerHitBlocks:
                 if pb.collide(block):
                     if block.kind == "warp":
