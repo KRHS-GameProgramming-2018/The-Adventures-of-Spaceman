@@ -68,6 +68,10 @@ shooting = False
 
 startTime = time.clock()
 
+
+isX = False;
+isY = False;
+
 while True:
     bg = Background ("PNG/backgrounds/Title.png")
     while mode == "menu":
@@ -196,24 +200,30 @@ while True:
                     if event.axis == 0:
                         if event.value > .7:
                             pb.go("go right")
-                        elif event.value > -.7:
+                           # isX = True
+                        elif event.value >= -.7:
                             pb.go("s left")
                             pb.go("s right")
                             pb.speed = 0
-                        else:
+                           # isX = False
+                        elif event.value < -.7:
                             pb.go("go left")
+                          #  isX = True
                            
                             
                             
                     if event.axis == 1:
                         if event.value > .7:
                             pb.go("go down")
-                        elif event.value > -.7:
+                        #    isY = True
+                        elif event.value >= -.7:
                             pb.go("s up")
                             pb.go("s down")
                             pb.speed = 0
-                        else:
+                           # isY = False
+                        elif event.value < -.7:
                             pb.go("go up")
+                           # isY = True
                                 
                     
                     if not event.axis == 3:
