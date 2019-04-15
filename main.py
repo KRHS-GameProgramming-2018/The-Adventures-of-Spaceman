@@ -54,7 +54,7 @@ Background.containers = (all)
 
 hasPowers = []
 boltPower = False
-levelnum = 1
+levelnum = 0
 
 #blocks = level["blocks"]
 #mobs = level["enemies"]
