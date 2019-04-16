@@ -7,4 +7,7 @@ class Block(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center=pos)
         self.radius = (self.rect.width/2 + self.rect.height/2)/2
         self.kind = "block"
+    
+    def update(*args):
+            pass
 

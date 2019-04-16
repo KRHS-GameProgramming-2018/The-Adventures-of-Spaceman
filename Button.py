@@ -63,4 +63,7 @@ class Button():
             self.image = self.clickImage
         else:
             self.image = self.basicImage
+            
+    def update(*args):
+            pass
 
