@@ -54,7 +54,7 @@ Background.containers = (all)
 
 hasPowers = []
 boltPower = False
-levelnum = 0
+levelnum = 1
 
 #blocks = level["blocks"]
 #mobs = level["enemies"]
@@ -75,8 +75,6 @@ isY = False;
 while True:
     bg = Background ("PNG/backgrounds/Title.png")
     while mode == "menu":
-        
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -104,6 +102,7 @@ while True:
         bg = Background("PNG/backgrounds/Black.png")
         level = loadLevel("Levels/1.lvl")
         pb = Player(3, level["player"], hasPowers) 
+        HUD = GameDisplay(size, bulletMag, pb.lives)
 
         while pb.alive:
             for event in pygame.event.get():
@@ -114,6 +113,7 @@ while True:
                         if event.key == pygame.K_ESCAPE:
                             sys.exit()
                         if event.key == pygame.K_t:
+                            pb.keys = []
                             paused = True
                             while paused:
                                 for event in pygame.event.get():
@@ -317,6 +317,7 @@ while True:
                             bg = Background("PNG/backgrounds/Black.png")
                             level = loadLevel("Levels/"+str(levelnum)+".lvl")
                             pb = Player(3, level["player"], hasPowers)
+                            HUD = GameDisplay(size, bulletMag, pb.lives)
                             print levelnum
                             #blocks = level["blocks"]
                             #mobs = level["enemies"]
@@ -371,6 +372,7 @@ while True:
                             #mobs = level["enemies"]
                             #powerUps = level["power-ups"]
                             pb = Player(3, level["player"], hasPowers)
+                            HUD = GameDisplay(size, bulletMag, pb.lives)
                             bulletMag = 12
                         if event.key == pygame.K_ESCAPE:
                             sys.exit()

@@ -109,8 +109,8 @@ class Imposter(Mob):
         self.rect = self.rect.move(self.speed)
             
     def update(*args):
-        self = arg[0]
-        size = arg[1]
+        self = args[0]
+        size = args[1]
         pCenter = arg[2]
         self.didBounceX = False
         self.didBounceY = False
