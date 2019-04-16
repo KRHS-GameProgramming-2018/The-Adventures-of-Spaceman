@@ -101,7 +101,10 @@ class Greenie(Mob):
         self.rect = self.rect.move([16,0])
         return Greenie(self.maxspeed, [self.rect.centerx - 16, self.rect.centery], self.time + 1)
         
-    def update(self, size, pCenter):
+    def update(*args):
+        self = args[0]
+        size = args[1]
+        pCenter = args[2]
         Mob.update(self, size, pCenter)
         if not self.canDuplicate:
             if self.duplicateTimer < self.duplicateTimerMax:

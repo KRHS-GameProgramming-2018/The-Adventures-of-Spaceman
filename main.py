@@ -52,11 +52,9 @@ HUD.containers = (HUD, all)
 Player.containers = (all)
 Background.containers = (all)
 
-
-
 hasPowers = []
 boltPower = False
-levelnum = 1
+levelnum = 0
 
 #blocks = level["blocks"]
 #mobs = level["enemies"]
@@ -69,6 +67,10 @@ mode = "menu"
 shooting = False
 
 startTime = time.clock()
+
+
+isX = False;
+isY = False;
 
 while True:
     bg = Background ("PNG/backgrounds/Title.png")
@@ -105,6 +107,7 @@ while True:
 
         while pb.alive:
             for event in pygame.event.get():
+                #print event
                 if event.type == pygame.QUIT:
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
@@ -175,6 +178,7 @@ while True:
                             shooting = False
                 
                 if event.type == pygame.JOYAXISMOTION:
+                    
                     if event.axis == 3:
                         if event.value > .85:
                             pb.face("face down")
@@ -196,34 +200,30 @@ while True:
                     if event.axis == 0:
                         if event.value > .7:
                             pb.go("go right")
-                            
-                        elif event.value > 0: 
-                            pb.go("s right")
-                            pb.go("s left")
-                            pb.speed = 0
-                        elif event.value > -.7:
+                           # isX = True
+                        elif event.value >= -.7:
                             pb.go("s left")
                             pb.go("s right")
                             pb.speed = 0
-                        else:
+                           # isX = False
+                        elif event.value < -.7:
                             pb.go("go left")
+                          #  isX = True
                            
                             
                             
                     if event.axis == 1:
                         if event.value > .7:
                             pb.go("go down")
-                            
-                        elif event.value > 0: 
-                            pb.go("s down")
-                            pb.go("s up")
-                            pb.speed = 0
-                        elif event.value > -.7:
+                        #    isY = True
+                        elif event.value >= -.7:
                             pb.go("s up")
                             pb.go("s down")
                             pb.speed = 0
-                        else:
+                           # isY = False
+                        elif event.value < -.7:
                             pb.go("go up")
+                           # isY = True
                                 
                     
                     if not event.axis == 3:
@@ -303,7 +303,8 @@ while True:
                     
             bulletsHitBlocks = pygame.sprite.groupcollide(bullets, blocks, True, False)
             
-            playerHitBlocks = pygame.sprite.spritecollide(pb, blocks, False)   
+            playerHitBlocks = pygame.sprite.spritecollide(pb, blocks, False)
+            #if len(playerHitBlocks) > 0: print len(playerHitBlocks)
             for block in playerHitBlocks:
                 if pb.collide(block):
                     if block.kind == "warp":
@@ -323,7 +324,7 @@ while True:
                             #bullets = []
                             #add delay here
             
-            all.update(size, pb.rect.center)
+            all.update(size, pb.rect.center, pb.lives, bulletMag)
                    
                     
             boltPower = False
@@ -338,7 +339,8 @@ while True:
                 
                     
             for mob in mobs.sprites():
-                if mob.kind == "greenie" and len(mobs.sprites()) < 20:
+                #~ MOB LIMIT
+                if mob.kind == "greenie" and len(mobs.sprites()) < 15:
                     if mob.checkDuplicate():
                         mob.duplicate()
             

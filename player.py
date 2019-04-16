@@ -111,36 +111,39 @@ class Player(Mob):
                 
         
     def collide(self, other):
-        if not self.invincible and (other.kind == "enemy" or other.kind == "greenie" or other.kind == "imposter"):
+        if not self.invincible and (other.kind == "enemy" or other.kind == "greenie" or other.kind == "imposter"): #get hurt
             self.lives += -1
             print self.lives
             self.invincible = True
             if self.lives == 0:
                 self.alive = False
+       
+        diffx = abs(self.rect.centerx - other.rect.centerx)
+        diffy = abs(self.rect.centery - other.rect.centery)
+        
+        if diffx > diffy:
+            if not self.didBounceX:
+                self.speedx = -self.speedx
+                y = self.speedy
+                self.speedy = 0
+                self.move()
+                self.didBounceX = True
+                self.speedx = 0
+                self.speedy = y
+
         else:
-            self.speedx = -self.speedx
-            self.speedy = -self.speedy
-            self.move()
-            self.speedx = 0
-            self.didBounceX = True
-            self.speedy = 0
-            self.didBounceY = True
-            
-            return True
-        return False
+            if not self.didBounceY:
+                self.speedy = -self.speedy
+                x = self.speedx
+                self.speedx = 0
+                self.move()
+                self.didBounceY = True
+                self.speedy = 0
+                self.speedx = x
+        return True
     
-    def bounceBlock(self, other):
-        if self.rect.left < other.rect.right or self.rect.right > other.rect.left:
-            if self.rect.top < other.rect.bottom or self.rect.bottom > other.rect.top:
-                if other.kind == "block":
-                    if not self.didBounceX:
-                        self.speedx = -self.speedx
-                        self.didBounceX = True
-                    if not self.didBounceY:
-                        self.speedy = -self.speedy
-                        self.didBounceY = True
-                return True
-        return False
+   
+    
     
     def facingDirection(self):
         if self.images == self.downImages or self.images == self.notMoving:
@@ -178,7 +181,9 @@ class Player(Mob):
             
             
             
-    def update(self, size, pos):
+    def update(*args):
+        self = args[0]
+        size = args[1]
         self.didBounceX = False
         self.didBounceY = False
         self.move()
