@@ -121,15 +121,18 @@ while True:
                                     if event.type == pygame.KEYDOWN:
                                         if event.key == pygame.K_t:
                                             paused = False
-                        #if event.key == pygame.K_e:
-                            #if in merchant.radius:
-                                #paused = True
-                                #while paused:
-                                    #for event in pygame.event.get():
-                                        #if event.type == pygame.QUIT: sys.exit()
-                                        #if event.type == pygame.KEYDOWN:
-                                            #if event.key == pygame.K_t:
-                                                #paused = False
+                    ###~PLAYER MERCHANT INERACTION~###
+                        if event.key == pygame.K_e:
+                            for mob in mobs:
+                                if mob.kind == "merchant":
+                                    if mob.checkPlayer(pb.rect.center):
+                                        paused = True
+                                        while paused:
+                                            for event in pygame.event.get():
+                                                if event.type == pygame.QUIT: sys.exit()
+                                                if event.type == pygame.KEYDOWN:
+                                                    if event.key == pygame.K_e:
+                                                        paused = False
                         #for facing directions
                         if event.key == pygame.K_UP:
                             pb.face("face up")
@@ -278,6 +281,7 @@ while True:
             playerHitMobs = pygame.sprite.spritecollide(pb, mobs, False, pygame.sprite.collide_mask)   
             for mob in playerHitMobs:
                 pb.collide(mob)
+                mob.collide(pb)
                      
             
             bulletsHitMobs = pygame.sprite.groupcollide(bullets, mobs, True, False, pygame.sprite.collide_mask)
@@ -300,6 +304,8 @@ while True:
             for mob in mobsHitBlocks:
                 for block in mobsHitBlocks[mob]:
                     mob.collide(block)
+                    mob.bounceBlock(block)
+                    
                     
             bulletsHitBlocks = pygame.sprite.groupcollide(bullets, blocks, True, False)
             

@@ -43,11 +43,11 @@ def loadLevel(levelFile):
             if character == "%":
                 level["player"] = [x*50+25, y*50+25]
             if character == 'x':
-                level["enemies"] += [SpaceZombie(4, [x*50+25, y*50+25])]
+                level["enemies"] += [SpaceZombie(3, [x*50+25, y*50+25])]
             if character == 'm':
                 level["enemies"] += [Imposter(1.5, [x*50+25, y*50+25])]
             if character == 'g':
-                level["enemies"] += [Greenie(3, [x*50+25, y*50+25])]
+                level["enemies"] += [Greenie(2, [x*50+25, y*50+25])]
             if character == '$':
                 level["merchant"] += [Merchant(0, [x*50+25, y*50+25])]
             if character == '!':

@@ -88,7 +88,6 @@ class Mob(pygame.sprite.Sprite):
             
     def collide(self, other):
         self.speedx = -self.speedx
-        
         self.speedy = -self.speedy
         self.move()
         self.speedx = 0
