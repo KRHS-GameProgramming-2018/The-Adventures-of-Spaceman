@@ -73,3 +73,9 @@ class Merchant(Mob):
         # ~ print self.rect.center
         self.directMove(pCenter)
         self.animate()
+        
+    def checkPlayer(self, point):
+        if self.getDist(point) < self.detectionRadius:
+            return True
+        else:
+            return False
