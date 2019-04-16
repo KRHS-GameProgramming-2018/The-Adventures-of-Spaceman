@@ -181,7 +181,9 @@ class Player(Mob):
             
             
             
-    def update(self, size, pos):
+    def update(*args):
+        self = args[0]
+        size = args[1]
         self.didBounceX = False
         self.didBounceY = False
         self.move()
