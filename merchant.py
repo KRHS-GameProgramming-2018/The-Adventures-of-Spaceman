@@ -66,7 +66,10 @@ class Merchant(Mob):
             elif self.compass == 3:
                 self.images = self.leftImages
                 
-    def update(self, size, pCenter):
+    def update(*arg):
+        self = arg[0]
+        size = arg[1]
+        pCenter = arg[2]
         # ~ print self.rect.center
         self.directMove(pCenter)
         self.animate()

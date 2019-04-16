@@ -314,7 +314,7 @@ while True:
                             #bullets = []
                             #add delay here
             
-            all.update(size, pb.rect.center)
+            all.update(size, pb.rect.center, pb.lives, bulletMag)
                    
                     
             boltPower = False
