@@ -54,7 +54,7 @@ Background.containers = (all)
 
 hasPowers = []
 boltPower = False
-levelnum = 0
+levelnum = 1
 
 #blocks = level["blocks"]
 #mobs = level["enemies"]
@@ -281,6 +281,7 @@ while True:
             playerHitMobs = pygame.sprite.spritecollide(pb, mobs, False, pygame.sprite.collide_mask)   
             for mob in playerHitMobs:
                 pb.collide(mob)
+                mob.collide(pb)
                      
             
             bulletsHitMobs = pygame.sprite.groupcollide(bullets, mobs, True, False, pygame.sprite.collide_mask)
@@ -303,6 +304,8 @@ while True:
             for mob in mobsHitBlocks:
                 for block in mobsHitBlocks[mob]:
                     mob.collide(block)
+                    mob.bounceBlock(block)
+                    
                     
             bulletsHitBlocks = pygame.sprite.groupcollide(bullets, blocks, True, False)
             
@@ -327,7 +330,7 @@ while True:
                             #bullets = []
                             #add delay here
             
-            all.update(size, pb.rect.center)
+            all.update(size, pb.rect.center, pb.lives, bulletMag)
                    
                     
             boltPower = False

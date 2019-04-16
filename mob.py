@@ -47,7 +47,10 @@ class Mob(pygame.sprite.Sprite):
                 
             self.image = self.images[self.frame]
             
-    def update(self, size, pCenter):
+    def update(*args):
+        self = args[0]
+        size = args[1]
+        pCenter = args[2]
         # ~ print self.rect.center
         self.didBounceX = False
         self.didBounceY = False
@@ -85,7 +88,6 @@ class Mob(pygame.sprite.Sprite):
             
     def collide(self, other):
         self.speedx = -self.speedx
-        
         self.speedy = -self.speedy
         self.move()
         self.speedx = 0
