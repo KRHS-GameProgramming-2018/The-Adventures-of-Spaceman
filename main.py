@@ -35,7 +35,7 @@ mobs = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
 blocks = pygame.sprite.Group()
 powerUps = pygame.sprite.Group()
-HUD = pygame.sprite.Group()
+hud = pygame.sprite.Group()
 all = pygame.sprite.OrderedUpdates()
 
 SpaceZombie.containers = (mobs, all)
@@ -48,7 +48,7 @@ Warp.containers = (blocks, all)
 speedBoost.containers = (powerUps, all)
 boltPower.containers = (powerUps, all)
 healthUp.containers = (powerUps, all)
-HUD.containers = (HUD, all)
+GameDisplay.containers = (hud, all)
 Player.containers = (all)
 Background.containers = (all)
 
@@ -102,7 +102,7 @@ while True:
         bg = Background("PNG/backgrounds/Black.png")
         level = loadLevel("Levels/1.lvl")
         pb = Player(3, level["player"], hasPowers) 
-        HUD = GameDisplay(size, bulletMag, pb.lives)
+        GameDisplay(size, bulletMag, pb.lives)
 
         while pb.alive:
             for event in pygame.event.get():
@@ -324,7 +324,7 @@ while True:
                             bg = Background("PNG/backgrounds/Black.png")
                             level = loadLevel("Levels/"+str(levelnum)+".lvl")
                             pb = Player(3, level["player"], hasPowers)
-                            HUD = GameDisplay(size, bulletMag, pb.lives)
+                            GameDisplay(size, bulletMag, pb.lives)
                             print levelnum
                             #blocks = level["blocks"]
                             #mobs = level["enemies"]
@@ -379,7 +379,7 @@ while True:
                             #mobs = level["enemies"]
                             #powerUps = level["power-ups"]
                             pb = Player(3, level["player"], hasPowers)
-                            HUD = GameDisplay(size, bulletMag, pb.lives)
+                            GameDisplay(size, bulletMag, pb.lives)
                             bulletMag = 12
                         if event.key == pygame.K_ESCAPE:
                             sys.exit()
