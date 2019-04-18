@@ -202,6 +202,7 @@ while True:
 
                     if event.axis == 0:
                         if event.value > .7:
+                            pb.speed = (event.value + 1)**3
                             pb.go("go right")
                            # isX = True
                         elif event.value >= -.7:
@@ -217,6 +218,7 @@ while True:
                             
                     if event.axis == 1:
                         if event.value > .7:
+                            
                             pb.go("go down")
                         #    isY = True
                         elif event.value >= -.7:
