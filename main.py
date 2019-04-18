@@ -54,7 +54,7 @@ Background.containers = (all)
 
 hasPowers = []
 boltPower = False
-levelnum = 0
+levelnum = 1
 
 #blocks = level["blocks"]
 #mobs = level["enemies"]
@@ -75,8 +75,6 @@ isY = False;
 while True:
     bg = Background ("PNG/backgrounds/Title.png")
     while mode == "menu":
-        
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -104,6 +102,7 @@ while True:
         bg = Background("PNG/backgrounds/Black.png")
         level = loadLevel("Levels/1.lvl")
         pb = Player(3, level["player"], hasPowers) 
+        HUD = GameDisplay(size, bulletMag, pb.lives)
 
         while pb.alive:
             for event in pygame.event.get():
@@ -114,6 +113,7 @@ while True:
                         if event.key == pygame.K_ESCAPE:
                             sys.exit()
                         if event.key == pygame.K_t:
+                            pb.keys = []
                             paused = True
                             while paused:
                                 for event in pygame.event.get():
@@ -121,15 +121,18 @@ while True:
                                     if event.type == pygame.KEYDOWN:
                                         if event.key == pygame.K_t:
                                             paused = False
-                        #if event.key == pygame.K_e:
-                            #if in merchant.radius:
-                                #paused = True
-                                #while paused:
-                                    #for event in pygame.event.get():
-                                        #if event.type == pygame.QUIT: sys.exit()
-                                        #if event.type == pygame.KEYDOWN:
-                                            #if event.key == pygame.K_t:
-                                                #paused = False
+                    ###~PLAYER MERCHANT INERACTION~###
+                        if event.key == pygame.K_e:
+                            for mob in mobs:
+                                if mob.kind == "merchant":
+                                    if mob.checkPlayer(pb.rect.center):
+                                        paused = True
+                                        while paused:
+                                            for event in pygame.event.get():
+                                                if event.type == pygame.QUIT: sys.exit()
+                                                if event.type == pygame.KEYDOWN:
+                                                    if event.key == pygame.K_e:
+                                                        paused = False
                         #for facing directions
                         if event.key == pygame.K_UP:
                             pb.face("face up")
@@ -278,6 +281,7 @@ while True:
             playerHitMobs = pygame.sprite.spritecollide(pb, mobs, False, pygame.sprite.collide_mask)   
             for mob in playerHitMobs:
                 pb.collide(mob)
+                mob.collide(pb)
                      
             
             bulletsHitMobs = pygame.sprite.groupcollide(bullets, mobs, True, False, pygame.sprite.collide_mask)
@@ -300,6 +304,9 @@ while True:
             for mob in mobsHitBlocks:
                 for block in mobsHitBlocks[mob]:
                     mob.collide(block)
+                    mob.bounceBlock(block)
+                    
+                    
                     
             bulletsHitBlocks = pygame.sprite.groupcollide(bullets, blocks, True, False)
             
@@ -317,6 +324,7 @@ while True:
                             bg = Background("PNG/backgrounds/Black.png")
                             level = loadLevel("Levels/"+str(levelnum)+".lvl")
                             pb = Player(3, level["player"], hasPowers)
+                            HUD = GameDisplay(size, bulletMag, pb.lives)
                             print levelnum
                             #blocks = level["blocks"]
                             #mobs = level["enemies"]
@@ -371,6 +379,7 @@ while True:
                             #mobs = level["enemies"]
                             #powerUps = level["power-ups"]
                             pb = Player(3, level["player"], hasPowers)
+                            HUD = GameDisplay(size, bulletMag, pb.lives)
                             bulletMag = 12
                         if event.key == pygame.K_ESCAPE:
                             sys.exit()
@@ -389,8 +398,8 @@ while True:
             pygame.display.flip()
             clock.tick(60)
 
+    
     while mode == "victory":
-        bg.kill()
         bg = Background("PNG/backgrounds/winendgame.png")
         for event in pygame.event.get():
                     #print event.type
