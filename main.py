@@ -304,6 +304,7 @@ while True:
                     mob.bounceBlock(block)
                     
                     
+                    
             bulletsHitBlocks = pygame.sprite.groupcollide(bullets, blocks, True, False)
             
             playerHitBlocks = pygame.sprite.spritecollide(pb, blocks, False)
@@ -392,8 +393,8 @@ while True:
             pygame.display.flip()
             clock.tick(60)
 
+    
     while mode == "victory":
-        bg.kill()
         bg = Background("PNG/backgrounds/winendgame.png")
         for event in pygame.event.get():
                     #print event.type
