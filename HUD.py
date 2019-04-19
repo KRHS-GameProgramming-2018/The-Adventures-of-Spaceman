@@ -1,5 +1,5 @@
 import pygame, sys, math
-
+from main import *
 
 #HealthBar and Power Ups 
 class GameDisplay(pygame.sprite.Sprite):
@@ -12,12 +12,32 @@ class GameDisplay(pygame.sprite.Sprite):
                        pygame.image.load("PNG/backgrounds/spacemansheart5.png"),
                        pygame.image.load("PNG/backgrounds/spacemansheart6.png")
                        ]
-        self.HealthImage = self.HealthImages[lives]
-        self.Healthrect = self.image.get_rect(center=[175,775])
+        self.healthImage = self.healthImages[lives]
+        self.healthrect = self.healthImage.get_rect(center=[175,775])
         
-        self.BulletImage = [pygame.image.load("PNG/Bolt/bulletmag"+str(bullets)+".png")]
-       # self.BulletImage = self.BulletImages[bullets - 1]
-        self.Bulletrect = self.image.get_rect(center=[770,265])
+        self.BulletImages = [pygame.image.load("PNG/Bolt/bulletmag0.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag1.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag2.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag3.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag4.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag5.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag6.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag7.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag8.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag9.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag10.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag11.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag12.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag13.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag14.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag15.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag16.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag17.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag18.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag19.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag20.png")]
+        self.BulletImage = self.BulletImages[bullets - 1]
+        self.BulletRect = self.BulletImage.get_rect(center=[770,265])
         
         
     def update(*args):
@@ -29,5 +49,6 @@ class GameDisplay(pygame.sprite.Sprite):
         if lives > 6:
             lives = 6
         self.healthImage = self.healthImages[lives-1]
+        self.BulletImage = [pygame.image.load("PNG/Bolt/bulletmag"+str(bullets)+".png")]
 
         pass
