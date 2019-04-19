@@ -13,7 +13,7 @@ class GameDisplay(pygame.sprite.Sprite):
                        pygame.image.load("PNG/backgrounds/spacemansheart6.png")
                        ]
         self.healthImage = self.healthImages[lives]
-        self.rect = self.image.get_rect(center=[175,775])
+        self.rect = self.healthImage.get_rect(center=[175,775])
         
         
         
@@ -25,9 +25,6 @@ class GameDisplay(pygame.sprite.Sprite):
         
         if lives > 6:
             lives = 6
-        self.HealthImage = self.HealthImages[lives-1]
-        if bullets > 20:
-            bullets = 20
-        self.BulletImage = self.BulletImages[bullets-1]
+        self.healthImage = self.healthImages[lives-1]
 
         pass
