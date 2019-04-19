@@ -12,9 +12,12 @@ class GameDisplay(pygame.sprite.Sprite):
                        pygame.image.load("PNG/backgrounds/spacemansheart5.png"),
                        pygame.image.load("PNG/backgrounds/spacemansheart6.png")
                        ]
-        self.healthImage = self.healthImages[lives]
-        self.rect = self.healthImage.get_rect(center=[175,775])
+        self.HealthImage = self.HealthImages[lives]
+        self.Healthrect = self.image.get_rect(center=[175,775])
         
+        self.BulletImage = [pygame.image.load("PNG/Bolt/bulletmag"+str(bullets)+".png")]
+       # self.BulletImage = self.BulletImages[bullets - 1]
+        self.Bulletrect = self.image.get_rect(center=[770,265])
         
         
     def update(*args):
