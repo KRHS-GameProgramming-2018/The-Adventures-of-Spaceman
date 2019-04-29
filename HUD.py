@@ -33,7 +33,6 @@ class GameDisplay(pygame.sprite.Sprite):
                              pygame.image.load("PNG/Bolt/bulletmag15.png"),
                              pygame.image.load("PNG/Bolt/bulletmag16.png"),
                              pygame.image.load("PNG/Bolt/bulletmag17.png"),
-                             pygame.image.load("PNG/Bolt/bulletmag18.png"),
                              pygame.image.load("PNG/Bolt/bulletmag19.png"),
                              pygame.image.load("PNG/Bolt/bulletmag20.png")]
         self.BulletImage = self.BulletImages[bullets - 1]

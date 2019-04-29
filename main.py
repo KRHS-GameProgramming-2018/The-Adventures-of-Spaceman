@@ -10,7 +10,7 @@ from Button import *
 from Background import *
 
 from warp import *
-from HUD import *
+from Lifebar import *
 
 from boltPower import *
 from healthUp import *
@@ -48,7 +48,7 @@ Warp.containers = (blocks, all)
 speedBoost.containers = (powerUps, all)
 boltPower.containers = (powerUps, all)
 healthUp.containers = (powerUps, all)
-GameDisplay.containers = (hud, all)
+Lifebar.containers = (hud, all)
 Player.containers = (all)
 Background.containers = (all)
 
@@ -102,7 +102,7 @@ while True:
         bg = Background("PNG/backgrounds/Black.png")
         level = loadLevel("Levels/1.lvl")
         pb = Player(3, level["player"], hasPowers) 
-        GameDisplay(size, bulletMag, pb.lives)
+        Lifebar(size, bulletMag, pb.lives)
 
 
         while pb.alive:
@@ -267,7 +267,7 @@ while True:
                             
                 if event.type == pygame.JOYBUTTONDOWN:
                     if event.button == 2:
-                        bulletMag = 12
+                        bulletMag = 20
                     
             if shooting:
                 bullet = pb.shoot()
