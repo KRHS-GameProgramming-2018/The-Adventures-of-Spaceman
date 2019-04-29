@@ -11,7 +11,7 @@ from Background import *
 
 from warp import *
 from Lifebar import *
-
+from magazine import *
 from boltPower import *
 from healthUp import *
 from speedBoost import *
@@ -49,6 +49,7 @@ speedBoost.containers = (powerUps, all)
 boltPower.containers = (powerUps, all)
 healthUp.containers = (powerUps, all)
 Lifebar.containers = (hud, all)
+magazine.containers = (hud, all)
 Player.containers = (all)
 Background.containers = (all)
 
@@ -102,7 +103,7 @@ while True:
         bg = Background("PNG/backgrounds/Black.png")
         level = loadLevel("Levels/1.lvl")
         pb = Player(3, level["player"], hasPowers) 
-        Lifebar(size, bulletMag, pb.lives)
+        Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")
 
 
         while pb.alive:
@@ -327,7 +328,10 @@ while True:
                             bg = Background("PNG/backgrounds/Black.png")
                             level = loadLevel("Levels/"+str(levelnum)+".lvl")
                             pb = Player(3, level["player"], hasPowers)
-                            GameDisplay(size, bulletMag, pb.lives)
+							magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png")
+                            Lifebar(size, pb.lives, "PNG/backgrounds/spacemansheart.png")
+                   
+
                             print levelnum
                             #blocks = level["blocks"]
                             #mobs = level["enemies"]
@@ -354,8 +358,6 @@ while True:
                 if mob.kind == "greenie" and len(mobs.sprites()) < 15:
                     if mob.checkDuplicate():
                         mob.duplicate()
-            
-            
                 
             dirty = all.draw(screen)
             pygame.display.update(dirty)
@@ -376,13 +378,16 @@ while True:
                 if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_RETURN:
                             levelnum = 1
-                            #bullets = []
+                            bullets = []
                             level = loadLevel("Levels/"+str(levelnum)+".lvl")
-                            #blocks = level["blocks"]
-                            #mobs = level["enemies"]
-                            #powerUps = level["power-ups"]
+                            blocks = level["blocks"]
+                            mobs = level["enemies"]
+                            powerUps = level["power-ups"]
                             pb = Player(3, level["player"], hasPowers)
-                            GameDisplay(size, bulletMag, pb.lives)
+
+                            magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png")
+                            Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")
+
                             bulletMag = 20
                         if event.key == pygame.K_ESCAPE:
                             sys.exit()
