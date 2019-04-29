@@ -10,7 +10,7 @@ from Button import *
 from Background import *
 
 from warp import *
-from Lifebar import *
+#from Lifebar import *
 
 from boltPower import *
 from healthUp import *
@@ -48,7 +48,7 @@ Warp.containers = (blocks, all)
 speedBoost.containers = (powerUps, all)
 boltPower.containers = (powerUps, all)
 healthUp.containers = (powerUps, all)
-Lifebar.containers = (hud, all)
+#Lifebar.containers = (hud, all)
 Player.containers = (all)
 Background.containers = (all)
 
@@ -102,7 +102,7 @@ while True:
         bg = Background("PNG/backgrounds/Black.png")
         level = loadLevel("Levels/1.lvl")
         pb = Player(3, level["player"], hasPowers) 
-        Lifebar(size, bulletMag, pb.lives)
+        #Lifebar(size, bulletMag, pb.lives)
 
         while pb.alive:
             for event in pygame.event.get():
@@ -326,7 +326,7 @@ while True:
                             bg = Background("PNG/backgrounds/Black.png")
                             level = loadLevel("Levels/"+str(levelnum)+".lvl")
                             pb = Player(3, level["player"], hasPowers)
-                            GameDisplay(size, bulletMag, pb.lives)
+                            #GameDisplay(size, bulletMag, pb.lives)
                             print levelnum
                             #blocks = level["blocks"]
                             #mobs = level["enemies"]
