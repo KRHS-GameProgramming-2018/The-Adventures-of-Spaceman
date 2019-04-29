@@ -4,7 +4,7 @@ import pygame, sys, math
 #HealthBar and Power Ups 
 class magazine(pygame.sprite.Sprite):
     def __init__(self, bullets, lives):
-        pygame.sprite.Sprite.__init__(self, self.container)
+        pygame.sprite.Sprite.__init__(self, self.containers)
         
         self.images = [pygame.image.load("PNG/Bolt/bulletmag0.png"),
                              pygame.image.load("PNG/Bolt/bulletmag1.png"),

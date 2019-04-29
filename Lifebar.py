@@ -45,7 +45,7 @@ class Lifebar(pygame.sprite.Sprite):
         self = args[0]
         size = args[1]
         lives = args[3]
-        bullets = args[4]
+        # ~ bullets = args[4]
         
         if lives > 6:
             lives = 6
