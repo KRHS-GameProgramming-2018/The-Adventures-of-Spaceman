@@ -104,6 +104,7 @@ while True:
         pb = Player(3, level["player"], hasPowers) 
         Lifebar(size, bulletMag, pb.lives)
 
+
         while pb.alive:
             for event in pygame.event.get():
                 #print event
@@ -382,7 +383,7 @@ while True:
                             #powerUps = level["power-ups"]
                             pb = Player(3, level["player"], hasPowers)
                             GameDisplay(size, bulletMag, pb.lives)
-                            bulletMag = 12
+                            bulletMag = 20
                         if event.key == pygame.K_ESCAPE:
                             sys.exit()
                         if event.key == pygame.K_t:
