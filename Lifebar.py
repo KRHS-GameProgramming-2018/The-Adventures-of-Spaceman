@@ -3,7 +3,7 @@ import pygame, sys, math
 
 #HealthBar and Power Ups 
 class Lifebar(pygame.sprite.Sprite):
-    def __init__(self, size, bullets, lives):
+    def __init__(self, size, bullets, lives, image):
         pygame.sprite.Sprite.__init__(self, self.containers)
         self.healthImages = [pygame.image.load("PNG/backgrounds/spacemansheart.png"),
                        pygame.image.load("PNG/backgrounds/spacemansheart2.png"),
@@ -12,9 +12,8 @@ class Lifebar(pygame.sprite.Sprite):
                        pygame.image.load("PNG/backgrounds/spacemansheart5.png"),
                        pygame.image.load("PNG/backgrounds/spacemansheart6.png")
                        ]
-        self.healthImage = self.healthImages[lives]
-        self.healthrect = self.healthImage.get_rect(center=[175,775])
-        
+        self.image = self.healthImages[lives]
+        self.rect = self.image.get_rect(center=[175,775])
         # ~ self.BulletImages = [pygame.image.load("PNG/Bolt/bulletmag20.png"),
                             # ~ pygame.image.load("PNG/Bolt/bulletmag19.png"),
                             # ~ pygame.image.load("PNG/Bolt/bulletmag18.png"),
@@ -50,7 +49,7 @@ class Lifebar(pygame.sprite.Sprite):
         
         if lives > 6:
             lives = 6
-        self.healthImage = self.healthImages[lives-1]
+        self.image = self.healthImages[lives-1]
         
         # ~ if bullets > 20:
             # ~ lives = 20
