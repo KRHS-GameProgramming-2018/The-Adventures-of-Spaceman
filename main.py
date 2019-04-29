@@ -328,7 +328,7 @@ while True:
                             bg = Background("PNG/backgrounds/Black.png")
                             level = loadLevel("Levels/"+str(levelnum)+".lvl")
                             pb = Player(3, level["player"], hasPowers)
-                            Lifebar(size, pb.lives, "PNG/backgrounds/spacemansheart.png")
+                            Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")
                             magazine(size, bulletMag)
                             print levelnum
                             #blocks = level["blocks"]
