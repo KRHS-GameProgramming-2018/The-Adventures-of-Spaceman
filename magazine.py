@@ -3,19 +3,10 @@ import pygame, sys, math
 
 #HealthBar and Power Ups 
 class GameDisplay(pygame.sprite.Sprite):
-    def __init__(self, size, bullets, lives):
-        pygame.sprite.Sprite.__init__(self, self.containers)
-        self.healthImages = [pygame.image.load("PNG/backgrounds/spacemansheart.png"),
-                       pygame.image.load("PNG/backgrounds/spacemansheart2.png"),
-                       pygame.image.load("PNG/backgrounds/spacemansheart3.png"),
-                       pygame.image.load("PNG/backgrounds/spacemansheart4.png"),
-                       pygame.image.load("PNG/backgrounds/spacemansheart5.png"),
-                       pygame.image.load("PNG/backgrounds/spacemansheart6.png")
-                       ]
-        self.healthImage = self.healthImages[lives]
-        self.healthrect = self.healthImage.get_rect(center=[175,775])
+    def __init__(self, bullets, lives):
+        pygame.sprite.Sprite.__init__(self, self.container)
         
-        self.BulletImages = [pygame.image.load("PNG/Bolt/bulletmag0.png"),
+        self.images = [pygame.image.load("PNG/Bolt/bulletmag0.png"),
                              pygame.image.load("PNG/Bolt/bulletmag1.png"),
                              pygame.image.load("PNG/Bolt/bulletmag2.png"),
                              pygame.image.load("PNG/Bolt/bulletmag3.png"),
@@ -36,8 +27,8 @@ class GameDisplay(pygame.sprite.Sprite):
                              pygame.image.load("PNG/Bolt/bulletmag18.png"),
                              pygame.image.load("PNG/Bolt/bulletmag19.png"),
                              pygame.image.load("PNG/Bolt/bulletmag20.png")]
-        self.BulletImage = self.BulletImages[bullets - 1]
-        self.BulletRect = self.BulletImage.get_rect(center=[770,265])
+        self.image = self.images[bullets - 1]
+        self.rect = self.image.get_rect(center=[770,265])
         
         
     def update(*args):
@@ -52,3 +43,4 @@ class GameDisplay(pygame.sprite.Sprite):
         self.BulletImage = [pygame.image.load("PNG/Bolt/bulletmag"+str(bullets)+".png")]
 
         pass
+
