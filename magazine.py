@@ -2,7 +2,7 @@ import pygame, sys, math
 
 
 #HealthBar and Power Ups 
-class GameDisplay(pygame.sprite.Sprite):
+class magazine(pygame.sprite.Sprite):
     def __init__(self, bullets, lives):
         pygame.sprite.Sprite.__init__(self, self.container)
         

@@ -11,7 +11,7 @@ from Background import *
 
 from warp import *
 from Lifebar import *
-
+from magazine import *
 from boltPower import *
 from healthUp import *
 from speedBoost import *
@@ -49,6 +49,7 @@ speedBoost.containers = (powerUps, all)
 boltPower.containers = (powerUps, all)
 healthUp.containers = (powerUps, all)
 Lifebar.containers = (hud, all)
+magazine.containers = (hud, all)
 Player.containers = (all)
 Background.containers = (all)
 
@@ -354,8 +355,6 @@ while True:
                 if mob.kind == "greenie" and len(mobs.sprites()) < 15:
                     if mob.checkDuplicate():
                         mob.duplicate()
-            
-            
                 
             dirty = all.draw(screen)
             pygame.display.update(dirty)
