@@ -3,7 +3,7 @@ import pygame, sys, math
 
 #HealthBar and Power Ups 
 class magazine(pygame.sprite.Sprite):
-    def __init__(self, bullets, lives):
+    def __init__(self, bullets, lives, init):
         pygame.sprite.Sprite.__init__(self, self.containers)
         
         self.images = [pygame.image.load("PNG/Bolt/bulletmag0.png"),
@@ -37,10 +37,6 @@ class magazine(pygame.sprite.Sprite):
         lives = args[3]
         bullets = args[4]
         
-        if lives > 6:
-            lives = 6
-        self.healthImage = self.healthImages[lives-1]
-        self.BulletImage = [pygame.image.load("PNG/Bolt/bulletmag"+str(bullets)+".png")]
 
         pass
 

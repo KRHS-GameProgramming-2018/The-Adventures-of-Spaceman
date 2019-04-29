@@ -328,8 +328,10 @@ while True:
                             bg = Background("PNG/backgrounds/Black.png")
                             level = loadLevel("Levels/"+str(levelnum)+".lvl")
                             pb = Player(3, level["player"], hasPowers)
-                            Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")
-                            magazine(size, bulletMag)
+							magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png")
+                            Lifebar(size, pb.lives, "PNG/backgrounds/spacemansheart.png")
+                   
+
                             print levelnum
                             #blocks = level["blocks"]
                             #mobs = level["enemies"]
@@ -382,8 +384,10 @@ while True:
                             mobs = level["enemies"]
                             powerUps = level["power-ups"]
                             pb = Player(3, level["player"], hasPowers)
+
+                            magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png")
                             Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")
-                            magazine(size, bulletMag)
+
                             bulletMag = 20
                         if event.key == pygame.K_ESCAPE:
                             sys.exit()
