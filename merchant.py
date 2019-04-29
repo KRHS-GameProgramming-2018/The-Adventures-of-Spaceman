@@ -28,7 +28,7 @@ class Merchant(Mob):
         self.directMove()
     
         self.radius = (int(self.rect.height/2.0 + self.rect.width/2.0)/2) - 1
-        self.detectionRadius = 96
+        self.detectionRadius = 100
     
     def setPos(self, pos):
         self.rect.center = pos0
