@@ -3,7 +3,7 @@ import pygame, sys, math
 
 #HealthBar and Power Ups 
 class Lifebar(pygame.sprite.Sprite):
-    def __init__(self, size, lives):
+    def __init__(self, size, bullets, lives):
         pygame.sprite.Sprite.__init__(self, self.containers)
         self.healthImages = [pygame.image.load("PNG/backgrounds/spacemansheart.png"),
                        pygame.image.load("PNG/backgrounds/spacemansheart2.png"),
