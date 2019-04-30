@@ -387,196 +387,196 @@ while True:
                             mobs = level["enemies"]
                             powerUps = level["power-ups"]
                             pb = Player(3, level["player"], hasPowers)
+                if event.type == pygame.JOYAXISMOTION:            
+                    if event.axis == 0:
+                        if event.value > .7:
+                            pb.speed = (event.value + 1)**3
+                            pb.go("go right")
+                           # isX = True
+                        elif event.value >= -.7:
+                            pb.go("s left")
+                            pb.go("s right")
+                            pb.speed = 0
+                           # isX = False
+                        elif event.value < -.7:
+                            pb.go("go left")
+                          #  isX = True
+                           
+                            
+                            
+                    if event.axis == 1:
+                        if event.value > .7:
+                            
+                            pb.go("go down")
+                        #    isY = True
+                        elif event.value >= -.7:
+                            pb.go("s up")
+                            pb.go("s down")
+                            pb.speed = 0
+                           # isY = False
+                        elif event.value < -.7:
+                            pb.go("go up")
+                           # isY = True
+                                
+                    
+                    if not event.axis == 3:
+                        if event.value <.7:
+                            if event.value >0:
+                                if event.axis == 1:
+                                    if event.value > .7:
+                                        pb.face("face down")
+                        if event.value > -.7:
+                            if event.value <0:
+                                if event.axis == 1:                
+                                    if event.value < -.7:
+                                        pb.face("face up")
+                                        
+                    if not event.axis == 4:
+                        if event.value <.7:
+                            if event.value >0:
+                                if event.axis == 0:
+                                    if event.value > .7:
+                                        pb.face("face right")
+                        if event.value > -.7:
+                            if event.value <0:
+                                if event.axis == 1:                                
+                                    if event.value < -.7:
+                                        pb.face("face left")
+                                 
+                            
+                    
+                        
+                    if event.axis == 2:
+                        if event.value < -.3:
+                            shooting = True
+                        else:
+                            shooting = False
+                            
+                if event.type == pygame.JOYBUTTONDOWN:
+                    if event.button == 2:
+                        bulletMag = 20
+                        
+                    
+            if shooting:
+                bullet = pb.shoot()
+                if bullet:
+                    if bulletMag > 0:
+                        bulletMag -= 1
+                        print bulletMag
+                        
+                        if boltPower == True:
+                            print 'yes'
+                            pb.shoot(False)  
+                if bulletMag <= 0:
+                    shooting = False
+            
+            
+            playerHitMobs = pygame.sprite.spritecollide(pb, mobs, False, pygame.sprite.collide_mask)   
+            for mob in playerHitMobs:
+                pb.collide(mob)
+                mob.collide(pb)
+                     
+            
+            bulletsHitMobs = pygame.sprite.groupcollide(bullets, mobs, True, False, pygame.sprite.collide_mask)
+            for bullet in bulletsHitMobs:
+                for mob in bulletsHitMobs[bullet]:
+                    mob.collide(bullet)
+            
+            playerHitPowerUps = pygame.sprite.spritecollide(pb, powerUps, True, pygame.sprite.collide_mask)   
+            for power in playerHitPowerUps:
+                if pb.collide(power):
+                    hasPowers += [power.kind]
+                    print hasPowers
+                
+            mobsHitMobs = pygame.sprite.groupcollide(mobs, mobs, False, False, pygame.sprite.collide_mask)
+            for hitter in mobsHitMobs:
+                for hittee in mobsHitMobs[hitter]:
+                    hitter.collide(hittee)
+            
+            mobsHitBlocks = pygame.sprite.groupcollide(mobs, blocks, False, False)
+            for mob in mobsHitBlocks:
+                for block in mobsHitBlocks[mob]:
+                    mob.collide(block)
+                    mob.bounceBlock(block)
+                    
+                    
+                    
+            bulletsHitBlocks = pygame.sprite.groupcollide(bullets, blocks, True, False)
+            
+            playerHitBlocks = pygame.sprite.spritecollide(pb, blocks, False)
+            #if len(playerHitBlocks) > 0: print len(playerHitBlocks)
+            for block in playerHitBlocks:
+                if pb.collide(block):
+                    if block.kind == "warp":
+                        if levelnum == 10:
+                            mode = "victory"
+                        else:
+                            for s in all.sprites():
+                                s.kill()
+                            levelnum += 1
+                            bg = Background("PNG/backgrounds/Black.png")
+                            level = loadLevel("Levels/"+str(levelnum)+".lvl")
+                            pb = Player(3, level["player"], hasPowers)
+                            magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png")
+                            Lifebar(size, pb.lives, "PNG/backgrounds/spacemansheart.png")
+                   
 
-					if event.axis == 0:
-						if event.value > .7:
-							pb.speed = (event.value + 1)**3
-							pb.go("go right")
-						   # isX = True
-						elif event.value >= -.7:
-							pb.go("s left")
-							pb.go("s right")
-							pb.speed = 0
-						   # isX = False
-						elif event.value < -.7:
-							pb.go("go left")
-						  #  isX = True
-						   
-							
-							
-					if event.axis == 1:
-						if event.value > .7:
-							
-							pb.go("go down")
-						#    isY = True
-						elif event.value >= -.7:
-							pb.go("s up")
-							pb.go("s down")
-							pb.speed = 0
-						   # isY = False
-						elif event.value < -.7:
-							pb.go("go up")
-						   # isY = True
-								
-					
-					if not event.axis == 3:
-						if event.value <.7:
-							if event.value >0:
-								if event.axis == 1:
-									if event.value > .7:
-										pb.face("face down")
-						if event.value > -.7:
-							if event.value <0:
-								if event.axis == 1:                
-									if event.value < -.7:
-										pb.face("face up")
-										
-					if not event.axis == 4:
-						if event.value <.7:
-							if event.value >0:
-								if event.axis == 0:
-									if event.value > .7:
-										pb.face("face right")
-						if event.value > -.7:
-							if event.value <0:
-								if event.axis == 1:                                
-									if event.value < -.7:
-										pb.face("face left")
-								 
-							
-					
-						
-					if event.axis == 2:
-						if event.value < -.3:
-							shooting = True
-						else:
-							shooting = False
-							
-				if event.type == pygame.JOYBUTTONDOWN:
-					if event.button == 2:
-						bulletMag = 20
-						
-					
-			if shooting:
-				bullet = pb.shoot()
-				if bullet:
-					if bulletMag > 0:
-						bulletMag -= 1
-						print bulletMag
-						
-						if boltPower == True:
-							print 'yes'
-							pb.shoot(False)  
-				if bulletMag <= 0:
-					shooting = False
-			
-			
-			playerHitMobs = pygame.sprite.spritecollide(pb, mobs, False, pygame.sprite.collide_mask)   
-			for mob in playerHitMobs:
-				pb.collide(mob)
-				mob.collide(pb)
-					 
-			
-			bulletsHitMobs = pygame.sprite.groupcollide(bullets, mobs, True, False, pygame.sprite.collide_mask)
-			for bullet in bulletsHitMobs:
-				for mob in bulletsHitMobs[bullet]:
-					mob.collide(bullet)
-			
-			playerHitPowerUps = pygame.sprite.spritecollide(pb, powerUps, True, pygame.sprite.collide_mask)   
-			for power in playerHitPowerUps:
-				if pb.collide(power):
-					hasPowers += [power.kind]
-					print hasPowers
-				
-			mobsHitMobs = pygame.sprite.groupcollide(mobs, mobs, False, False, pygame.sprite.collide_mask)
-			for hitter in mobsHitMobs:
-				for hittee in mobsHitMobs[hitter]:
-					hitter.collide(hittee)
-			
-			mobsHitBlocks = pygame.sprite.groupcollide(mobs, blocks, False, False)
-			for mob in mobsHitBlocks:
-				for block in mobsHitBlocks[mob]:
-					mob.collide(block)
-					mob.bounceBlock(block)
-					
-					
-					
-			bulletsHitBlocks = pygame.sprite.groupcollide(bullets, blocks, True, False)
-			
-			playerHitBlocks = pygame.sprite.spritecollide(pb, blocks, False)
-			#if len(playerHitBlocks) > 0: print len(playerHitBlocks)
-			for block in playerHitBlocks:
-				if pb.collide(block):
-					if block.kind == "warp":
-						if levelnum == 10:
-							mode = "victory"
-						else:
-							for s in all.sprites():
-								s.kill()
-							levelnum += 1
-							bg = Background("PNG/backgrounds/Black.png")
-							level = loadLevel("Levels/"+str(levelnum)+".lvl")
-							pb = Player(3, level["player"], hasPowers)
-							magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png")
-							Lifebar(size, pb.lives, "PNG/backgrounds/spacemansheart.png")
-				   
-
-							print levelnum
-							#blocks = level["blocks"]
-							#mobs = level["enemies"]
-							#powerUps = level["power-ups"]\
-							#bullets = []
-							#add delay here
-			
-			all.update(size, pb.rect.center, pb.lives, bulletMag)
-				   
-					
-			boltPower = False
-			if "speedBoost" in hasPowers:
-				pb.maxSpeed = 7
-			if "healthUp" in hasPowers:
-				pb.lives = pb.extraLives
-				hasPowers.remove("healthUp")
-				print pb.lives
-			if "boltPower" in hasPowers:
-				boltPower = True
-				
-					
-			for mob in mobs.sprites():
-				#~ MOB LIMIT
-				if mob.kind == "greenie" and len(mobs.sprites()) < 15:
-					if mob.checkDuplicate():
-						mob.duplicate()
-				
-			dirty = all.draw(screen)
-			pygame.display.update(dirty)
-			pygame.display.flip()
-			clock.tick(60)
-			
-		while not pb.alive:
-			for s in all.sprites():
-				s.kill()
-			hasPowers = []
-			bg = Background("PNG/backgrounds/endscreen.png")
-			for event in pygame.event.get():
-				if event.type == pygame.QUIT:
-					sys.exit()
-				if event.type == pygame.JOYBUTTONDOWN:
-					if event.button == 0:
-						mode = "menu"
-				if event.type == pygame.KEYDOWN:
-						if event.key == pygame.K_RETURN:
-							levelnum = 1
-							bullets = []
-							level = loadLevel("Levels/"+str(levelnum)+".lvl")
-							blocks = level["blocks"]
-							mobs = level["enemies"]
-							powerUps = level["power-ups"]
-							pb = Player(3, level["player"], hasPowers)
+                            print levelnum
+                            #blocks = level["blocks"]
+                            #mobs = level["enemies"]
+                            #powerUps = level["power-ups"]\
+                            #bullets = []
+                            #add delay here
+            
+            all.update(size, pb.rect.center, pb.lives, bulletMag)
+                   
+                    
+            boltPower = False
+            if "speedBoost" in hasPowers:
+                pb.maxSpeed = 7
+            if "healthUp" in hasPowers:
+                pb.lives = pb.extraLives
+                hasPowers.remove("healthUp")
+                print pb.lives
+            if "boltPower" in hasPowers:
+                boltPower = True
+                
+                    
+            for mob in mobs.sprites():
+                #~ MOB LIMIT
+                if mob.kind == "greenie" and len(mobs.sprites()) < 15:
+                    if mob.checkDuplicate():
+                        mob.duplicate()
+                
+            dirty = all.draw(screen)
+            pygame.display.update(dirty)
+            pygame.display.flip()
+            clock.tick(60)
+            
+        while not pb.alive:
+            for s in all.sprites():
+                s.kill()
+            hasPowers = []
+            bg = Background("PNG/backgrounds/endscreen.png")
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    sys.exit()
+                if event.type == pygame.JOYBUTTONDOWN:
+                    if event.button == 0:
+                        mode = "menu"
+                if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_RETURN:
+                            levelnum = 1
+                            bullets = []
+                            level = loadLevel("Levels/"+str(levelnum)+".lvl")
+                            blocks = level["blocks"]
+                            mobs = level["enemies"]
+                            powerUps = level["power-ups"]
+                            pb = Player(3, level["player"], hasPowers)
 
 
-							magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png")
-							Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")
+                            magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png")
+                            Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")
 
                             bulletMag = 20
                         if event.key == pygame.K_ESCAPE:
