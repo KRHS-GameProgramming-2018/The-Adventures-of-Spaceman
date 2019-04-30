@@ -385,7 +385,7 @@ while True:
                             mobs = level["enemies"]
                             powerUps = level["power-ups"]
                             pb = Player(3, level["player"], hasPowers)
-=======
+
 					if event.axis == 0:
 						if event.value > .7:
 							pb.speed = (event.value + 1)**3
