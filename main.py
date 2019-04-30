@@ -272,7 +272,6 @@ while True:
                 if event.type == pygame.JOYBUTTONDOWN:
                     if event.button == 2:
                         bulletMag = 20
-
                     
             if shooting:
                 bullet = pb.shoot()
@@ -401,8 +400,6 @@ while True:
                         elif event.value < -.7:
                             pb.go("go left")
                           #  isX = True
-                           
-                            
                             
                     if event.axis == 1:
                         if event.value > .7:
