@@ -133,6 +133,8 @@ while True:
                                         paused = True
                                         while paused:
                                             for event in pygame.event.get():
+                                                ## ~SHOP MENU CODE~ ##
+                                                
                                                 if event.type == pygame.QUIT: sys.exit()
                                                 if event.type == pygame.KEYDOWN:
                                                     if event.key == pygame.K_e:
