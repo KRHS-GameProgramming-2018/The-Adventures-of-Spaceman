@@ -38,13 +38,9 @@ class magazine(pygame.sprite.Sprite):
         
         print "bullet: ", bullets
 
-        if bullets > 20:
-            bullets = 20
+        if bullets > 21:
+            bullets = 21
         self.image = self.bulletImages[bullets-1]
-        # ~ self.image = self.bulletImages[bullets - 1]
-        
-        # ~ if bullets <= 0:
-			# ~ self.image = self.bulletImages[0]
         
         pass
 
