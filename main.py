@@ -337,7 +337,11 @@ while True:
                             Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")
 
                             print levelnum
-                            
+                            #blocks = level["blocks"]
+                            #mobs = level["enemies"]
+                            #powerUps = level["power-ups"]\
+                            #bullets = []
+                            #add delay here
             
             all.update(size, pb.rect.center, pb.lives, bulletMag)
                    
@@ -364,7 +368,6 @@ while True:
             pygame.display.flip()
             clock.tick(60)
             
-            
         while not pb.alive:
             for s in all.sprites():
                 s.kill()
@@ -379,18 +382,18 @@ while True:
                 if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_RETURN:
                             levelnum = 1
-                            bullets = []
+                            #bullets = []
                             level = loadLevel("Levels/"+str(levelnum)+".lvl")
-                            blocks = level["blocks"]
-                            mobs = level["enemies"]
-                            powerUps = level["power-ups"]
+                            # ~ blocks = level["blocks"]
+                            # ~ mobs = level["enemies"]
+                            # ~ powerUps = level["power-ups"]
                             pb = Player(3, level["player"], hasPowers)
 
 
                             magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png")
                             Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")
 
-                            bulletMag = 20
+                            bulletMag = 40
                         if event.key == pygame.K_ESCAPE:
                             sys.exit()
                         if event.key == pygame.K_t:
