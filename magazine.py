@@ -26,7 +26,27 @@ class magazine(pygame.sprite.Sprite):
                              pygame.image.load("PNG/Bolt/bulletmag17.png"),
                              pygame.image.load("PNG/Bolt/bulletmag18.png"),
                              pygame.image.load("PNG/Bolt/bulletmag19.png"),
-                             pygame.image.load("PNG/Bolt/bulletmag20.png")]
+                             pygame.image.load("PNG/Bolt/bulletmag20.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag21.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag22.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag23.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag24.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag25.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag26.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag27.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag28.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag29.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag30.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag31.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag32.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag33.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag34.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag35.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag36.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag37.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag38.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag39.png"),
+                             pygame.image.load("PNG/Bolt/bulletmag40.png"),]
         self.image = self.bulletImages[bullets]
         self.rect = self.image.get_rect(center=[975,265])
         
@@ -38,13 +58,13 @@ class magazine(pygame.sprite.Sprite):
         
         print "bullet: ", bullets
 
-        if bullets > 20:
-            bullets = 20
+        if bullets > 40:
+            bullets = 40
         self.image = self.bulletImages[bullets-1]
-        # ~ self.image = self.bulletImages[bullets - 1]
+       
         
-        # ~ if bullets <= 0:
-			# ~ self.image = self.bulletImages[0]
+        if bullets <= 0:
+            self.image = self.bulletImages[0]
         
         pass
 
