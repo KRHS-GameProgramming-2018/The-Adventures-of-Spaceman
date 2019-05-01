@@ -61,7 +61,7 @@ levelnum = 1
 #mobs = level["enemies"]
 #powerUps = level["power-ups"]
 #bullets = []
-bulletMag = 20
+bulletMag = 40
 
 bgColor = 0,0,0
 mode = "menu"
@@ -133,6 +133,8 @@ while True:
                                         paused = True
                                         while paused:
                                             for event in pygame.event.get():
+                                                ## ~SHOP MENU CODE~ ##
+                                                
                                                 if event.type == pygame.QUIT: sys.exit()
                                                 if event.type == pygame.KEYDOWN:
                                                     if event.key == pygame.K_e:
@@ -159,7 +161,7 @@ while True:
                         if event.key == pygame.K_SPACE:  
                             shooting = True
                         if event.key == pygame.K_r:
-                            bulletMag = 20
+                            bulletMag = 40
                             
                                     
                 if event.type == pygame.KEYUP:
@@ -271,7 +273,7 @@ while True:
                             
                 if event.type == pygame.JOYBUTTONDOWN:
                     if event.button == 2:
-                        bulletMag = 20
+                        bulletMag = 40
                     
             if shooting:
                 bullet = pb.shoot()
