@@ -56,7 +56,6 @@ class magazine(pygame.sprite.Sprite):
         size = args[1]
         bullets = args[4]
         
-        print "bullet: ", bullets
 
         if bullets > 40:
             bullets = 40
