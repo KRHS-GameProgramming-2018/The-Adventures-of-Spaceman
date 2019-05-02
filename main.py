@@ -319,7 +319,7 @@ while True:
             bulletsHitBlocks = pygame.sprite.groupcollide(bullets, blocks, True, False)
             
             playerHitBlocks = pygame.sprite.spritecollide(pb, blocks, False)
-            #if len(playerHitBlocks) > 0: print len(playerHitBlocks)
+            if len(playerHitBlocks) > 0: print len(playerHitBlocks)
             for block in playerHitBlocks:
                 if pb.collide(block):
                     if block.kind == "warp":
