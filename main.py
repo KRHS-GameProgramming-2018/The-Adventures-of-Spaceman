@@ -63,12 +63,13 @@ levelnum = 1
 #bullets = []
 bulletMag = 40
 
+#playerLives = 5
+
 bgColor = 0,0,0
 mode = "menu"
 shooting = False
 
 startTime = time.clock()
-
 
 isX = False;
 isY = False;
@@ -103,7 +104,7 @@ while True:
         bg = Background("PNG/backgrounds/Black.png")
         level = loadLevel("Levels/1.lvl")
         pb = Player(3, level["player"], hasPowers) 
-        Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")
+        Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")#playerLives
         magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png")
 
 
@@ -290,6 +291,8 @@ while True:
             for mob in playerHitMobs:
                 pb.collide(mob)
                 mob.collide(pb)
+                #playerLives -= 1
+   
                      
             
             bulletsHitMobs = pygame.sprite.groupcollide(bullets, mobs, True, False, pygame.sprite.collide_mask)
@@ -314,29 +317,27 @@ while True:
                     mob.collide(block)
                     mob.bounceBlock(block)
                     
-                    
-                    
             bulletsHitBlocks = pygame.sprite.groupcollide(bullets, blocks, True, False)
             
             playerHitBlocks = pygame.sprite.spritecollide(pb, blocks, False)
             if len(playerHitBlocks) > 0: print len(playerHitBlocks)
             for block in playerHitBlocks:
                 if pb.collide(block):
-                    if block.kind == "warp":
-                        if levelnum == 10:
-                            mode = "victory"
-                        else:
-                            for s in all.sprites():
-                                s.kill()
-                            levelnum += 1
-                            bg = Background("PNG/backgrounds/Black.png")
-                            level = loadLevel("Levels/"+str(levelnum)+".lvl")
-                            pb = Player(3, level["player"], hasPowers)
-                            print pb.lives
-                            magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png")
-                            Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")
+					if block.kind == "warp":
+						if levelnum == 10:
+							mode = "victory"
+						else:
+							for s in all.sprites():
+								s.kill()
+							levelnum += 1
+							bg = Background("PNG/backgrounds/Black.png")
+							level = loadLevel("Levels/"+str(levelnum)+".lvl")
+							pb = Player(3, level["player"], hasPowers)
+							print pb.lives
+							magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png")
+							Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")#playerLives
 
-                            print levelnum
+							print levelnum
                             #blocks = level["blocks"]
                             #mobs = level["enemies"]
                             #powerUps = level["power-ups"]\
@@ -388,10 +389,8 @@ while True:
                             # ~ mobs = level["enemies"]
                             # ~ powerUps = level["power-ups"]
                             pb = Player(3, level["player"], hasPowers)
-
-
                             magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png")
-                            Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")
+                            Lifebar(size, bulletMag, pb.lives , "PNG/backgrounds/spacemansheart.png")#playerLives
 
                             bulletMag = 40
                         if event.key == pygame.K_ESCAPE:
