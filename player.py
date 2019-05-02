@@ -132,6 +132,7 @@ class Player(Mob):
                 self.didBounceX = True
                 self.speedx = 0
                 self.speedy = y
+       
 
         else:
             if not self.didBounceY:
