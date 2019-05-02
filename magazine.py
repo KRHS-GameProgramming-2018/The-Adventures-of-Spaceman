@@ -49,14 +49,13 @@ class magazine(pygame.sprite.Sprite):
                              pygame.image.load("PNG/Bolt/bulletmag40.png"),]
         self.image = self.bulletImages[bullets]
         self.rect = self.image.get_rect(center=[975,265])
-        
+   
         
     def update(*args):
         self = args[0]
         size = args[1]
         bullets = args[4]
         
-        print "bullet: ", bullets
 
         if bullets > 40:
             bullets = 40
