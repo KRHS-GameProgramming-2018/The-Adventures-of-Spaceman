@@ -130,6 +130,7 @@ while True:
                             for mob in mobs:
                                 if mob.kind == "merchant":
                                     if mob.checkPlayer(pb.rect.center):
+                                        pb.keys = []
                                         paused = True
                                         while paused:
                                             for event in pygame.event.get():
