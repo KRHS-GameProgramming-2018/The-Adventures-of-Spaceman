@@ -120,6 +120,8 @@ class Player(Mob):
        
         diffx = abs(self.rect.centerx - other.rect.centerx)
         diffy = abs(self.rect.centery - other.rect.centery)
+        if other.kind == "block":
+            pass
         
         if diffx > diffy:
             if self.speedx != 0 and not self.didBounceX:
