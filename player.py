@@ -120,24 +120,29 @@ class Player(Mob):
        
         diffx = abs(self.rect.centerx - other.rect.centerx)
         diffy = abs(self.rect.centery - other.rect.centery)
+        if other.kind == "block":
+            pass
         
         if diffx > diffy:
-            if not self.didBounceX:
+            if self.speedx != 0 and not self.didBounceX:
                 self.speedx = -self.speedx
                 y = self.speedy
                 self.speedy = 0
                 self.move()
                 self.didBounceX = True
+                print "already bounced"
                 self.speedx = 0
                 self.speedy = y
+       
 
         else:
-            if not self.didBounceY:
+            if self.speedy != 0 and not self.didBounceY:
                 self.speedy = -self.speedy
                 x = self.speedx
                 self.speedx = 0
                 self.move()
                 self.didBounceY = True
+                print "already bounced"
                 self.speedy = 0
                 self.speedx = x
         return True

@@ -130,6 +130,7 @@ while True:
                             for mob in mobs:
                                 if mob.kind == "merchant":
                                     if mob.checkPlayer(pb.rect.center):
+                                        pb.keys = []
                                         paused = True
                                         menu = Background("PNG/backgrounds/shopMenuSpoon.png")
                                         while paused:
@@ -330,7 +331,7 @@ while True:
             bulletsHitBlocks = pygame.sprite.groupcollide(bullets, blocks, True, False)
             
             playerHitBlocks = pygame.sprite.spritecollide(pb, blocks, False)
-            #if len(playerHitBlocks) > 0: print len(playerHitBlocks)
+            if len(playerHitBlocks) > 0: print len(playerHitBlocks)
             for block in playerHitBlocks:
                 if pb.collide(block):
 					if block.kind == "warp":
