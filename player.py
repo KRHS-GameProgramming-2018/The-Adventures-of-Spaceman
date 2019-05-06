@@ -133,6 +133,7 @@ class Player(Mob):
                 print "already bounced"
                 self.speedx = 0
                 self.speedy = y
+       
 
         else:
             if self.speedy != 0 and not self.didBounceY:
