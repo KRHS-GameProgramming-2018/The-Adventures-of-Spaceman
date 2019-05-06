@@ -1,10 +1,10 @@
 import pygame, sys, math
 
 class Background(pygame.sprite.Sprite):
-    def __init__(self,  image):
+    def __init__(self,  image, pos = [500, 400]):
         pygame.sprite.Sprite.__init__(self, self.containers)
         self.image = pygame.image.load(image)
-        self.rect = self.image.get_rect()
+        self.rect = self.image.get_rect(center = pos)
         self.layer = 0
 
     def update(*args):
