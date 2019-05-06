@@ -131,14 +131,24 @@ while True:
                                 if mob.kind == "merchant":
                                     if mob.checkPlayer(pb.rect.center):
                                         paused = True
+                                        menu = Background("PNG/backgrounds/shopMenuSpoon.png")
                                         while paused:
                                             for event in pygame.event.get():
                                                 ## ~SHOP MENU CODE~ ##
-                                                
                                                 if event.type == pygame.QUIT: sys.exit()
                                                 if event.type == pygame.KEYDOWN:
                                                     if event.key == pygame.K_e:
                                                         paused = False
+                                                        menu.kill()
+                                                        
+                                            menu.update()
+                                                        
+                                            dirty = all.draw(screen)
+                                            pygame.display.update(dirty)
+                                            pygame.display.flip()
+                                            clock.tick(60)
+                                            
+                                                
                         #for facing directions
                         if event.key == pygame.K_UP:
                             pb.face("face up")
