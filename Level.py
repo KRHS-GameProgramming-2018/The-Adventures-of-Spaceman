@@ -37,7 +37,7 @@ def loadLevel(levelFile):
     for y, line in enumerate(lines):
         for x, character in enumerate(line):
             if character == '#':
-                level["blocks"] += [Block([x*50+25, y*50+25])]
+                level["blocks"] += [Block("PNG/Blocks/br1.png", [x*50+25, y*50+25])]
             if character == '@':
                 level["blocks"] += [Warp([x*50+25, y*50+25])]
             if character == "%":
