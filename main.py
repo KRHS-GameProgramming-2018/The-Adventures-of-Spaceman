@@ -132,7 +132,7 @@ while True:
                                     if mob.checkPlayer(pb.rect.center):
                                         pb.keys = []
                                         paused = True
-                                        menu = Background("PNG/backgrounds/shopMenuSpoon.png")
+                                        menu = Background("PNG/backgrounds/shopMenu.png")
                                         while paused:
                                             for event in pygame.event.get():
                                                 ## ~SHOP MENU CODE~ ##
