@@ -317,10 +317,10 @@ while True:
                     hasPowers += [power.kind]
                     print hasPowers
                 
-            mobsHitMobs = pygame.sprite.groupcollide(mobs, mobs, False, False, pygame.sprite.collide_mask)
-            for hitter in mobsHitMobs:
-                for hittee in mobsHitMobs[hitter]:
-                    hitter.collide(hittee)
+            # ~ mobsHitMobs = pygame.sprite.groupcollide(mobs, mobs, False, False, pygame.sprite.collide_mask)
+            # ~ for hitter in mobsHitMobs:
+                # ~ for hittee in mobsHitMobs[hitter]:
+                    # ~ hitter.collide(hittee)
             
             mobsHitBlocks = pygame.sprite.groupcollide(mobs, blocks, False, False)
             for mob in mobsHitBlocks:
