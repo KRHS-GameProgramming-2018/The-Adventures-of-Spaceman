@@ -10,6 +10,7 @@ from Button import *
 from Background import *
 
 from warp import *
+from ShopItem import *
 from Lifebar import *
 from magazine import *
 from boltPower import *
@@ -36,6 +37,7 @@ bullets = pygame.sprite.Group()
 blocks = pygame.sprite.Group()
 powerUps = pygame.sprite.Group()
 hud = pygame.sprite.Group()
+shopItems = pygame.sprite.Group()
 all = pygame.sprite.OrderedUpdates()
 
 SpaceZombie.containers = (mobs, all)
@@ -50,6 +52,7 @@ boltPower.containers = (powerUps, all)
 healthUp.containers = (powerUps, all)
 Lifebar.containers = (hud, all)
 magazine.containers = (hud, all)
+ShopItem.containers = (shopItems, all)
 Player.containers = (all)
 Background.containers = (all)
 
