@@ -13,7 +13,7 @@ class Lifebar(pygame.sprite.Sprite):
                        pygame.image.load("PNG/backgrounds/spacemansheart6.png")
                        ]
         self.image = self.healthImages[lives]
-        self.rect = self.image.get_rect(center=[175,775])
+        self.rect = self.image.get_rect(center=[975,500])
         
         
         
