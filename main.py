@@ -10,6 +10,7 @@ from Button import *
 from Background import *
 
 from warp import *
+from ShopItem import *
 from Lifebar import *
 from magazine import *
 from boltPower import *
@@ -36,6 +37,7 @@ bullets = pygame.sprite.Group()
 blocks = pygame.sprite.Group()
 powerUps = pygame.sprite.Group()
 hud = pygame.sprite.Group()
+shopItems = pygame.sprite.Group()
 all = pygame.sprite.OrderedUpdates()
 
 Block.containers = (blocks, all)
@@ -50,6 +52,7 @@ boltPower.containers = (powerUps, all)
 healthUp.containers = (powerUps, all)
 Lifebar.containers = (hud, all)
 magazine.containers = (hud, all)
+ShopItem.containers = (shopItems, all)
 Player.containers = (all)
 Background.containers = (all)
 
@@ -317,10 +320,10 @@ while True:
                     hasPowers += [power.kind]
                     print hasPowers
                 
-            mobsHitMobs = pygame.sprite.groupcollide(mobs, mobs, False, False, pygame.sprite.collide_mask)
-            for hitter in mobsHitMobs:
-                for hittee in mobsHitMobs[hitter]:
-                    hitter.collide(hittee)
+            # ~ mobsHitMobs = pygame.sprite.groupcollide(mobs, mobs, False, False, pygame.sprite.collide_mask)
+            # ~ for hitter in mobsHitMobs:
+                # ~ for hittee in mobsHitMobs[hitter]:
+                    # ~ hitter.collide(hittee)
             
             mobsHitBlocks = pygame.sprite.groupcollide(mobs, blocks, False, False)
             for mob in mobsHitBlocks:

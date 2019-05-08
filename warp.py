@@ -6,12 +6,7 @@ class Warp(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self, self.containers)
         self.images = [ pygame.image.load("PNG/Blocks/warp.png"),
                         pygame.image.load("PNG/Blocks/warp2.png"),
-                        pygame.image.load("PNG/Blocks/warp3.png"),
-                        pygame.image.load("PNG/Blocks/warp4.png"),
-                        pygame.image.load("PNG/Blocks/warp5.png"),
-                        pygame.image.load("PNG/Blocks/warp6.png"),
-                        pygame.image.load("PNG/Blocks/warp7.png"),
-                        pygame.image.load("PNG/Blocks/warp8.png")]
+                        pygame.image.load("PNG/Blocks/warp3.png")]
         self.image = self.images[0]
         self.rect = self.image.get_rect(center=pos)
         self.radius = (self.rect.width/2 + self.rect.height/2)/2
