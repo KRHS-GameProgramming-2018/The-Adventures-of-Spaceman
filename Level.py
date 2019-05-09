@@ -84,6 +84,8 @@ def loadLevel(levelFile):
                 level["power-ups"] += [speedBoost([x*50+25, y*50+25])]
             if character == '<':
                 level["power-ups"] += [healthUp([x*50+25, y*50+25])]
+            if character == 'c':
+                level["power-ups"] += [Coin([x*50+25, y*50+25])]
     return level
     
     
