@@ -16,6 +16,7 @@ from magazine import *
 from boltPower import *
 from healthUp import *
 from speedBoost import *
+from Coin import *
 
 pygame.init()
 pygame.joystick.init()
@@ -38,14 +39,15 @@ blocks = pygame.sprite.Group()
 powerUps = pygame.sprite.Group()
 hud = pygame.sprite.Group()
 shopItems = pygame.sprite.Group()
+coins = pygame.sprite.Group()
 all = pygame.sprite.OrderedUpdates()
 
+Block.containers = (blocks, all)
 SpaceZombie.containers = (mobs, all)
 Imposter.containers = (mobs, all)
 Greenie.containers = (mobs, all)
 Merchant.containers = (mobs, all)
 Bolt.containers = (bullets, all)
-Block.containers = (blocks, all)
 Warp.containers = (blocks, all)
 speedBoost.containers = (powerUps, all)
 boltPower.containers = (powerUps, all)
@@ -55,6 +57,7 @@ magazine.containers = (hud, all)
 ShopItem.containers = (shopItems, all)
 Player.containers = (all)
 Background.containers = (all)
+Coin.containers = (coins, all)
 
 hasPowers = []
 boltPower = False
@@ -65,6 +68,7 @@ levelnum = 1
 #powerUps = level["power-ups"]
 #bullets = []
 bulletMag = 40
+PlayerCoins = 0
 
 #playerLives = 5
 
@@ -136,6 +140,11 @@ while True:
                                         pb.keys = []
                                         paused = True
                                         menu = Background("PNG/backgrounds/shopMenu.png")
+                                        items = [ShopItem("health", [240,510]),
+                                                 ShopItem("mag", [500,510]),
+                                                 ShopItem("health", [760,510])]
+                                        itemIndex = 0
+                                        keyPressed = False
                                         while paused:
                                             for event in pygame.event.get():
                                                 ## ~SHOP MENU CODE~ ##
@@ -144,7 +153,20 @@ while True:
                                                     if event.key == pygame.K_e:
                                                         paused = False
                                                         menu.kill()
-                                                        
+                                                        item1.kill()
+                                                    if event.key == pygame.K_LEFT:
+                                                        if itemIndex > 0:
+                                                            itemIndex -= 1
+                                                    if event.key == pygame.K_RIGHT:
+                                                        if itemIndex < len(items)-1:
+                                                            itemIndex += 1
+                                            
+                                            for i,item in enumerate(items):
+                                                if i == itemIndex:
+                                                    item.doSelect()
+                                                else:
+                                                    item.stopSelect()
+                                            
                                             menu.update()
                                                         
                                             dirty = all.draw(screen)
@@ -319,6 +341,11 @@ while True:
                 if pb.collide(power):
                     hasPowers += [power.kind]
                     print hasPowers
+            
+            playerHitCoins = pygame.sprite.spritecollide(pb, coins, True, pygame.sprite.collide_mask)   
+            for coin in playerHitCoins:
+                if pb.collide(coin):
+                    PlayerCoins += 1
                 
             # ~ mobsHitMobs = pygame.sprite.groupcollide(mobs, mobs, False, False, pygame.sprite.collide_mask)
             # ~ for hitter in mobsHitMobs:
@@ -358,7 +385,7 @@ while True:
                             #bullets = []
                             #add delay here
             
-            all.update(size, pb.rect.center, pb.lives, bulletMag)
+            all.update(size, pb.rect.center, pb.lives, bulletMag, PlayerCoins)
                    
                     
             boltPower = False
