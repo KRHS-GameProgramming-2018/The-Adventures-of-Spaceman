@@ -16,6 +16,7 @@ from magazine import *
 from boltPower import *
 from healthUp import *
 from speedBoost import *
+from Coin import *
 
 pygame.init()
 pygame.joystick.init()
@@ -38,6 +39,7 @@ blocks = pygame.sprite.Group()
 powerUps = pygame.sprite.Group()
 hud = pygame.sprite.Group()
 shopItems = pygame.sprite.Group()
+coins = pygame.sprite.Group()
 all = pygame.sprite.OrderedUpdates()
 
 SpaceZombie.containers = (mobs, all)
@@ -55,6 +57,7 @@ magazine.containers = (hud, all)
 ShopItem.containers = (shopItems, all)
 Player.containers = (all)
 Background.containers = (all)
+Coin.containers = (coins, all)
 
 hasPowers = []
 boltPower = False
@@ -65,6 +68,7 @@ levelnum = 1
 #powerUps = level["power-ups"]
 #bullets = []
 bulletMag = 40
+PlayerCoins = 0
 
 #playerLives = 5
 
@@ -319,6 +323,11 @@ while True:
                 if pb.collide(power):
                     hasPowers += [power.kind]
                     print hasPowers
+            
+            playerHitCoins = pygame.sprite.spritecollide(pb, coins, True, pygame.sprite.collide_mask)   
+            for coin in playerHitCoins:
+                if pb.collide(coin):
+                    PlayerCoins += 1
                 
             # ~ mobsHitMobs = pygame.sprite.groupcollide(mobs, mobs, False, False, pygame.sprite.collide_mask)
             # ~ for hitter in mobsHitMobs:
@@ -358,7 +367,7 @@ while True:
                             #bullets = []
                             #add delay here
             
-            all.update(size, pb.rect.center, pb.lives, bulletMag)
+            all.update(size, pb.rect.center, pb.lives, bulletMag, PlayerCoins)
                    
                     
             boltPower = False
