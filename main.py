@@ -136,6 +136,11 @@ while True:
                                         pb.keys = []
                                         paused = True
                                         menu = Background("PNG/backgrounds/shopMenu.png")
+                                        items = [ShopItem("health", [240,510]),
+                                                 ShopItem("health", [500,510]),
+                                                 ShopItem("health", [760,510])]
+                                        itemIndex = 0
+                                        keyPressed = False
                                         while paused:
                                             for event in pygame.event.get():
                                                 ## ~SHOP MENU CODE~ ##
@@ -144,7 +149,20 @@ while True:
                                                     if event.key == pygame.K_e:
                                                         paused = False
                                                         menu.kill()
-                                                        
+                                                        item1.kill()
+                                                    if event.key == pygame.K_LEFT:
+                                                        if itemIndex > 0:
+                                                            itemIndex -= 1
+                                                    if event.key == pygame.K_RIGHT:
+                                                        if itemIndex < len(items)-1:
+                                                            itemIndex += 1
+                                            
+                                            for i,item in enumerate(items):
+                                                if i == itemIndex:
+                                                    item.doSelect()
+                                                else:
+                                                    item.stopSelect()
+                                            
                                             menu.update()
                                                         
                                             dirty = all.draw(screen)
