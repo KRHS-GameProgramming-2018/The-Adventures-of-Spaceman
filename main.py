@@ -11,8 +11,11 @@ from Background import *
 
 from warp import *
 from ShopItem import *
+
 from Lifebar import *
 from magazine import *
+from CoinCounter import *
+
 from boltPower import *
 from healthUp import *
 from speedBoost import *
@@ -54,6 +57,7 @@ boltPower.containers = (powerUps, all)
 healthUp.containers = (powerUps, all)
 Lifebar.containers = (hud, all)
 magazine.containers = (hud, all)
+CoinCounter.containers = (hud, all)
 ShopItem.containers = (shopItems, all)
 Player.containers = (all)
 Background.containers = (all)
@@ -106,14 +110,15 @@ while True:
     while mode == "inGame":
         for s in all.sprites():
             s.kill()
-        print len(mobs)
+        
         bg.kill()
         bg = Background("PNG/backgrounds/Black.png")
         level = loadLevel("Levels/1.lvl")
         pb = Player(3, level["player"], hasPowers) 
         Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")#playerLives
         magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png")
-
+        CoinCounter(size, bulletMag, PlayerCoins, "PNG/Power-ups/goldCoin.png")
+        print PlayerCoins
 
         while pb.alive:
             for event in pygame.event.get():
