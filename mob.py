@@ -87,13 +87,40 @@ class Mob(pygame.sprite.Sprite):
         return False
             
     def collide(self, other):
-        self.speedx = -self.speedx
-        self.speedy = -self.speedy
-        self.move()
-        self.speedx = 0
-        self.didBounceX = True
-        self.speedy = 0
-        self.didBounceY = True
+        # ~ if pygame.sprite.collide_rect(self, other):
+            # ~ if self.speedx > 1: #right
+                # ~ if self.rect.right > other.rect.left:
+                    # ~ self.rect.right = other.rect.left - 1
+                    # ~ self.speedx = 0
+        # ~ if pygame.sprite.collide_rect(self, other):
+            # ~ if self.speedx < -1: #left
+                # ~ if self.rect.left < other.rect.right:
+                    # ~ self.rect.left = other.rect.right + 1
+                    # ~ self.speedx = 0
+        # ~ if pygame.sprite.collide_rect(self, other):
+            # ~ if self.speedy > 1: #down
+                # ~ if self.rect.bottom > other.rect.top:
+                    # ~ self.rect.bottom = other.rect.top - 1
+                    # ~ self.speedy = 0
+        # ~ if pygame.sprite.collide_rect(self, other):
+            # ~ if self.speedy < -1: #up
+                # ~ if self.rect.top < other.rect.bottom:
+                    # ~ self.rect.top = other.rect.bottom + 1
+                    # ~ self.speedy = 0
+                
+                
+        if pygame.sprite.collide_rect(self, other):
+            if not self.didBounceX and self.speedx != 0:
+                self.speedx = -self.speedx
+                self.didBounceX = True
+                self.move()
+                self.speedx = 0
+            if not self.didBounceY and self.speedy != 0:
+                self.speedy = -self.speedy
+                self.didBounceY = True
+                self.move()
+                self.speedy = 0
+        
         
         return True
 
