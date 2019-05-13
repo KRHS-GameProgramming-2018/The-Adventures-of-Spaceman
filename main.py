@@ -11,11 +11,15 @@ from Background import *
 
 from warp import *
 from ShopItem import *
+
 from Lifebar import *
 from magazine import *
+from CoinCounter import *
+
 from boltPower import *
 from healthUp import *
 from speedBoost import *
+from Coin import *
 
 pygame.init()
 pygame.joystick.init()
@@ -38,6 +42,7 @@ blocks = pygame.sprite.Group()
 powerUps = pygame.sprite.Group()
 hud = pygame.sprite.Group()
 shopItems = pygame.sprite.Group()
+coins = pygame.sprite.Group()
 all = pygame.sprite.OrderedUpdates()
 
 Block.containers = (blocks, all)
@@ -52,9 +57,11 @@ boltPower.containers = (powerUps, all)
 healthUp.containers = (powerUps, all)
 Lifebar.containers = (hud, all)
 magazine.containers = (hud, all)
+CoinCounter.containers = (hud, all)
 ShopItem.containers = (shopItems, all)
 Player.containers = (all)
 Background.containers = (all)
+Coin.containers = (coins, all)
 
 hasPowers = []
 boltPower = False
@@ -65,6 +72,7 @@ levelnum = 1
 #powerUps = level["power-ups"]
 #bullets = []
 bulletMag = 40
+PlayerCoins = 0
 
 #playerLives = 5
 
@@ -102,14 +110,15 @@ while True:
     while mode == "inGame":
         for s in all.sprites():
             s.kill()
-        print len(mobs)
+        
         bg.kill()
         bg = Background("PNG/backgrounds/Black.png")
         level = loadLevel("Levels/1.lvl")
         pb = Player(3, level["player"], hasPowers) 
         Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")#playerLives
         magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png")
-
+        CoinCounter(size, bulletMag, PlayerCoins, "PNG/Power-ups/goldCoin.png")
+        print PlayerCoins
 
         while pb.alive:
             for event in pygame.event.get():
@@ -137,7 +146,7 @@ while True:
                                         paused = True
                                         menu = Background("PNG/backgrounds/shopMenu.png")
                                         items = [ShopItem("health", [240,510]),
-                                                 ShopItem("health", [500,510]),
+                                                 ShopItem("mag", [500,510]),
                                                  ShopItem("health", [760,510])]
                                         itemIndex = 0
                                         keyPressed = False
@@ -337,6 +346,11 @@ while True:
                 if pb.collide(power):
                     hasPowers += [power.kind]
                     print hasPowers
+            
+            playerHitCoins = pygame.sprite.spritecollide(pb, coins, True, pygame.sprite.collide_mask)   
+            for coin in playerHitCoins:
+                if pb.collide(coin):
+                    PlayerCoins += 1
                 
             # ~ mobsHitMobs = pygame.sprite.groupcollide(mobs, mobs, False, False, pygame.sprite.collide_mask)
             # ~ for hitter in mobsHitMobs:
@@ -376,7 +390,7 @@ while True:
                             #bullets = []
                             #add delay here
             
-            all.update(size, pb.rect.center, pb.lives, bulletMag)
+            all.update(size, pb.rect.center, pb.lives, bulletMag, PlayerCoins)
                    
                     
             boltPower = False

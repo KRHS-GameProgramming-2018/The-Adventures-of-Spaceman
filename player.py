@@ -5,6 +5,7 @@ from bolt import *
 from boltPower import *
 from healthUp import *
 from speedBoost import *
+from Coin import *
 #https://opengameart.org/content/space-man-space-bot-rework
 class Player(Mob):
     def __init__(self, speed=6, startPos=[0,0], powers=[]):
@@ -120,7 +121,8 @@ class Player(Mob):
        
         diffx = abs(self.rect.centerx - other.rect.centerx)
         diffy = abs(self.rect.centery - other.rect.centery)
-        
+        if other.kind == "block":
+            pass
         if diffx > diffy:
             if self.speedx != 0 and not self.didBounceX:
                 self.speedx = -self.speedx
