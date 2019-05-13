@@ -9,6 +9,9 @@ class ShopItem(pygame.sprite.Sprite):
         if kind == "mag":
             self.basicImage = pygame.image.load("PNG/Buttons/magShop.png")
             self.hoverImage = pygame.image.load("PNG/Buttons/magShop-selected.png")
+        if kind == "boost":
+            self.basicImage = pygame.image.load("PNG/Buttons/healthBoostShop.png")
+            self.hoverImage = pygame.image.load("PNG/Buttons/healthBoostShop-selected.png")
         self.image = self.basicImage
         self.rect = self.image.get_rect(center=pos)
         self.radius = (self.rect.width/2 + self.rect.height/2)/2
