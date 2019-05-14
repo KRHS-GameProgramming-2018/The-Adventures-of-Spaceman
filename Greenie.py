@@ -41,7 +41,7 @@ class Greenie(Mob):
         self.maxspeed = speed
         self.goal = [0,0]
         self.directMove()
-        
+        self.dropRate = 30
         self.lives = 1
         
     def setPos(self, pos):

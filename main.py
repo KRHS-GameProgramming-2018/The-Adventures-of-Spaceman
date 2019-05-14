@@ -43,13 +43,14 @@ powerUps = pygame.sprite.Group()
 hud = pygame.sprite.Group()
 shopItems = pygame.sprite.Group()
 coins = pygame.sprite.Group()
+npcs = pygame.sprite.Group()
 all = pygame.sprite.OrderedUpdates()
 
 Block.containers = (blocks, all)
 SpaceZombie.containers = (mobs, all)
 Imposter.containers = (mobs, all)
 Greenie.containers = (mobs, all)
-Merchant.containers = (mobs, all)
+Merchant.containers = (npcs, all)
 Bolt.containers = (bullets, all)
 Warp.containers = (blocks, all)
 speedBoost.containers = (powerUps, all)
@@ -339,7 +340,11 @@ while True:
             bulletsHitMobs = pygame.sprite.groupcollide(bullets, mobs, True, False)#, pygame.sprite.collide_mask)
             for bullet in bulletsHitMobs:
                 for mob in bulletsHitMobs[bullet]:
-                    mob.collide(bullet)
+                    if mob.collide(bullet): 
+                        if mob.lives == 0:
+                            if random.randint(0, mob.dropRate) == 0:
+                                Coin(mob.rect.center)
+                        
             
             playerHitPowerUps = pygame.sprite.spritecollide(pb, powerUps, True)#, pygame.sprite.collide_mask)   
             for power in playerHitPowerUps:
