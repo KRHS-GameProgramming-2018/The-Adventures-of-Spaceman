@@ -145,7 +145,7 @@ while True:
                                         pb.keys = []
                                         paused = True
                                         menu = Background("PNG/backgrounds/shopMenu.png")
-                                        items = [ShopItem("health", [240,510]),
+                                        items = [ShopItem("boost", [240,510]),
                                                  ShopItem("mag", [500,510]),
                                                  ShopItem("health", [760,510])]
                                         itemIndex = 0
@@ -328,7 +328,7 @@ while True:
                     shooting = False
             
             
-            playerHitMobs = pygame.sprite.spritecollide(pb, mobs, False, pygame.sprite.collide_mask)   
+            playerHitMobs = pygame.sprite.spritecollide(pb, mobs, False)#, pygame.sprite.collide_mask)   
             for mob in playerHitMobs:
                 pb.collide(mob)
                 mob.collide(pb)
@@ -336,18 +336,18 @@ while True:
    
                      
             
-            bulletsHitMobs = pygame.sprite.groupcollide(bullets, mobs, True, False, pygame.sprite.collide_mask)
+            bulletsHitMobs = pygame.sprite.groupcollide(bullets, mobs, True, False)#, pygame.sprite.collide_mask)
             for bullet in bulletsHitMobs:
                 for mob in bulletsHitMobs[bullet]:
                     mob.collide(bullet)
             
-            playerHitPowerUps = pygame.sprite.spritecollide(pb, powerUps, True, pygame.sprite.collide_mask)   
+            playerHitPowerUps = pygame.sprite.spritecollide(pb, powerUps, True)#, pygame.sprite.collide_mask)   
             for power in playerHitPowerUps:
                 if pb.collide(power):
                     hasPowers += [power.kind]
                     print hasPowers
             
-            playerHitCoins = pygame.sprite.spritecollide(pb, coins, True, pygame.sprite.collide_mask)   
+            playerHitCoins = pygame.sprite.spritecollide(pb, coins, True)#, pygame.sprite.collide_mask)   
             for coin in playerHitCoins:
                 if pb.collide(coin):
                     PlayerCoins += 1
@@ -361,7 +361,7 @@ while True:
             for mob in mobsHitBlocks:
                 for block in mobsHitBlocks[mob]:
                     mob.collide(block)
-                    mob.bounceBlock(block)
+                    #mob.bounceBlock(block)
                     
             bulletsHitBlocks = pygame.sprite.groupcollide(bullets, blocks, True, False)
             
