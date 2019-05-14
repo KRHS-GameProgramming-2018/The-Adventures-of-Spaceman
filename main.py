@@ -145,6 +145,7 @@ while True:
                                     if mob.checkPlayer(pb.rect.center):
                                         pb.keys = []
                                         paused = True
+                                        ## ~SHOP MENU CODE~ ##
                                         menu = Background("PNG/backgrounds/shopMenu.png")
                                         items = [ShopItem("boost", [240,510]),
                                                  ShopItem("mag", [500,510]),
@@ -153,7 +154,6 @@ while True:
                                         keyPressed = False
                                         while paused:
                                             for event in pygame.event.get():
-                                                ## ~SHOP MENU CODE~ ##
                                                 if event.type == pygame.QUIT: sys.exit()
                                                 if event.type == pygame.KEYDOWN:
                                                     if event.key == pygame.K_e:
