@@ -109,8 +109,7 @@ class Player(Mob):
                 self.images = self.downImages
                 self.rect = self.image.get_rect(center = self.rect.center)
                 
-                
-        
+   
     def collide(self, other):
         if not self.invincible and (other.kind == "enemy" or other.kind == "greenie" or other.kind == "imposter"): #get hurt
             self.lives += -1
