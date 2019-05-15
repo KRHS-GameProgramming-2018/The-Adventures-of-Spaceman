@@ -36,7 +36,7 @@ class SpaceZombie(Mob):
         #self.maxspeed = speed
         self.goal = [0,0]
         self.directMove()
-        
+        self.dropRate = 15
         self.lives = 3
         
     def setPos(self, pos):

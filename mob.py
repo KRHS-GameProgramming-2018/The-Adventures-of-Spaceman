@@ -1,6 +1,7 @@
 import pygame, sys, math
 
 
+
 class Mob(pygame.sprite.Sprite):
     def __init__(self, image, speed=[5,5], startPos=[0,0], power=[]):
         pygame.sprite.Sprite.__init__(self, self.containers)
@@ -15,6 +16,7 @@ class Mob(pygame.sprite.Sprite):
         self.radius = (self.rect.width/2 + self.rect.height/2)/2
         self.didBounceX = False
         self.didBounceY = False
+        self.dropRate = 8
         
         #for animation
         self.images = [self.image]
@@ -23,7 +25,8 @@ class Mob(pygame.sprite.Sprite):
         self.aniTimer = 0
         self.aniTimerMax = 60/20
         
-    def live(self, lives):
+        
+    def live(self, lives):      ####MOB DYING
         if self.lives <= 0:
             self.kill()
     
