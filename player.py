@@ -117,7 +117,7 @@ class Player(Mob):
             self.invincible = True
             if self.lives == 0:
                 self.alive = False
-        if not (other.kind == "warp" or other.kind == "greenie"):
+        if not (other.kind == "warp" or other.kind == "greenie" or other.kind == "Coin"):
             Mob.collide(self, other)
         return True
         # ~ diffx = abs(self.rect.centerx - other.rect.centerx)
