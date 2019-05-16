@@ -5,7 +5,7 @@ from mob import *
 class Greenie(Mob):
     def __init__(self, speed=5, startPos=[0,0], time = 2):
         Mob.__init__(self, "PNG/Enemy3/Greenie-Down1.png", [0,0], startPos)
-        self.rightImages = [pygame.image.load("PNG/Enemy3/Greenie-Right1.png"),
+        self.rightImages = [pygame.image.load("PNG/Enemy3/Greenie-Right2.png"),
                         pygame.image.load("PNG/Enemy3/Greenie-Right2.png"),
                         pygame.image.load("PNG/Enemy3/Greenie-Right3.png"),
                         ]
@@ -41,7 +41,7 @@ class Greenie(Mob):
         self.maxspeed = speed
         self.goal = [0,0]
         self.directMove()
-        
+        self.dropRate = 30
         self.lives = 1
         
     def setPos(self, pos):

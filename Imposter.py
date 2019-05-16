@@ -37,7 +37,7 @@ class Imposter(Mob):
         self.tracking = True
         self.compass = 0
         self.directMove()
-        
+        self.dropRate = 8
         self.radius = (int(self.rect.height/2.0 + self.rect.width/2.0)/2) - 1
         self.detectionRadius = 96
         
