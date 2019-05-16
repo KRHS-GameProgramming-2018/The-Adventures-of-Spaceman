@@ -118,7 +118,7 @@ while True:
         pb = Player(3, level["player"], hasPowers) 
         Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")#playerLives
         magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png")
-        CoinCounter(size, bulletMag, PlayerCoins, "PNG/Power-ups/goldCoin.png")
+        CoinCounter(PlayerCoins, [980, 150])
         print PlayerCoins
 
         while pb.alive:
@@ -399,7 +399,7 @@ while True:
                             #bullets = []
                             #add delay here
             
-            all.update(size, pb.rect.center, pb.lives, bulletMag, PlayerCoins)
+            all.update(size, pb.rect.center, pb.lives, bulletMag, PlayerCoins, CoinCounter)
                    
                     
             boltPower = False
