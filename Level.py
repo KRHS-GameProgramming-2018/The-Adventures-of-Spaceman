@@ -17,7 +17,8 @@ def loadLevel(levelFile):
              "player":[0,0],
              "enemies":[],
              "merchant":[],
-             "power-ups":[]
+             "power-ups":[],
+             "fish":[]
              }
     
     #Block Size is 50x50
@@ -86,6 +87,8 @@ def loadLevel(levelFile):
                 level["power-ups"] += [healthUp([x*50+25, y*50+25])]
             if character == 'c':
                 level["power-ups"] += [Coin([x*50+25, y*50+25])]
+            if character == 'f':
+                level["fish"] = [Block("PNG/fish/fish.png", [x*50+25, y*50+25])]
     return level
     
     
