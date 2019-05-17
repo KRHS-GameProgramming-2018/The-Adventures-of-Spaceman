@@ -160,7 +160,8 @@ while True:
                                                     if event.key == pygame.K_e:
                                                         paused = False
                                                         menu.kill()
-                                                        item1.kill()
+                                                        for item in items:
+                                                            item.kill()
                                                     if event.key == pygame.K_LEFT:
                                                         if itemIndex > 0:
                                                             itemIndex -= 1
