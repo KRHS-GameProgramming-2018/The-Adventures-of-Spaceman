@@ -2,6 +2,7 @@ import pygame, sys, math
 
 class Button():
     def __init__(self, kind, pos=[0,0]):
+        pygame.sprite.Sprite.__init__(self, self.containers)
         if kind == "easy":
             self.basicImage = pygame.image.load("Buttons/easyBasic.png")
             self.hoverImage = pygame.image.load("Buttons/easyHover.png")
@@ -38,7 +39,10 @@ class Button():
             self.basicImage = pygame.image.load("Buttons/gBasic.png")
             self.hoverImage = pygame.image.load("Buttons/gHover.png")
             self.clickImage = pygame.image.load("Buttons/gClick.png")
-            
+        if kind == "pewds":
+            self.basicImage = pygame.image.load("Buttons/pewdiepieBasic.png")
+            self.hoverImage = pygame.image.load("Buttons/pewdiepieHover.png")
+            self.clickImage = pygame.image.load("Buttons/pewdiepieClick.png")
             
         self.image = self.basicImage
         self.rect = self.image.get_rect(center=pos)
@@ -63,7 +67,3 @@ class Button():
             self.image = self.clickImage
         else:
             self.image = self.basicImage
-            
-    def update(*args):
-            pass
-
