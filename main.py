@@ -104,7 +104,7 @@ while True:
                 if event.button == 0:
                     mode = "inGame"
                     
-        startButton = Button("menu", [400,500])
+        # ~ startButton = Button("menu", [400,500])
         
         dirty = all.draw(screen)
         pygame.display.update(dirty)
