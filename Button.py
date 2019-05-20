@@ -1,6 +1,6 @@
 import pygame, sys, math
 
-class Button():
+class Button(pygame.sprite.Sprite):
     def __init__(self, kind, pos=[0,0]):
         pygame.sprite.Sprite.__init__(self, self.containers)
         if kind == "easy":
