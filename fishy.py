@@ -3,7 +3,7 @@ import pygame, sys, math, random
 from mob import *
 
 
-class Greenie(Mob):
+class Fishy(Mob):
     def __init__(self, speed=5, startPos=[0,0], time = 2):
         Mob.__init__(self, "PNG/Enemy3/Greenie-Down1.png", [0,0], startPos)
         self.rightImages = [pygame.image.load("PNG/fish/fish.png"),
