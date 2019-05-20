@@ -42,7 +42,7 @@ class Player(Mob):
         self.keys = []
         self.goal = [0,0]
         self.kind = "player"
-        self.lives = 5
+        self.lives = lives
         self.extraLives = 8
         
         self.didBounceX = False
