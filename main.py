@@ -63,6 +63,7 @@ ShopItem.containers = (shopItems, all)
 Player.containers = (all)
 Background.containers = (all)
 Coin.containers = (coins, all)
+Button.containers = (all)
 
 hasPowers = []
 boltPower = False
@@ -102,6 +103,8 @@ while True:
             if event.type == pygame.JOYBUTTONDOWN:
                 if event.button == 0:
                     mode = "inGame"
+                    
+        startButton = Button("menu", [400,500])
         
         dirty = all.draw(screen)
         pygame.display.update(dirty)
@@ -160,7 +163,8 @@ while True:
                                                     if event.key == pygame.K_e:
                                                         paused = False
                                                         menu.kill()
-                                                        item1.kill()
+                                                        for item in items:
+                                                            item.kill()
                                                     if event.key == pygame.K_LEFT:
                                                         if itemIndex > 0:
                                                             itemIndex -= 1
