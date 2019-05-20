@@ -121,7 +121,7 @@ while True:
         pb = Player(3, level["player"], hasPowers) 
         Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")#playerLives
         magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png")
-        CoinCounter(size, bulletMag, PlayerCoins, "PNG/Power-ups/goldCoin.png")
+        CoinCounter(PlayerCoins, [980, 150])
         print PlayerCoins
 
         while pb.alive:
@@ -143,8 +143,9 @@ while True:
                                             paused = False
                     ###~PLAYER MERCHANT INERACTION~###
                         if event.key == pygame.K_e:
-                            for mob in mobs:
+                            for mob in npcs:
                                 if mob.kind == "merchant":
+                                    print ">>>>>>>>>>>>>>>>>>>"
                                     if mob.checkPlayer(pb.rect.center):
                                         pb.keys = []
                                         paused = True
@@ -162,7 +163,8 @@ while True:
                                                     if event.key == pygame.K_e:
                                                         paused = False
                                                         menu.kill()
-                                                        item1.kill()
+                                                        for item in items:
+                                                            item.kill()
                                                     if event.key == pygame.K_LEFT:
                                                         if itemIndex > 0:
                                                             itemIndex -= 1
@@ -331,7 +333,7 @@ while True:
                 if bulletMag == 0:
                     shooting = False
             
-            
+            ###~ENEMY WITH PLAYER COLLISIONS~###
             playerHitMobs = pygame.sprite.spritecollide(pb, mobs, False)#, pygame.sprite.collide_mask)   
             for mob in playerHitMobs:
                 pb.collide(mob)
@@ -340,6 +342,7 @@ while True:
    
                      
             
+            ###~BULLET KILL ENEMIES~###
             bulletsHitMobs = pygame.sprite.groupcollide(bullets, mobs, True, False)#, pygame.sprite.collide_mask)
             for bullet in bulletsHitMobs:
                 for mob in bulletsHitMobs[bullet]:
@@ -349,12 +352,14 @@ while True:
                                 Coin(mob.rect.center)
                         
             
+            ###~POWER UP COLLECTION~###
             playerHitPowerUps = pygame.sprite.spritecollide(pb, powerUps, True)#, pygame.sprite.collide_mask)   
             for power in playerHitPowerUps:
                 if pb.collide(power):
                     hasPowers += [power.kind]
                     print hasPowers
             
+            ###~COIN COLLECTION~###
             playerHitCoins = pygame.sprite.spritecollide(pb, coins, True)#, pygame.sprite.collide_mask)   
             for coin in playerHitCoins:
                 if pb.collide(coin):
@@ -398,7 +403,7 @@ while True:
                             #bullets = []
                             #add delay here
             
-            all.update(size, pb.rect.center, pb.lives, bulletMag, PlayerCoins)
+            all.update(size, pb.rect.center, pb.lives, bulletMag, PlayerCoins, CoinCounter)
                    
                     
             boltPower = False
