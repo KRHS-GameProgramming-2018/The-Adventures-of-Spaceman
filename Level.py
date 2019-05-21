@@ -7,6 +7,7 @@ from Imposter import *
 from merchant import *
 from tripleShot import *
 from Greenie import *
+# from fishy import *
 
 def loadLevel(levelFile):
     f = open(levelFile, 'r')
