@@ -171,6 +171,11 @@ while True:
                                                     if event.key == pygame.K_RIGHT:
                                                         if itemIndex < len(items)-1:
                                                             itemIndex += 1
+                                                    if event.key == pygame.K_RETURN:
+                                                        for power in shopItems:
+                                                            if itemIndex == 0:
+                                                                hasPowers += [power.kind]
+                                                                
                                             
                                             for i,item in enumerate(items):
                                                 if i == itemIndex:
@@ -415,6 +420,9 @@ while True:
                 print pb.lives
             if "boltPower" in hasPowers:
                 boltPower = True
+                
+            ###~UPGRADES~###
+            #if "mag"
                 
                     
             for mob in mobs.sprites():
