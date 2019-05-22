@@ -9,6 +9,8 @@ class CoinCounter(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self, self.containers)
         self.coin = coins
         self.font = pygame.font.Font(None, 36)
+        # ~ self.shellImage = pygame.image.load("PNG/Power-ups/c0.png")
+        # ~ self.shellRect = self.image.get_rect(center = [980, 150])
         self.image = self.font.render(str(self.coin), True, (255,255,255))
         self.rect = self.image.get_rect(center = pos)
         
