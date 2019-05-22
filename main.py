@@ -171,11 +171,14 @@ while True:
                                                     if event.key == pygame.K_RIGHT:
                                                         if itemIndex < len(items)-1:
                                                             itemIndex += 1
+                                                    ###~Boost~###
                                                     if event.key == pygame.K_RETURN:
-                                                        for power in shopItems:
-                                                            if itemIndex == 0:
-                                                                hasPowers += [power.kind]
-                                                                
+                                                        if itemIndex == 0:
+                                                            hasPowers += [items[itemIndex].kind]
+                                                            
+                                                        items[itemIndex] = ShopItem("purchased", items[itemIndex].rect.center)
+                                                            
+                                                        
                                             
                                             for i,item in enumerate(items):
                                                 if i == itemIndex:
