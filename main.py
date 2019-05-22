@@ -89,10 +89,9 @@ isY = False;
 
 while True:
     bg = Background ("PNG/backgrounds/Title.png")
-    startButton = Button("start", [width/2,height/3])
-    levelButton = Button("levels", [width/2, height/2])
-    controlButton = Button("controls", [width/2, 2*height/3])
-    quitButton = Button("quit", [width/2, 5*height/6])
+    startButton = Button("start", [width/2,3*height/8])
+    controlButton = Button("controls", [width/2, height/2])
+    quitButton = Button("quit", [width/2, 5*height/8])
     
     while mode == "menu":
         for event in pygame.event.get():
@@ -108,7 +107,30 @@ while True:
             if event.type == pygame.JOYBUTTONDOWN:
                 if event.button == 0:
                     mode = "inGame"
+            
             if event.type == pygame.MOUSEMOTION:
+                if event.buttons[0] == 0:
+                    startButton.checkHover(event.pos)
+                    controlButton.checkHover(event.pos)
+                    quitButton.checkHover(event.pos)
+                else:
+                    startButton.checkClick(event.pos)
+                    controlButton.checkClick(event.pos)
+                    quitButton.checkClick(event.pos)
+                    
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                print event.button
+                if event.button == 1:
+                    startButton.checkClick(event.pos)
+                    controlButton.checkClick(event.pos)
+                    quitButton.checkClick(event.pos)
+            if event.type == pygame.MOUSEBUTTONUP:
+                if startButton.collidePt(event.pos):
+                    mode = "inGame"
+                if controlButton.collidePt(event.pos):
+                   pass
+                if quitButton.collidePt(event.pos):
+                    sys.exit()
        
         
         
