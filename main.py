@@ -179,9 +179,9 @@ while True:
                                         paused = True
                                         ## ~SHOP MENU CODE~ ##
                                         menu = Background("PNG/backgrounds/shopMenu.png")
-                                        items = [ShopItem("health plus", [240,510]),
-                                                 ShopItem("mag", [500,510]),
-                                                 ShopItem("health", [760,510])]
+                                        items = [ShopItem("health plus", [280,420]),
+                                                 ShopItem("mag", [520,420]),
+                                                 ShopItem("health", [740,420])]
                                         itemIndex = 0
                                         keyPressed = False
                                         while paused:
