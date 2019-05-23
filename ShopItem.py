@@ -11,10 +11,10 @@ class ShopItem(pygame.sprite.Sprite):
             self.basicImage = pygame.image.load("PNG/Buttons/magShop.png")
             self.hoverImage = pygame.image.load("PNG/Buttons/magShop-selected.png")
             self.kind = "mag"
-        if kind == "boost":
+        if kind == "health plus":
             self.basicImage = pygame.image.load("PNG/Buttons/healthBoostShop.png")
             self.hoverImage = pygame.image.load("PNG/Buttons/healthBoostShop-selected.png")
-            self.kind = "boost"
+            self.kind = "health plus"
         
         if kind == "purchased":
             self.basicImage = pygame.image.load("PNG/Buttons/purchased.png")

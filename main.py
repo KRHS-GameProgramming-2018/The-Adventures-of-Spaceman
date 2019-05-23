@@ -179,7 +179,7 @@ while True:
                                         paused = True
                                         ## ~SHOP MENU CODE~ ##
                                         menu = Background("PNG/backgrounds/shopMenu.png")
-                                        items = [ShopItem("boost", [240,510]),
+                                        items = [ShopItem("health plus", [240,510]),
                                                  ShopItem("mag", [500,510]),
                                                  ShopItem("health", [760,510])]
                                         itemIndex = 0
@@ -199,7 +199,7 @@ while True:
                                                     if event.key == pygame.K_RIGHT:
                                                         if itemIndex < len(items)-1:
                                                             itemIndex += 1
-                                                    ###~Boost~###
+                                                    ###~ITEM SELECT~###
                                                     if event.key == pygame.K_RETURN:
                                                         if itemIndex == 0:
                                                             hasPowers += [items[itemIndex].kind]
