@@ -89,6 +89,10 @@ isY = False;
 
 while True:
     bg = Background ("PNG/backgrounds/Title.png")
+    startButton = Button("start", [width/2,3*height/8])
+    controlButton = Button("controls", [width/2, height/2])
+    quitButton = Button("quit", [width/2, 5*height/8])
+    
     while mode == "menu":
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -103,8 +107,32 @@ while True:
             if event.type == pygame.JOYBUTTONDOWN:
                 if event.button == 0:
                     mode = "inGame"
+            
+            if event.type == pygame.MOUSEMOTION:
+                if event.buttons[0] == 0:
+                    startButton.checkHover(event.pos)
+                    controlButton.checkHover(event.pos)
+                    quitButton.checkHover(event.pos)
+                else:
+                    startButton.checkClick(event.pos)
+                    controlButton.checkClick(event.pos)
+                    quitButton.checkClick(event.pos)
                     
-        startButton = Button("start", [400,500])
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                print event.button
+                if event.button == 1:
+                    startButton.checkClick(event.pos)
+                    controlButton.checkClick(event.pos)
+                    quitButton.checkClick(event.pos)
+            if event.type == pygame.MOUSEBUTTONUP:
+                if startButton.collidePt(event.pos):
+                    mode = "inGame"
+                if controlButton.collidePt(event.pos):
+                   pass
+                if quitButton.collidePt(event.pos):
+                    sys.exit()
+       
+        
         
         dirty = all.draw(screen)
         pygame.display.update(dirty)
@@ -151,9 +179,9 @@ while True:
                                         paused = True
                                         ## ~SHOP MENU CODE~ ##
                                         menu = Background("PNG/backgrounds/shopMenu.png")
-                                        items = [ShopItem("boost", [240,510]),
-                                                 ShopItem("mag", [500,510]),
-                                                 ShopItem("health", [760,510])]
+                                        items = [ShopItem("health plus", [280,420]),
+                                                 ShopItem("mag", [520,420]),
+                                                 ShopItem("health", [740,420])]
                                         itemIndex = 0
                                         keyPressed = False
                                         while paused:
@@ -171,11 +199,14 @@ while True:
                                                     if event.key == pygame.K_RIGHT:
                                                         if itemIndex < len(items)-1:
                                                             itemIndex += 1
+                                                    ###~ITEM SELECT~###
                                                     if event.key == pygame.K_RETURN:
-                                                        for power in shopItems:
-                                                            if itemIndex == 0:
-                                                                hasPowers += [power.kind]
-                                                                
+                                                        if itemIndex == 0:
+                                                            hasPowers += [items[itemIndex].kind]
+                                                        items[itemIndex].kill()
+                                                        items[itemIndex] = ShopItem("purchased", items[itemIndex].rect.center)
+                                                            
+                                                        
                                             
                                             for i,item in enumerate(items):
                                                 if i == itemIndex:

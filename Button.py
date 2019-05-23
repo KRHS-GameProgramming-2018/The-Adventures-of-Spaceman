@@ -10,13 +10,13 @@ class Button(pygame.sprite.Sprite):
         if kind == "controls":
             self.basicImage = pygame.image.load("PNG/buttons/controlsButton.png")
             self.hoverImage = pygame.image.load("PNG/buttons/controlsHover.png")
-            self.clickImage = pygame.image.load("PNG/buttons/controlClick.png")
+            self.clickImage = pygame.image.load("PNG/buttons/controlsClick.png")
         if kind == "levels":
-            self.basicImage = pygame.image.load("PNG/buttons/easyBasic.png")
-            self.hoverImage = pygame.image.load("PNG/buttons/easyBasic.png")
-            self.clickImage = pygame.image.load("PNG/buttons/easyBasic.png")
+            self.basicImage = pygame.image.load("PNG/buttons/quitButton.png")
+            self.hoverImage = pygame.image.load("PNG/buttons/quitButton.png")
+            self.clickImage = pygame.image.load("PNG/buttons/quitButton.png")
         if kind == "quit":
-            self.basicImage = pygame.image.load("PNG/buttons/quitBotton.png")
+            self.basicImage = pygame.image.load("PNG/buttons/quitButton.png")
             self.hoverImage = pygame.image.load("PNG/buttons/quitHover.png")
             self.clickImage = pygame.image.load("PNG/buttons/quitClick.png")
         
