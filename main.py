@@ -88,7 +88,7 @@ isX = False;
 isY = False;
 
 while True:
-    bg = Background ("PNG/backgrounds/Title.png")
+    bg = Background("PNG/backgrounds/Title.png")
     startButton = Button("start", [width/2,3*height/8])
     controlButton = Button("controls", [width/2, height/2])
     quitButton = Button("quit", [width/2, 5*height/8])
@@ -128,7 +128,7 @@ while True:
                 if startButton.collidePt(event.pos):
                     mode = "inGame"
                 if controlButton.collidePt(event.pos):
-                   pass
+                   bg =  Background("PNG/backgrounds/controls.png")
                 if quitButton.collidePt(event.pos):
                     sys.exit()
        
