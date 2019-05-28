@@ -129,6 +129,9 @@ while True:
                     mode = "inGame"
                 if controlButton.collidePt(event.pos):
                    bg =  Background("PNG/backgrounds/controls.png")
+                   if event.type == pygame.KEYDOWN:
+                       if event.key == pygame.K_RETURN:
+                            mode = "inGame"
                 if quitButton.collidePt(event.pos):
                     sys.exit()
        
@@ -421,8 +424,8 @@ while True:
             for block in playerHitBlocks:
                 if pb.collide(block):
                     if block.kind == "warp":
-                        if levelnum == 10:
-                            mode = "victory"
+                        if levelnum == 11:
+                            bg = "PNG/backgrounds/end.PNG"
                         else:
                             currentCoins = CoinCount.coin
                             for s in all.sprites():
