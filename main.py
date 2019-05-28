@@ -179,7 +179,7 @@ while True:
                                         paused = True
                                         ## ~SHOP MENU CODE~ ##
                                         menu = Background("PNG/backgrounds/shopMenu.png")
-                                        items = [ShopItem("health plus", [280,420]),
+                                        items = [ShopItem("health plus", [270,420]),
                                                  ShopItem("mag", [520,420]),
                                                  ShopItem("health", [740,420])]
                                         itemIndex = 0
