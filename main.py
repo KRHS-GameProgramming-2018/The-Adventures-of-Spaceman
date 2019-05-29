@@ -88,7 +88,7 @@ isX = False;
 isY = False;
 
 while True:
-    bg = Background ("PNG/backgrounds/Title.png")
+    bg = Background("PNG/backgrounds/Title.png")
     startButton = Button("start", [width/2,3*height/8])
     controlButton = Button("controls", [width/2, height/2])
     quitButton = Button("quit", [width/2, 5*height/8])
@@ -128,7 +128,10 @@ while True:
                 if startButton.collidePt(event.pos):
                     mode = "inGame"
                 if controlButton.collidePt(event.pos):
-                   pass
+                   bg =  Background("PNG/backgrounds/controls.png")
+                   if event.type == pygame.KEYDOWN:
+                       if event.key == pygame.K_RETURN:
+                            mode = "inGame"
                 if quitButton.collidePt(event.pos):
                     sys.exit()
        
@@ -179,7 +182,7 @@ while True:
                                         paused = True
                                         ## ~SHOP MENU CODE~ ##
                                         menu = Background("PNG/backgrounds/shopMenu.png")
-                                        items = [ShopItem("health plus", [280,420]),
+                                        items = [ShopItem("health plus", [270,420]),
                                                  ShopItem("mag", [520,420]),
                                                  ShopItem("health", [740,420])]
                                         itemIndex = 0
@@ -421,9 +424,14 @@ while True:
             for block in playerHitBlocks:
                 if pb.collide(block):
                     if block.kind == "warp":
+
                         
                         if levelnum == 10:
                             mode = "victory"
+
+                        if levelnum == 11:
+                            bg = "PNG/backgrounds/end.PNG"
+
                         else:
                             currentCoins = CoinCount.coin
                             for s in all.sprites():
