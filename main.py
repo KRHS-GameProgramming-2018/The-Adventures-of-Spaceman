@@ -76,7 +76,7 @@ levelnum = 1
 bulletMag = 40
 PlayerCoins = 0
 startCoins = 0
-#playerLives = 5
+playerLives = 5
 
 bgColor = 0,0,0
 mode = "menu"
@@ -421,6 +421,7 @@ while True:
             for block in playerHitBlocks:
                 if pb.collide(block):
                     if block.kind == "warp":
+                        
                         if levelnum == 10:
                             mode = "victory"
                         else:
