@@ -76,7 +76,7 @@ levelnum = 1
 bulletMag = 40
 PlayerCoins = 0
 startCoins = 0
-#playerLives = 5
+playerLives = 5
 
 bgColor = 0,0,0
 mode = "menu"
@@ -182,9 +182,9 @@ while True:
                                         paused = True
                                         ## ~SHOP MENU CODE~ ##
                                         menu = Background("PNG/backgrounds/shopMenu.png")
-                                        items = [ShopItem("health plus", [270,420]),
-                                                 ShopItem("mag", [520,420]),
-                                                 ShopItem("health", [740,420])]
+                                        items = [ShopItem("health plus", [270,400]),
+                                                 ShopItem("mag", [490,400]),
+                                                 ShopItem("health", [740,400])]
                                         itemIndex = 0
                                         keyPressed = False
                                         while paused:
@@ -424,8 +424,14 @@ while True:
             for block in playerHitBlocks:
                 if pb.collide(block):
                     if block.kind == "warp":
+
+                        
+                        if levelnum == 10:
+                            mode = "victory"
+
                         if levelnum == 11:
                             bg = "PNG/backgrounds/end.PNG"
+
                         else:
                             currentCoins = CoinCount.coin
                             for s in all.sprites():
@@ -461,7 +467,8 @@ while True:
                 boltPower = True
                 
             ###~UPGRADES~###
-            #if "mag"
+            if "mag" in hasPowers:
+                bulletMag += 10
                 
                     
             for mob in mobs.sprites():
