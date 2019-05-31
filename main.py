@@ -456,6 +456,7 @@ while True:
             all.update(size, pb.rect.center, pb.lives, bulletMag, PlayerCoins, CoinCounter)
                    
                     
+            ###~POWER UPS~###
             boltPower = False
             if "speedBoost" in hasPowers:
                 pb.maxSpeed = 7
@@ -468,7 +469,7 @@ while True:
                 
             ###~UPGRADES~###
             if "mag" in hasPowers:
-                bulletMag += 10
+                magPlus = True
                 
                     
             for mob in mobs.sprites():
