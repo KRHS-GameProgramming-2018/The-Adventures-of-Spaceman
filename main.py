@@ -441,7 +441,7 @@ while True:
                             level = loadLevel("Levels/"+str(levelnum)+".lvl")
                             pb = Player(3, level["player"], hasPowers)
                             print pb.lives
-                            magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png")
+                            magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png", "mag" in hasPowers)
                             Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")#playerLives
                             CoinCount= CoinCounter(currentCoins, [980, 150])
 
