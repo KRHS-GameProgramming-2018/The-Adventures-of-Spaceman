@@ -424,8 +424,6 @@ while True:
             for block in playerHitBlocks:
                 if pb.collide(block):
                     if block.kind == "warp":
-
-                        
                         if levelnum == 10:
                             mode = "victory"
 
