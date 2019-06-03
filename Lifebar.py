@@ -23,8 +23,11 @@ class Lifebar(pygame.sprite.Sprite):
         lives = args[3]
         # ~ bullets = args[4]
         
-        if lives > 6:
-            lives = 6
+        if lives > 8:
+            lives = 8
+        if lives < 0:
+            # ~ print "lives:" + str(lives)
+            lives = 0
         self.image = self.healthImages[lives-1]
         
 
