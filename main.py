@@ -182,9 +182,9 @@ while True:
                                         paused = True
                                         ## ~SHOP MENU CODE~ ##
                                         menu = Background("PNG/backgrounds/shopMenu.png")
-                                        items = [ShopItem("health plus", [270,420]),
-                                                 ShopItem("mag", [520,420]),
-                                                 ShopItem("health", [740,420])]
+                                        items = [ShopItem("health plus", [270,400]),
+                                                 ShopItem("mag", [490,400]),
+                                                 ShopItem("health", [740,400])]
                                         itemIndex = 0
                                         keyPressed = False
                                         while paused:
@@ -439,7 +439,7 @@ while True:
                             level = loadLevel("Levels/"+str(levelnum)+".lvl")
                             pb = Player(3, level["player"], hasPowers)
                             print pb.lives
-                            magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png")
+                            magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png", "mag" in hasPowers)
                             Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")#playerLives
                             CoinCount= CoinCounter(currentCoins, [980, 150])
 
@@ -454,6 +454,7 @@ while True:
             all.update(size, pb.rect.center, pb.lives, bulletMag, PlayerCoins, CoinCounter)
                    
                     
+            ###~POWER UPS~###
             boltPower = False
             if "speedBoost" in hasPowers:
                 pb.maxSpeed = 7
@@ -465,7 +466,8 @@ while True:
                 boltPower = True
                 
             ###~UPGRADES~###
-            #if "mag"
+            if "mag" in hasPowers:
+                magPlus = True
                 
                     
             for mob in mobs.sprites():
