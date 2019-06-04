@@ -77,7 +77,11 @@ playerLives = 5
 bulletMag = 40
 PlayerCoins = 0
 startCoins = 0
+<<<<<<< HEAD
 
+=======
+playerLives = 5
+>>>>>>> origin/master
 
 bgColor = 0,0,0
 mode = "menu"
@@ -183,9 +187,9 @@ while True:
                                         paused = True
                                         ## ~SHOP MENU CODE~ ##
                                         menu = Background("PNG/backgrounds/shopMenu.png")
-                                        items = [ShopItem("health plus", [280,420]),
-                                                 ShopItem("mag", [520,420]),
-                                                 ShopItem("health", [740,420])]
+                                        items = [ShopItem("health plus", [270,400]),
+                                                 ShopItem("mag", [490,400]),
+                                                 ShopItem("health", [740,400])]
                                         itemIndex = 0
                                         keyPressed = False
                                         while paused:
@@ -422,6 +426,7 @@ while True:
             bulletsHitBlocks = pygame.sprite.groupcollide(bullets, blocks, True, False)
             
             playerHitBlocks = pygame.sprite.spritecollide(pb, blocks, False)
+<<<<<<< HEAD
             if len(playerHitBlocks) > 0: #print len(playerHitBlocks)
                 for block in playerHitBlocks:
                     if pb.collide(block):
@@ -442,6 +447,30 @@ while True:
                                 magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png")
                                 Lifebar(size, bulletMag, playerLives, "PNG/backgrounds/spacemansheart.png")#playerLives
                                 CoinCount= CoinCounter(currentCoins, [980, 150])
+=======
+            if len(playerHitBlocks) > 0: print len(playerHitBlocks)
+            for block in playerHitBlocks:
+                if pb.collide(block):
+                    if block.kind == "warp":
+                        if levelnum == 10:
+                            mode = "victory"
+
+                        if levelnum == 11:
+                            bg = "PNG/backgrounds/end.PNG"
+
+                        else:
+                            currentCoins = CoinCount.coin
+                            for s in all.sprites():
+                                s.kill()
+                            levelnum += 1
+                            bg = Background("PNG/backgrounds/Black.png")
+                            level = loadLevel("Levels/"+str(levelnum)+".lvl")
+                            pb = Player(3, level["player"], hasPowers)
+                            print pb.lives
+                            magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png", "mag" in hasPowers)
+                            Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")#playerLives
+                            CoinCount= CoinCounter(currentCoins, [980, 150])
+>>>>>>> origin/master
 
 
                                 # ~ print levelnum
@@ -454,6 +483,7 @@ while True:
             all.update(size, pb.rect.center, pb.lives, bulletMag, PlayerCoins, CoinCounter)
                    
                     
+            ###~POWER UPS~###
             boltPower = False
             if "speedBoost" in hasPowers:
                 pb.maxSpeed = 6
@@ -465,7 +495,8 @@ while True:
                 boltPower = True
                 
             ###~UPGRADES~###
-            #if "mag"
+            if "mag" in hasPowers:
+                magPlus = True
                 
                     
             for mob in mobs.sprites():
