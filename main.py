@@ -77,11 +77,6 @@ playerLives = 5
 bulletMag = 40
 PlayerCoins = 0
 startCoins = 0
-<<<<<<< HEAD
-
-=======
-playerLives = 5
->>>>>>> origin/master
 
 bgColor = 0,0,0
 mode = "menu"
@@ -148,6 +143,7 @@ while True:
     
     
     while mode == "inGame":
+        print "in game"
         for s in all.sprites():
             s.kill()
         
@@ -426,14 +422,17 @@ while True:
             bulletsHitBlocks = pygame.sprite.groupcollide(bullets, blocks, True, False)
             
             playerHitBlocks = pygame.sprite.spritecollide(pb, blocks, False)
-<<<<<<< HEAD
-            if len(playerHitBlocks) > 0: #print len(playerHitBlocks)
+            if len(playerHitBlocks) > 0: 
+                print len(playerHitBlocks)
                 for block in playerHitBlocks:
                     if pb.collide(block):
-                        # ~ print ("lives:" + str(playerLives))
                         if block.kind == "warp":
+                            if levelnum == 10:
+                                mode = "victory"
+
                             if levelnum == 11:
                                 bg = "PNG/backgrounds/end.PNG"
+
                             else:
                                 currentCoins = CoinCount.coin
                                 for s in all.sprites():
@@ -441,44 +440,20 @@ while True:
                                 levelnum += 1
                                 bg = Background("PNG/backgrounds/Black.png")
                                 level = loadLevel("Levels/"+str(levelnum)+".lvl")
-                                print ("lives:" + str(playerLives))
-                                pb = Player(3, level["player"], hasPowers, playerLives)
-                                
-                                magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png")
-                                Lifebar(size, bulletMag, playerLives, "PNG/backgrounds/spacemansheart.png")#playerLives
+                                pb = Player(3, level["player"], hasPowers)
+                                print pb.lives
+                                magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png", "mag" in hasPowers)
+                                Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")#playerLives
                                 CoinCount= CoinCounter(currentCoins, [980, 150])
-=======
-            if len(playerHitBlocks) > 0: print len(playerHitBlocks)
-            for block in playerHitBlocks:
-                if pb.collide(block):
-                    if block.kind == "warp":
-                        if levelnum == 10:
-                            mode = "victory"
-
-                        if levelnum == 11:
-                            bg = "PNG/backgrounds/end.PNG"
-
-                        else:
-                            currentCoins = CoinCount.coin
-                            for s in all.sprites():
-                                s.kill()
-                            levelnum += 1
-                            bg = Background("PNG/backgrounds/Black.png")
-                            level = loadLevel("Levels/"+str(levelnum)+".lvl")
-                            pb = Player(3, level["player"], hasPowers)
-                            print pb.lives
-                            magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png", "mag" in hasPowers)
-                            Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")#playerLives
-                            CoinCount= CoinCounter(currentCoins, [980, 150])
->>>>>>> origin/master
 
 
-                                # ~ print levelnum
-                                #blocks = level["blocks"]
-                                #mobs = level["enemies"]
-                                #powerUps = level["power-ups"]\
-                                #bullets = []
-                                #add delay here
+
+                                    # ~ print levelnum
+                                    #blocks = level["blocks"]
+                                    #mobs = level["enemies"]
+                                    #powerUps = level["power-ups"]\
+                                    #bullets = []
+                                    #add delay here
             
             all.update(size, pb.rect.center, pb.lives, bulletMag, PlayerCoins, CoinCounter)
                    
