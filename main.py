@@ -204,10 +204,11 @@ while True:
                                                             itemIndex += 1
                                                     ###~ITEM SELECT~###
                                                     if event.key == pygame.K_RETURN:
-                                                        if itemIndex == 0:
-                                                            hasPowers += [items[itemIndex].kind]
+                                                        hasPowers += [items[itemIndex].kind]
                                                         items[itemIndex].kill()
                                                         items[itemIndex] = ShopItem("purchased", items[itemIndex].rect.center)
+                                                    if "mag" in hasPowers:
+                                                        bulletMag = 50
                                                             
                                                         
                                             
