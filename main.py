@@ -461,6 +461,7 @@ while True:
                 pb.maxSpeed = 6
             if "healthUp" in hasPowers:
                 playerLives = 8
+                pb.lives = playerLives
                 hasPowers.remove("healthUp")
                 print pb.lives
             if "boltPower" in hasPowers:

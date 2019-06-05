@@ -15,7 +15,7 @@ class Lifebar(pygame.sprite.Sprite):
                        pygame.image.load("PNG/backgrounds/h8.png")
                        ]
         self.image = self.healthImages[lives]
-        self.rect = self.image.get_rect(center=[979,430])
+        self.rect = self.image.get_rect(center=[979,460])
         
         
         
