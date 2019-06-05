@@ -74,7 +74,7 @@ levelnum = 1
 #powerUps = level["power-ups"]
 #bullets = []
 bulletMag = 40
-PlayerCoins = 0
+PlayerCoins = 1
 startCoins = 0
 playerLives = 5
 
