@@ -6,6 +6,7 @@ class Background(pygame.sprite.Sprite):
         self.image = pygame.image.load(image)
         self.rect = self.image.get_rect(center = pos)
         self.layer = 0
+        self.name = image
 
     def update(*args):
         pass

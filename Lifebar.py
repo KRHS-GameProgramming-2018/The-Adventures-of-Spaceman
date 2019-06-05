@@ -13,7 +13,10 @@ class Lifebar(pygame.sprite.Sprite):
                        pygame.image.load("PNG/backgrounds/h6.png"),
                        pygame.image.load("PNG/backgrounds/h7.png"),
                        pygame.image.load("PNG/backgrounds/h8.png")
+<<<<<<< HEAD
                        
+=======
+>>>>>>> origin/master
                        ]
         self.image = self.healthImages[lives]
         self.rect = self.image.get_rect(center=[979,430])
@@ -26,8 +29,11 @@ class Lifebar(pygame.sprite.Sprite):
         lives = args[3]
         # ~ bullets = args[4]
         
-        if lives > 6:
-            lives = 6
+        if lives > 8:
+            lives = 8
+        if lives < 0:
+            print "lives:" + str(lives)
+            lives = 0
         self.image = self.healthImages[lives-1]
         
 
