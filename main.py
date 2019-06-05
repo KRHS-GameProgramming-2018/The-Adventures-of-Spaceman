@@ -143,7 +143,6 @@ while True:
     
     
     while mode == "inGame":
-        print "in game"
         for s in all.sprites():
             s.kill()
         
@@ -379,9 +378,7 @@ while True:
                 pb.collide(mob)
                 mob.collide(pb)
                 if pb.collide(mob):
-                    playerLives += -1
-   
-                     
+                    playerLives = pb.lives
             
             ###~BULLET KILL ENEMIES~###
             bulletsHitMobs = pygame.sprite.groupcollide(bullets, mobs, True, False)#, pygame.sprite.collide_mask)
@@ -440,7 +437,7 @@ while True:
                                 levelnum += 1
                                 bg = Background("PNG/backgrounds/Black.png")
                                 level = loadLevel("Levels/"+str(levelnum)+".lvl")
-                                pb = Player(3, level["player"], hasPowers)
+                                pb = Player(3, level["player"], hasPowers, playerLives)
                                 print pb.lives
                                 magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png", "mag" in hasPowers)
                                 Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")#playerLives
