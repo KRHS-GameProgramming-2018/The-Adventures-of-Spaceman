@@ -8,8 +8,8 @@ from speedBoost import *
 from Coin import *
 #https://opengameart.org/content/space-man-space-bot-rework
 class Player(Mob):
-    def __init__(self, speed=6, startPos=[0,0], powers=[]):
-        Mob.__init__(self, "PNG/Player/spaceman.png", [0,0], startPos, powers)
+    def __init__(self, speed=6, startPos=[0,0], powers=[], playerLives=6):
+        Mob.__init__(self, "PNG/Player/spaceman.png", [0,0], startPos)
         self.notMoving = [pygame.image.load("PNG/Player/spaceman.png"),
                         pygame.image.load("PNG/Player/spaceman.png"),
                         pygame.image.load("PNG/Player/spaceman.png"),
@@ -42,8 +42,8 @@ class Player(Mob):
         self.keys = []
         self.goal = [0,0]
         self.kind = "player"
-        self.lives = 5
-        self.extraLives = 8
+        self.lives = playerLives
+        
         
         self.didBounceX = False
         self.didBounceY = False
@@ -111,13 +111,15 @@ class Player(Mob):
                 
    
     def collide(self, other):
+        if other.kind == "warp":
+            pass
         if not self.invincible and (other.kind == "enemy" or other.kind == "greenie" or other.kind == "imposter"): #get hurt
             self.lives += -1
-            print self.lives
+            print "gets hurt"
             self.invincible = True
             if self.lives == 0:
                 self.alive = False
-        if not (other.kind == "warp" or other.kind == "greenie" or other.kind == "Coin"):
+        if not (other.kind == "warp" or other.kind == "Coin"):
             Mob.collide(self, other)
         return True
         # ~ diffx = abs(self.rect.centerx - other.rect.centerx)
@@ -220,8 +222,9 @@ class Player(Mob):
             else:
                 self.invincTimer = 0
                 self.invincible = False
-        
-                   
+                
+        if self.lives < 0:
+            self.alive = False
     
     
     

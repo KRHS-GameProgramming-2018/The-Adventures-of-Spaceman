@@ -68,15 +68,15 @@ Button.containers = (all)
 hasPowers = []
 boltPower = False
 levelnum = 1
+playerLives = 5
 
 #blocks = level["blocks"]
 #mobs = level["enemies"]
 #powerUps = level["power-ups"]
 #bullets = []
 bulletMag = 40
-PlayerCoins = 0
+PlayerCoins = 1
 startCoins = 0
-playerLives = 5
 
 bgColor = 0,0,0
 mode = "menu"
@@ -149,8 +149,8 @@ while True:
         bg.kill()
         bg = Background("PNG/backgrounds/Black.png")
         level = loadLevel("Levels/1.lvl")
-        pb = Player(3, level["player"], hasPowers) 
-        Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")#playerLives
+        pb = Player(3, level["player"], hasPowers, playerLives) 
+        Lifebar(size, bulletMag, playerLives, "PNG/backgrounds/spacemansheart.png")#playerLives
         magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png")
         CoinCount= CoinCounter(PlayerCoins, [980, 150])
         print PlayerCoins
@@ -176,7 +176,7 @@ while True:
                         if event.key == pygame.K_e:
                             for mob in npcs:
                                 if mob.kind == "merchant":
-                                    print ">>>>>>>>>>>>>>>>>>>"
+                                    # ~ print ">>>>>>>>>>>>>>>>>>>"
                                     if mob.checkPlayer(pb.rect.center):
                                         pb.keys = []
                                         paused = True
@@ -368,7 +368,7 @@ while True:
                     if bulletMag > 0:
                         bulletMag -= 1
                         if boltPower == True:
-                            print 'yes'
+                            # ~ print 'yes'
                             pb.shoot(False)  
                 if bulletMag == 0:
                     shooting = False
@@ -378,9 +378,8 @@ while True:
             for mob in playerHitMobs:
                 pb.collide(mob)
                 mob.collide(pb)
-                #playerLives -= 1
-   
-                     
+                if pb.collide(mob):
+                    playerLives = pb.lives
             
             ###~BULLET KILL ENEMIES~###
             bulletsHitMobs = pygame.sprite.groupcollide(bullets, mobs, True, False)#, pygame.sprite.collide_mask)
@@ -404,7 +403,7 @@ while True:
             for coin in playerHitCoins:
                 if pb.collide(coin):
                     PlayerCoins += 1
-                    print PlayerCoins
+                    # ~ print PlayerCoins
                 
             # ~ mobsHitMobs = pygame.sprite.groupcollide(mobs, mobs, False, False, pygame.sprite.collide_mask)
             # ~ for hitter in mobsHitMobs:
@@ -421,36 +420,38 @@ while True:
             bulletsHitBlocks = pygame.sprite.groupcollide(bullets, blocks, True, False)
             
             playerHitBlocks = pygame.sprite.spritecollide(pb, blocks, False)
-            if len(playerHitBlocks) > 0: print len(playerHitBlocks)
-            for block in playerHitBlocks:
-                if pb.collide(block):
-                    if block.kind == "warp":
-                        if levelnum == 10:
-                            mode = "victory"
+            if len(playerHitBlocks) > 0: 
+                print len(playerHitBlocks)
+                for block in playerHitBlocks:
+                    if pb.collide(block):
+                        if block.kind == "warp":
+                            if levelnum == 10:
+                                mode = "victory"
 
-                        if levelnum == 11:
-                            bg = "PNG/backgrounds/end.PNG"
+                            if levelnum == 11:
+                                bg = "PNG/backgrounds/end.PNG"
 
-                        else:
-                            currentCoins = CoinCount.coin
-                            for s in all.sprites():
-                                s.kill()
-                            levelnum += 1
-                            bg = Background("PNG/backgrounds/Black.png")
-                            level = loadLevel("Levels/"+str(levelnum)+".lvl")
-                            pb = Player(3, level["player"], hasPowers)
-                            print pb.lives
-                            magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png", "mag" in hasPowers)
-                            Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")#playerLives
-                            CoinCount= CoinCounter(currentCoins, [980, 150])
+                            else:
+                                currentCoins = CoinCount.coin
+                                for s in all.sprites():
+                                    s.kill()
+                                levelnum += 1
+                                bg = Background("PNG/backgrounds/Black.png")
+                                level = loadLevel("Levels/"+str(levelnum)+".lvl")
+                                pb = Player(3, level["player"], hasPowers, playerLives)
+                                print pb.lives
+                                magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png", "mag" in hasPowers)
+                                Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")#playerLives
+                                CoinCount= CoinCounter(currentCoins, [980, 150])
 
 
-                            print levelnum
-                            #blocks = level["blocks"]
-                            #mobs = level["enemies"]
-                            #powerUps = level["power-ups"]\
-                            #bullets = []
-                            #add delay here
+
+                                    # ~ print levelnum
+                                    #blocks = level["blocks"]
+                                    #mobs = level["enemies"]
+                                    #powerUps = level["power-ups"]\
+                                    #bullets = []
+                                    #add delay here
             
             all.update(size, pb.rect.center, pb.lives, bulletMag, PlayerCoins, CoinCounter)
                    
@@ -458,9 +459,10 @@ while True:
             ###~POWER UPS~###
             boltPower = False
             if "speedBoost" in hasPowers:
-                pb.maxSpeed = 7
+                pb.maxSpeed = 6
             if "healthUp" in hasPowers:
-                pb.lives = pb.extraLives
+                playerLives = 8
+                pb.lives = playerLives
                 hasPowers.remove("healthUp")
                 print pb.lives
             if "boltPower" in hasPowers:
@@ -502,9 +504,10 @@ while True:
                             # ~ blocks = level["blocks"]
                             # ~ mobs = level["enemies"]
                             # ~ powerUps = level["power-ups"]
-                            pb = Player(3, level["player"], hasPowers)
+                            playerLives = 5
+                            pb = Player(3, level["player"], hasPowers, playerLives)
                             magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png")
-                            Lifebar(size, bulletMag, pb.lives , "PNG/backgrounds/spacemansheart.png")#playerLives
+                            Lifebar(size, bulletMag, playerLives, "PNG/backgrounds/spacemansheart.png")#playerLives
                             
 
                             bulletMag = 40
