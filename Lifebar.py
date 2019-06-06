@@ -25,8 +25,8 @@ class Lifebar(pygame.sprite.Sprite):
         lives = args[3]
         # ~ bullets = args[4]
         
-        if lives > 8:
-            lives = 8
+        if lives > 7:
+            lives = 7
         if lives < 0:
             print "lives:" + str(lives)
             lives = 0
