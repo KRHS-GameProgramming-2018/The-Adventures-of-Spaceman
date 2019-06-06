@@ -184,7 +184,7 @@ while True:
                                         menu = Background("PNG/backgrounds/shopMenu.png")
                                         items = [ShopItem("health plus", [270,400]),
                                                  ShopItem("mag", [490,400]),
-                                                 ShopItem("health", [740,400])]
+                                                 ShopItem("healthUp", [740,400])]
                                         itemIndex = 0
                                         keyPressed = False
                                         while paused:
