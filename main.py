@@ -248,7 +248,8 @@ while True:
                         if event.key == pygame.K_SPACE:  
                             shooting = True
                         if event.key == pygame.K_r:
-                            bulletMag = 40
+                            if "mag" in hasPowers:
+                                bulletMag = 50
                             
                                     
                 if event.type == pygame.KEYUP:
@@ -453,7 +454,12 @@ while True:
                                     #bullets = []
                                     #add delay here
             
-            all.update(size, pb.rect.center, pb.lives, bulletMag, PlayerCoins, CoinCounter)
+            all.update(size, 
+                       pb.rect.center, 
+                       pb.lives, 
+                       bulletMag, 
+                       PlayerCoins, 
+                       CoinCounter)
                    
                     
             ###~POWER UPS~###
