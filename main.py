@@ -458,7 +458,7 @@ while True:
             ###~POWER UPS~###
             boltPower = False
             if "speedBoost" in hasPowers:
-                pb.maxSpeed = 6
+                pb.maxSpeed = 60
             if "healthUp" in hasPowers:
                 playerLives = 8
                 pb.lives = playerLives
