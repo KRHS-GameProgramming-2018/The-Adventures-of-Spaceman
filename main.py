@@ -209,6 +209,7 @@ while True:
                                                         items[itemIndex] = ShopItem("purchased", items[itemIndex].rect.center)
                                                     if "mag" in hasPowers:
                                                         bulletMag = 50
+                                                    
                                                             
                                                         
                                             
@@ -250,6 +251,8 @@ while True:
                         if event.key == pygame.K_r:
                             if "mag" in hasPowers:
                                 bulletMag = 50
+                            else:
+                                bulletMag = 40
                             
                                     
                 if event.type == pygame.KEYUP:
