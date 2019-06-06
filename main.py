@@ -184,7 +184,7 @@ while True:
                                         menu = Background("PNG/backgrounds/shopMenu.png")
                                         items = [ShopItem("health plus", [270,400]),
                                                  ShopItem("mag", [490,400]),
-                                                 ShopItem("health", [740,400])]
+                                                 ShopItem("healthUp", [740,400])]
                                         itemIndex = 0
                                         keyPressed = False
                                         while paused:
@@ -204,10 +204,12 @@ while True:
                                                             itemIndex += 1
                                                     ###~ITEM SELECT~###
                                                     if event.key == pygame.K_RETURN:
-                                                        if itemIndex == 0:
-                                                            hasPowers += [items[itemIndex].kind]
+                                                        hasPowers += [items[itemIndex].kind]
                                                         items[itemIndex].kill()
                                                         items[itemIndex] = ShopItem("purchased", items[itemIndex].rect.center)
+                                                    if "mag" in hasPowers:
+                                                        bulletMag = 50
+                                                    
                                                             
                                                         
                                             
@@ -247,7 +249,10 @@ while True:
                         if event.key == pygame.K_SPACE:  
                             shooting = True
                         if event.key == pygame.K_r:
-                            bulletMag = 40
+                            if "mag" in hasPowers:
+                                bulletMag = 50
+                            else:
+                                bulletMag = 40
                             
                                     
                 if event.type == pygame.KEYUP:
@@ -452,7 +457,12 @@ while True:
                                     #bullets = []
                                     #add delay here
             
-            all.update(size, pb.rect.center, pb.lives, bulletMag, PlayerCoins, CoinCounter)
+            all.update(size, 
+                       pb.rect.center, 
+                       pb.lives, 
+                       bulletMag, 
+                       PlayerCoins, 
+                       CoinCounter)
                    
                     
             ###~POWER UPS~###
