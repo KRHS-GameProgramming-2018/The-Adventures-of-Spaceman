@@ -3,10 +3,10 @@ import pygame, sys, math
 class ShopItem(pygame.sprite.Sprite):
     def __init__(self, kind, pos=[0,0]):
         pygame.sprite.Sprite.__init__(self, self.containers)
-        if kind == "health":
+        if kind == "healthUp":
             self.basicImage = pygame.image.load("PNG/Buttons/healthShop.png")
             self.hoverImage = pygame.image.load("PNG/Buttons/healthShop-selected.png")
-            self.kind = "health"
+            self.kind = "healthUp"
         if kind == "mag":
             self.basicImage = pygame.image.load("PNG/Buttons/magShop.png")
             self.hoverImage = pygame.image.load("PNG/Buttons/magShop-selected.png")

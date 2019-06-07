@@ -179,7 +179,7 @@ while True:
                                         menu = Background("PNG/backgrounds/shopMenu.png")
                                         items = [ShopItem("health plus", [270,400]),
                                                  ShopItem("mag", [490,400]),
-                                                 ShopItem("health", [740,400])]
+                                                 ShopItem("healthUp", [740,400])]
                                         itemIndex = 0
                                         keyPressed = False
                                         while paused:
@@ -243,8 +243,10 @@ while True:
                         if event.key == pygame.K_SPACE:  
                             shooting = True
                         if event.key == pygame.K_r:
-                            # ~ if "mag" in hasPowers:
-                            bulletMag = 50
+                            if "mag" in hasPowers:
+                                bulletMag = 50
+                            else:
+                                bulletMag = 40
                             
                                     
                 if event.type == pygame.KEYUP:
@@ -453,7 +455,7 @@ while True:
             ###~POWER UPS~###
             boltPower = False
             if "speedBoost" in hasPowers:
-                pb.maxSpeed = 6
+                pb.maxSpeed = 60
             if "healthUp" in hasPowers:
                 playerLives = 8
                 pb.lives = playerLives
