@@ -94,4 +94,3 @@ def loadLevel(levelFile):
     
     
     
-# ~ loadLevel("Levels/1.lvl")
