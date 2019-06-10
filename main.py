@@ -149,7 +149,7 @@ while True:
         bg.kill()
         bg = Background("PNG/backgrounds/Black.png")
         level = loadLevel("Levels/1.lvl")
-        pb = Player(3, level["player"], hasPowers, playerLives) 
+        pb = Player(3, level["player"], hasPowers, 8) 
         Lifebar(size, bulletMag, playerLives, "PNG/backgrounds/spacemansheart.png")#playerLives
         magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png")
         CoinCount= CoinCounter(PlayerCoins, [980, 150])
