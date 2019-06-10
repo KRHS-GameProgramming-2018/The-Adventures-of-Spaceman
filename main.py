@@ -70,10 +70,6 @@ boltPower = False
 levelnum = 1
 playerLives = 5
 
-#blocks = level["blocks"]
-#mobs = level["enemies"]
-#powerUps = level["power-ups"]
-#bullets = []
 bulletMag = 40
 PlayerCoins = 1
 startCoins = 0
@@ -92,7 +88,7 @@ while True:
     startButton = Button("start", [width/2,3*height/8])
     controlButton = Button("controls", [width/2, height/2])
     quitButton = Button("quit", [width/2, 5*height/8])
-    
+    uselessButton = Button("useless", [width/2, 8*height/4])
     while mode == "menu":
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -113,10 +109,12 @@ while True:
                     startButton.checkHover(event.pos)
                     controlButton.checkHover(event.pos)
                     quitButton.checkHover(event.pos)
+                    uselessButton.checkHover(event.pos)
                 else:
                     startButton.checkClick(event.pos)
                     controlButton.checkClick(event.pos)
                     quitButton.checkClick(event.pos)
+                    uselessButton.checkClick(event.pos)
                     
             if event.type == pygame.MOUSEBUTTONDOWN:
                 print event.button
@@ -124,14 +122,17 @@ while True:
                     startButton.checkClick(event.pos)
                     controlButton.checkClick(event.pos)
                     quitButton.checkClick(event.pos)
+                    uselessButton.checkClick(event.pos)
             if event.type == pygame.MOUSEBUTTONUP:
                 if startButton.collidePt(event.pos):
                     mode = "inGame"
                 if controlButton.collidePt(event.pos):
-                   bg =  Background("PNG/backgrounds/controls.png")
-                   if event.type == pygame.KEYDOWN:
-                       if event.key == pygame.K_RETURN:
-                            mode = "inGame"
+                    bg =  Background("PNG/backgrounds/controls.png")
+                if uselessButton.collidePt(event.pos):
+                    bg =  Background("PNG/backgrounds/skittleAd.png")
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        mode = "inGame"
                 if quitButton.collidePt(event.pos):
                     sys.exit()
        
@@ -149,15 +150,14 @@ while True:
         bg.kill()
         bg = Background("PNG/backgrounds/Black.png")
         level = loadLevel("Levels/1.lvl")
-        pb = Player(3, level["player"], hasPowers, 8) 
-        Lifebar(size, bulletMag, playerLives, "PNG/backgrounds/spacemansheart.png")#playerLives
+        pb = Player(3, level["player"], hasPowers, playerLives) 
+        Lifebar(size, bulletMag, playerLives, "PNG/backgrounds/spacemansheart.png")
         magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png")
         CoinCount= CoinCounter(PlayerCoins, [980, 150])
         print PlayerCoins
 
         while pb.alive:
             for event in pygame.event.get():
-                #print event
                 if event.type == pygame.QUIT:
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
@@ -209,7 +209,6 @@ while True:
                                                         items[itemIndex] = ShopItem("purchased", items[itemIndex].rect.center)
                                                     if "mag" in hasPowers:
                                                         bulletMag = 50
-                                                    
                                                             
                                                         
                                             
@@ -372,7 +371,7 @@ while True:
                     if bulletMag > 0:
                         bulletMag -= 1
                         if boltPower == True:
-                            # ~ print 'yes'
+                            
                             pb.shoot(False)  
                 if bulletMag == 0:
                     shooting = False
@@ -442,21 +441,14 @@ while True:
                                 levelnum += 1
                                 bg = Background("PNG/backgrounds/Black.png")
                                 level = loadLevel("Levels/"+str(levelnum)+".lvl")
+                                if playerLives > 7:
+                                    playerLives = 7
                                 pb = Player(3, level["player"], hasPowers, playerLives)
                                 print pb.lives
                                 magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png", "mag" in hasPowers)
                                 Lifebar(size, bulletMag, pb.lives, "PNG/backgrounds/spacemansheart.png")#playerLives
                                 CoinCount= CoinCounter(currentCoins, [980, 150])
-
-
-
-                                    # ~ print levelnum
-                                    #blocks = level["blocks"]
-                                    #mobs = level["enemies"]
-                                    #powerUps = level["power-ups"]\
-                                    #bullets = []
-                                    #add delay here
-            
+                                
             all.update(size, 
                        pb.rect.center, 
                        pb.lives, 
@@ -508,11 +500,7 @@ while True:
                 if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_RETURN:
                             levelnum = 1
-                            #bullets = []
                             level = loadLevel("Levels/"+str(levelnum)+".lvl")
-                            # ~ blocks = level["blocks"]
-                            # ~ mobs = level["enemies"]
-                            # ~ powerUps = level["power-ups"]
                             playerLives = 5
                             pb = Player(3, level["player"], hasPowers, playerLives)
                             magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png")
@@ -541,7 +529,6 @@ while True:
     while mode == "victory":
         bg = Background("PNG/backgrounds/winendgame.png")
         for event in pygame.event.get():
-                    #print event.type
                     if event.type == pygame.QUIT:
                         sys.exit()
                     if event.type == pygame.KEYDOWN:
