@@ -19,7 +19,10 @@ class Button(pygame.sprite.Sprite):
             self.basicImage = pygame.image.load("PNG/buttons/quitButton.png")
             self.hoverImage = pygame.image.load("PNG/buttons/quitHover.png")
             self.clickImage = pygame.image.load("PNG/buttons/quitClick.png")
-        
+        if kind == "useless":
+            self.basicImage = pygame.image.load("PNG/buttons/uselessButton.png")
+            self.hoverImage = pygame.image.load("PNG/buttons/uselessHover.png")
+            self.clickImage = pygame.image.load("PNG/buttons/uselessClick.png")
             
         self.image = self.basicImage
         self.rect = self.image.get_rect(center=pos)
