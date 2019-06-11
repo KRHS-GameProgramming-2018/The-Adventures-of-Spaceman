@@ -437,7 +437,7 @@ while True:
                                 bg = Background("PNG/backgrounds/Black.png")
                                 level = loadLevel("Levels/"+str(levelnum)+".lvl")
                                 if playerLives > 7:
-                                    playerLives = 7
+                                    playerLives = 77
                                 pb = Player(3, level["player"], hasPowers, playerLives)
                                 print pb.lives
                                 magazine(size, bulletMag, "PNG/Bolt/bulletmag20.png", "mag" in hasPowers)
