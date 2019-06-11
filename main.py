@@ -88,7 +88,7 @@ while True:
     startButton = Button("start", [width/2,3*height/8])
     controlButton = Button("controls", [width/2, height/2])
     quitButton = Button("quit", [width/2, 5*height/8])
-    
+    uselessButton = Button("useless", [width/2, 8*height/4])
     while mode == "menu":
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -109,10 +109,12 @@ while True:
                     startButton.checkHover(event.pos)
                     controlButton.checkHover(event.pos)
                     quitButton.checkHover(event.pos)
+                    uselessButton.checkHover(event.pos)
                 else:
                     startButton.checkClick(event.pos)
                     controlButton.checkClick(event.pos)
                     quitButton.checkClick(event.pos)
+                    uselessButton.checkClick(event.pos)
                     
             if event.type == pygame.MOUSEBUTTONDOWN:
                 print event.button
@@ -120,14 +122,17 @@ while True:
                     startButton.checkClick(event.pos)
                     controlButton.checkClick(event.pos)
                     quitButton.checkClick(event.pos)
+                    uselessButton.checkClick(event.pos)
             if event.type == pygame.MOUSEBUTTONUP:
                 if startButton.collidePt(event.pos):
                     mode = "inGame"
                 if controlButton.collidePt(event.pos):
-                   bg =  Background("PNG/backgrounds/controls.png")
-                   if event.type == pygame.KEYDOWN:
-                       if event.key == pygame.K_RETURN:
-                            mode = "inGame"
+                    bg =  Background("PNG/backgrounds/controls.png")
+                if uselessButton.collidePt(event.pos):
+                    bg =  Background("PNG/backgrounds/skittleAd.png")
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        mode = "inGame"
                 if quitButton.collidePt(event.pos):
                     sys.exit()
        
